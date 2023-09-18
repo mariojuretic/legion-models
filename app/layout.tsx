@@ -6,11 +6,7 @@ export const metadata: Metadata = {
   title: "THE LEGION",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-black text-white">{children}</body>
