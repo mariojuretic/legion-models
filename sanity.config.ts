@@ -2,8 +2,12 @@ import { theme } from "https://themer.sanity.build/api/hues?default=737373;light
 
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
+import { visionTool } from "@sanity/vision";
 
 import { schemaTypes } from "./schemas";
+
+const singletonActions = new Set(["publish", "discardChanges", "restore"]);
+const singletonTypes = new Set(["about"]);
 
 export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -13,10 +17,37 @@ export default defineConfig({
   basePath: "/studio",
   title: "THE LEGION",
 
-  plugins: [deskTool()],
+  plugins: [
+    deskTool({
+      structure: (S) =>
+        S.list()
+          .title("Content")
+          .items([
+            S.listItem()
+              .title("About")
+              .id("about")
+              .child(
+                S.document()
+                  .title("About")
+                  .schemaType("about")
+                  .documentId("about"),
+              ),
+          ]),
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+  },
+
+  document: {
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
   },
 
   theme,
