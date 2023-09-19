@@ -11,3 +11,11 @@ interface AboutSingleton extends Base {
   _type: "about";
   content: string;
 }
+
+interface ContactSingleton extends Base {
+  _id: "contact";
+  _type: "contact";
+  address: string;
+  email: string[];
+  phone: string[];
+}

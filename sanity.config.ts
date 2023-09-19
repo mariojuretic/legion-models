@@ -7,7 +7,7 @@ import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemas";
 
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
-const singletonTypes = new Set(["about"]);
+const singletonTypes = new Set(["about", "contact"]);
 
 export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -31,6 +31,15 @@ export default defineConfig({
                   .title("About")
                   .schemaType("about")
                   .documentId("about"),
+              ),
+            S.listItem()
+              .title("Contact")
+              .id("contact")
+              .child(
+                S.document()
+                  .title("Contact")
+                  .schemaType("contact")
+                  .documentId("contact"),
               ),
           ]),
     }),

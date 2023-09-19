@@ -11,7 +11,9 @@ export default async function Page() {
 
   return (
     <div className="flex grow items-center justify-center">
-      <p className="max-w-[100ch]">{about.content}</p>
+      <div className="w-full max-w-[100ch] whitespace-pre-line">
+        <p>{about.content}</p>
+      </div>
     </div>
   );
 }
