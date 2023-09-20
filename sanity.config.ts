@@ -5,6 +5,7 @@ import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
 
 import { schemaTypes } from "./schemas";
+import { DocumentText, UserCircle } from "./components/StudioIcons";
 
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 const singletonTypes = new Set(["about", "contact"]);
@@ -21,26 +22,33 @@ export default defineConfig({
     deskTool({
       structure: (S) =>
         S.list()
-          .title("Content")
+          .id("studio")
+          .title("Studio")
           .items([
             S.listItem()
-              .title("About")
               .id("about")
+              .title("About Page")
+              .icon(DocumentText)
               .child(
                 S.document()
-                  .title("About")
-                  .schemaType("about")
-                  .documentId("about"),
+                  .id("about")
+                  .title("About Page")
+                  .documentId("about")
+                  .schemaType("about"),
               ),
             S.listItem()
-              .title("Contact")
               .id("contact")
+              .title("Contact Page")
+              .icon(DocumentText)
               .child(
                 S.document()
-                  .title("Contact")
-                  .schemaType("contact")
-                  .documentId("contact"),
+                  .id("contact")
+                  .title("Contact Page")
+                  .documentId("contact")
+                  .schemaType("contact"),
               ),
+            S.divider(),
+            S.documentTypeListItem("model").title("Models").icon(UserCircle),
           ]),
     }),
     visionTool(),
