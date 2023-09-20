@@ -17,9 +17,10 @@ export default function Page() {
   }, [push]);
 
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-center text-xs uppercase tracking-widest">
-      <p>Home Page</p>
-      <p>Redirecting in 5 seconds...</p>
-    </main>
+    <div className="p-8">
+      <p className="text-sm font-light uppercase tracking-widest">
+        Home Page. Redirecting to Models Page in 5 seconds...
+      </p>
+    </div>
   );
 }

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function NavMenu() {
+export default function Menu() {
   return (
-    <nav className="flex flex-col items-start p-6 text-xs uppercase tracking-widest">
+    <nav className="sticky top-[100px] flex w-80 flex-col items-start self-start p-8 text-sm font-light uppercase tracking-widest">
       <Link href="/about">About</Link>
       <Link href="/models">Models</Link>
       <Link href="/new-faces">New Faces</Link>

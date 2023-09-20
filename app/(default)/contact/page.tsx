@@ -11,12 +11,13 @@ export default async function Page() {
   const contact: ContactSingleton = await client.fetch(query);
 
   return (
-    <div className="flex grow items-center justify-center">
-      <div className="w-full max-w-[100ch] space-y-6 whitespace-pre-line">
+    <main className="flex grow items-center justify-center p-8">
+      <div className="w-full max-w-[100ch] space-y-8 whitespace-pre-line text-sm font-light uppercase tracking-widest">
         <p>{contact.address}</p>
 
         <div className="flex flex-col items-start">
           <p>Telephone</p>
+
           {contact.phone.map((item) => (
             <a key={item} href={`tel:${item.replace(/\s+/g, "")}`}>
               {item}
@@ -26,6 +27,7 @@ export default async function Page() {
 
         <div className="flex flex-col items-start">
           <p>Email</p>
+
           {contact.email.map((item) => (
             <a key={item} href={`mailto:${item}`} className="underline">
               {item}
@@ -40,10 +42,14 @@ export default async function Page() {
         </div>
 
         <div className="flex flex-col items-start">
-          <Link href="/">Instagram</Link>
-          <Link href="/">Facebook</Link>
+          <a href="https://instagram.com/" target="_blank">
+            Instagram
+          </a>
+          <a href="https://facebook.com/" target="_blank">
+            Facebook
+          </a>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
