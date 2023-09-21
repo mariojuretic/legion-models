@@ -9,7 +9,7 @@ export async function generateStaticParams() {
     *[_type == "model" && hidden == false]
   `;
 
-  const models: ModelDocument[] = await client.fetch(query);
+  const models: ModelDoc[] = await client.fetch(query);
 
   return models.map((model) => ({ slug: model.slug.current }));
 }
@@ -25,11 +25,11 @@ export default async function Page({
     *[_type == "model" && slug.current == $slug][0]
   `;
 
-  const model: ModelDocument = await client.fetch(query, { slug });
+  const model: ModelDoc = await client.fetch(query, { slug });
 
   return (
-    <div className="p-8">
-      <p className="text-sm font-light uppercase tracking-widest">
+    <div className="p-4 lg:p-8">
+      <p className="text-xs font-light uppercase tracking-widest lg:text-sm">
         Model: {model.name}
       </p>
     </div>
