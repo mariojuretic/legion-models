@@ -6,6 +6,12 @@ type BaseType = {
   _updatedAt: string;
 };
 
+interface HeroDoc extends BaseType {
+  _type: "hero";
+  image?: ImageType;
+  media: "image";
+}
+
 interface AboutPage extends BaseType {
   _id: "about";
   _type: "about";
