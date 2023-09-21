@@ -11,8 +11,8 @@ export default async function Page() {
   const contact: ContactSingleton = await client.fetch(query);
 
   return (
-    <main className="flex grow items-center justify-center p-8">
-      <div className="w-full max-w-[100ch] space-y-8 whitespace-pre-line text-sm font-light uppercase tracking-widest">
+    <main className="flex grow items-center p-4 lg:justify-center lg:p-8">
+      <div className="w-full max-w-[100ch] space-y-4 whitespace-pre-line text-xs font-light uppercase tracking-widest lg:space-y-8 lg:text-sm">
         <p>{contact.address}</p>
 
         <div className="flex flex-col items-start">

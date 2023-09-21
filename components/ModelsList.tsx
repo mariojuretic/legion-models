@@ -8,7 +8,7 @@ function ModelCard({ model }: { model: ModelDocument }) {
     <li>
       <Link
         href={`/models/${model.slug.current}`}
-        className="group flex flex-col space-y-4"
+        className="group flex flex-col space-y-2 lg:space-y-4"
       >
         <div className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-900 transition-colors group-hover:bg-neutral-800">
           {model.thumbnail?.default && (
@@ -42,7 +42,7 @@ function ModelCard({ model }: { model: ModelDocument }) {
 
 export default function ModelsList({ models }: { models: ModelDocument[] }) {
   return (
-    <ul className="grid grid-cols-6 gap-8 pr-16">
+    <ul className="grid grid-cols-2 gap-4 lg:grid-cols-6 lg:gap-8 lg:pr-16">
       {models.map((model) => (
         <ModelCard key={model._id} model={model} />
       ))}

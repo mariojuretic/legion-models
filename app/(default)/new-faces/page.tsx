@@ -11,8 +11,8 @@ export default async function Page() {
   const models: ModelDocument[] = await client.fetch(query);
 
   return (
-    <main className="grow self-start p-8">
-      <div className="text-sm font-light uppercase tracking-widest">
+    <main className="grow self-start p-4 lg:p-8">
+      <div className="text-xs font-light uppercase tracking-widest lg:text-sm">
         {models.length === 0 && <p>No models found.</p>}
 
         {models.length > 0 && <ModelsList models={models} />}

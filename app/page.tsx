@@ -17,8 +17,8 @@ export default function Page() {
   }, [push]);
 
   return (
-    <div className="p-8">
-      <p className="text-sm font-light uppercase tracking-widest">
+    <div className="p-4 lg:p-8">
+      <p className="text-xs font-light uppercase tracking-widest lg:text-sm">
         Home Page. Redirecting to Models Page in 5 seconds...
       </p>
     </div>
