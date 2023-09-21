@@ -2,17 +2,15 @@ import { defineType, defineField, defineArrayMember } from "sanity";
 
 export default defineType({
   name: "contact",
-  title: "Contact",
   type: "document",
   fields: [
     defineField({
       name: "address",
-      title: "Address",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "phone",
-      title: "Phone",
+      name: "phones",
       type: "array",
       of: [
         defineArrayMember({
@@ -21,12 +19,32 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "email",
-      title: "Email",
+      name: "emails",
       type: "array",
       of: [
         defineArrayMember({
           type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "socials",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "name",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "url",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
         }),
       ],
     }),

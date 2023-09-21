@@ -1,4 +1,4 @@
-type Base = {
+type BaseType = {
   _createdAt: string;
   _id: string;
   _rev: string;
@@ -6,46 +6,49 @@ type Base = {
   _updatedAt: string;
 };
 
-interface AboutSingleton extends Base {
+interface AboutPage extends BaseType {
   _id: "about";
   _type: "about";
-  content: string;
+  description: string;
 }
 
-interface ContactSingleton extends Base {
+interface ContactPage extends BaseType {
   _id: "contact";
   _type: "contact";
   address: string;
-  email: string[];
-  phone: string[];
+  emails?: string[];
+  phones?: string[];
+  socials?: SocialObj[];
 }
 
-interface ModelDocument extends Base {
+interface ModelDoc extends BaseType {
   _type: "model";
   category: string;
-  featuredImage?: Image;
   hidden: boolean;
   name: string;
-  slug: Slug;
+  slug: SlugType;
   thumbnail?: {
-    default?: Image;
-    hover?: Image;
+    default?: ImageType;
+    hover?: ImageType;
   };
 }
 
-interface Slug {
+interface SlugType {
   _type: "slug";
   current: string;
 }
 
-interface Image {
+interface ImageType {
   _type: "image";
-  asset: Reference;
-  author?: string;
-  description?: string;
+  asset: ReferenceType;
 }
 
-interface Reference {
+interface ReferenceType {
   _ref: string;
   _type: "reference";
+}
+
+interface SocialObj {
+  name: string;
+  url: string;
 }

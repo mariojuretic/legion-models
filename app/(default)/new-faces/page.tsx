@@ -8,7 +8,7 @@ const query = groq`
 `;
 
 export default async function Page() {
-  const models: ModelDocument[] = await client.fetch(query);
+  const models: ModelDoc[] = await client.fetch(query);
 
   return (
     <main className="grow self-start p-4 lg:p-8">

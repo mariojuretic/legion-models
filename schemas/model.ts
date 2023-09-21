@@ -2,7 +2,6 @@ import { defineType, defineField } from "sanity";
 
 export default defineType({
   name: "model",
-  title: "Model",
   type: "document",
   fields: [
     defineField({
@@ -56,20 +55,6 @@ export default defineType({
       options: {
         columns: 2,
       },
-    }),
-    defineField({
-      name: "featuredImage",
-      type: "image",
-      fields: [
-        defineField({
-          name: "author",
-          type: "string",
-        }),
-        defineField({
-          name: "description",
-          type: "string",
-        }),
-      ],
     }),
   ],
 });

@@ -8,32 +8,36 @@ const query = groq`
 `;
 
 export default async function Page() {
-  const contact: ContactSingleton = await client.fetch(query);
+  const contact: ContactPage = await client.fetch(query);
 
   return (
     <main className="flex grow items-center p-4 lg:justify-center lg:p-8">
       <div className="w-full max-w-[100ch] space-y-4 whitespace-pre-line text-xs font-light uppercase tracking-widest lg:space-y-8 lg:text-sm">
         <p>{contact.address}</p>
 
-        <div className="flex flex-col items-start">
-          <p>Telephone</p>
+        {contact.phones && contact.phones.length > 0 && (
+          <div className="flex flex-col items-start">
+            <p>Telephone</p>
 
-          {contact.phone.map((item) => (
-            <a key={item} href={`tel:${item.replace(/\s+/g, "")}`}>
-              {item}
-            </a>
-          ))}
-        </div>
+            {contact.phones.map((phone) => (
+              <a key={phone} href={`tel:${phone.replace(/\s+/g, "")}`}>
+                {phone}
+              </a>
+            ))}
+          </div>
+        )}
 
-        <div className="flex flex-col items-start">
-          <p>Email</p>
+        {contact.emails && contact.emails.length > 0 && (
+          <div className="flex flex-col items-start">
+            <p>Email</p>
 
-          {contact.email.map((item) => (
-            <a key={item} href={`mailto:${item}`} className="underline">
-              {item}
-            </a>
-          ))}
-        </div>
+            {contact.emails.map((email) => (
+              <a key={email} href={`mailto:${email}`} className="underline">
+                {email}
+              </a>
+            ))}
+          </div>
+        )}
 
         <div className="flex flex-col items-start">
           <Link href="/privacy-policy">Privacy Policy</Link>
@@ -41,14 +45,15 @@ export default async function Page() {
           <Link href="/terms-of-use">Terms of Use</Link>
         </div>
 
-        <div className="flex flex-col items-start">
-          <a href="https://instagram.com/" target="_blank">
-            Instagram
-          </a>
-          <a href="https://facebook.com/" target="_blank">
-            Facebook
-          </a>
-        </div>
+        {contact.socials && contact.socials.length > 0 && (
+          <div className="flex flex-col items-start">
+            {contact.socials.map((social) => (
+              <a key={social.name} href={social.url} target="_blank">
+                {social.name}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

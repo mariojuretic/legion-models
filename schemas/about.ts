@@ -2,13 +2,12 @@ import { defineType, defineField } from "sanity";
 
 export default defineType({
   name: "about",
-  title: "About",
   type: "document",
   fields: [
     defineField({
-      name: "content",
-      title: "Content",
+      name: "description",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 });
