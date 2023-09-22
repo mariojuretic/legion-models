@@ -1,26 +1,32 @@
-"use client";
+import Image from "next/image";
+import { groq } from "next-sanity";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import Redirect from "@/components/Redirect";
+import urlFor from "@/lib/urlFor";
+import { client } from "@/lib/sanity.client";
 
-export default function Page() {
-  const { push } = useRouter();
+const query = groq`
+  *[_type == "hero"]
+`;
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      push("/models");
-    }, 5000);
+export const dynamic = "force-dynamic";
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [push]);
+export default async function Page() {
+  const allHeros: HeroDoc[] = await client.fetch(query);
+  const randomHero = allHeros[Math.floor(Math.random() * allHeros.length)];
 
   return (
-    <div className="p-4 lg:p-8">
-      <p className="text-xs font-light uppercase tracking-widest lg:text-sm">
-        Home Page. Redirecting to Models Page in 5 seconds...
-      </p>
-    </div>
+    <Redirect>
+      <div className="relative h-[100svh] w-full overflow-hidden">
+        <Image
+          src={urlFor(randomHero.image!).url()}
+          alt="LEGION Model Management"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+      </div>
+    </Redirect>
   );
 }
