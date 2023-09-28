@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import localFont from "next/font/local";
-import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3BottomRightIcon,
+  XMarkIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 
 import { useMenuStore } from "@/store/MenuStore";
 
@@ -17,9 +21,10 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between bg-black lg:bg-transparent">
+      {/* Logo */}
       <div className="p-4 lg:w-80 lg:p-8">
         <h1
-          className={`${drukWide.className} text-3xl leading-none lg:text-4xl lg:leading-none`}
+          className={`${drukWide.className} text-xl leading-none lg:text-3xl`}
         >
           <Link href="/models" className="inline-block">
             LEGION
@@ -27,13 +32,19 @@ export default function Header() {
         </h1>
       </div>
 
-      <button className="p-4 lg:hidden" onClick={isOpen ? closeMenu : openMenu}>
-        {isOpen ? (
-          <XMarkIcon className="h-[30px] w-[30px]" />
-        ) : (
-          <Bars3BottomRightIcon className="h-[30px] w-[30px]" />
-        )}
-      </button>
+      {/* Buttons */}
+      <div className="flex items-center lg:hidden">
+        <button className="p-4">
+          <MagnifyingGlassIcon className="h-5 w-5" />
+        </button>
+        <button className="p-4" onClick={isOpen ? closeMenu : openMenu}>
+          {isOpen ? (
+            <XMarkIcon className="h-5 w-5" />
+          ) : (
+            <Bars3BottomRightIcon className="h-5 w-5" />
+          )}
+        </button>
+      </div>
 
       {/* SearchBar */}
     </header>

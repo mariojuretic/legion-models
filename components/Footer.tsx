@@ -2,11 +2,19 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-start p-4 text-xs font-light uppercase tracking-widest lg:flex-row lg:items-center lg:justify-center lg:space-x-8 lg:p-8 lg:text-sm">
+    <footer className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:ml-80 lg:flex-row-reverse lg:justify-center lg:p-8">
+      <ul className="flex flex-wrap items-center gap-x-4">
+        <li className="flex">
+          <Link href="/privacy-policy">Privacy Policy</Link>
+        </li>
+        <li className="flex">
+          <Link href="/cookie-polivy">Cookie Policy</Link>
+        </li>
+        <li className="flex">
+          <Link href="/terms-of-use">Terms of Use</Link>
+        </li>
+      </ul>
       <p>Copyright by LEGION</p>
-      <Link href="/privacy-policy">Privacy Policy</Link>
-      <Link href="/cookie-polivy">Cookie Policy</Link>
-      <Link href="/terms-of-use">Terms of Use</Link>
     </footer>
   );
 }

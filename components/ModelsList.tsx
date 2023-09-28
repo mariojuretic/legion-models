@@ -8,9 +8,9 @@ function ModelCard({ model }: { model: ModelDoc }) {
     <li>
       <Link
         href={`/models/${model.slug.current}`}
-        className="group flex flex-col space-y-2 lg:space-y-4"
+        className="group flex flex-col gap-y-2"
       >
-        <div className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-900 transition-colors duration-300 group-hover:bg-neutral-800">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-900 transition-colors duration-300 group-hover:bg-neutral-800">
           {model.thumbnail?.default && (
             <Image
               src={urlFor(model.thumbnail.default).url()}
@@ -34,7 +34,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
           )}
         </div>
 
-        <p className="text-center">{model.name}</p>
+        <p className="brand-text text-center">{model.name}</p>
       </Link>
     </li>
   );
@@ -42,7 +42,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
 
 export default function ModelsList({ models }: { models: ModelDoc[] }) {
   return (
-    <ul className="grid grid-cols-2 gap-4 lg:grid-cols-6 lg:gap-8 lg:pr-16">
+    <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       {models.map((model) => (
         <ModelCard key={model._id} model={model} />
       ))}

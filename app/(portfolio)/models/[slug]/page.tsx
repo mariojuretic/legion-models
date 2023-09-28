@@ -29,9 +29,7 @@ export default async function Page({
 
   return (
     <div className="p-4 lg:p-8">
-      <p className="text-xs font-light uppercase tracking-widest lg:text-sm">
-        Model: {model.name}
-      </p>
+      <p className="brand-text">{model.name} details page</p>
     </div>
   );
 }

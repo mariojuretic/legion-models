@@ -10,8 +10,8 @@ export default async function Page() {
   const about: AboutPage = await client.fetch(query);
 
   return (
-    <main className="flex grow items-center p-4 lg:justify-center lg:p-8">
-      <div className="w-full max-w-[100ch] whitespace-pre-line text-xs font-light uppercase tracking-widest lg:text-sm">
+    <main className="flex flex-1 items-center justify-center p-4 lg:p-8">
+      <div className="brand-text max-w-[100ch] whitespace-pre-line">
         <p>{about.description}</p>
       </div>
     </main>
