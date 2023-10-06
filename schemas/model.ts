@@ -56,5 +56,16 @@ export default defineType({
         columns: 2,
       },
     }),
+    defineField({
+      name: "portfolioImage",
+      type: "image",
+      fields: [
+        defineField({
+          name: "source",
+          type: "string",
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 });

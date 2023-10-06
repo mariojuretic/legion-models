@@ -32,6 +32,7 @@ interface ModelDoc extends BaseType {
   category: string;
   hidden: boolean;
   name: string;
+  portfolioImage: ImageType;
   slug: SlugType;
   thumbnail?: {
     default?: ImageType;
@@ -47,11 +48,20 @@ interface SlugType {
 interface ImageType {
   _type: "image";
   asset: ReferenceType;
+  dimensions?: ImageDimensionsType;
+  source?: string;
 }
 
 interface ReferenceType {
   _ref: string;
   _type: "reference";
+}
+
+interface ImageDimensionsType {
+  _type: "sanity.imageDimensions";
+  aspectRatio: number;
+  height: number;
+  width: number;
 }
 
 interface SocialObj {
