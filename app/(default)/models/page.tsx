@@ -7,6 +7,8 @@ const query = groq`
   *[_type == "model" && category == "models" && hidden == false]
 `;
 
+export const revalidate = 120;
+
 export default async function Page() {
   const models: ModelDoc[] = await client.fetch(query);
 

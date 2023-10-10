@@ -6,6 +6,8 @@ const query = groq`
   *[_type == "about"][0]
 `;
 
+export const revalidate = 120;
+
 export default async function Page() {
   const about: AboutPage = await client.fetch(query);
 

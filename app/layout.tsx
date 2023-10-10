@@ -17,6 +17,8 @@ const query = groq`
   *[_type == "settings"][0]
 `;
 
+export const revalidate = 120;
+
 export const metadata: Metadata = {
   title: "THE LEGION",
 };

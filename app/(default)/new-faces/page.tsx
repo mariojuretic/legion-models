@@ -7,6 +7,8 @@ const query = groq`
   *[_type == "model" && category == "new-faces" && hidden == false] | order(name asc)
 `;
 
+export const revalidate = 120;
+
 export default async function Page() {
   const models: ModelDoc[] = await client.fetch(query);
 

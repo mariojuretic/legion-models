@@ -13,6 +13,8 @@ const query = groq`
   }
 `;
 
+export const revalidate = 120;
+
 export default async function Page({
   params: { slug },
 }: {

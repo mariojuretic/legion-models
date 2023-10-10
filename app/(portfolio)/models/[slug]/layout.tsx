@@ -4,6 +4,7 @@ import CloseModel from "@/components/CloseModel";
 import ModelTabs from "@/components/ModelTabs";
 import { client } from "@/lib/sanity.client";
 
+export const revalidate = 120;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
