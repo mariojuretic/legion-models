@@ -5,10 +5,15 @@ import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
 
 import { schemaTypes } from "./schemas";
-import { Photo, DocumentText, UserCircle } from "./components/StudioIcons";
+import {
+  Photo,
+  DocumentText,
+  UserCircle,
+  Cog6Tooth,
+} from "./components/StudioIcons";
 
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
-const singletonTypes = new Set(["about", "contact"]);
+const singletonTypes = new Set(["about", "contact", "settings"]);
 
 export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -53,6 +58,18 @@ export default defineConfig({
             S.documentTypeListItem("model")
               .title("Model Database")
               .icon(UserCircle),
+            S.divider(),
+            S.listItem()
+              .id("settings")
+              .title("Settings")
+              .icon(Cog6Tooth)
+              .child(
+                S.document()
+                  .id("settings")
+                  .title("Settings")
+                  .documentId("settings")
+                  .schemaType("settings"),
+              ),
           ]),
     }),
     visionTool(),

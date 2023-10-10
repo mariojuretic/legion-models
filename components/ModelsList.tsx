@@ -10,7 +10,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
         href={`/models/${model.slug.current}`}
         className="group flex flex-col gap-y-2"
       >
-        <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-900 transition-colors duration-300 group-hover:bg-neutral-800">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 transition-colors duration-300 group-hover:bg-neutral-200 dark:bg-neutral-900 dark:group-hover:bg-neutral-800">
           {model.thumbnail?.default && (
             <Image
               src={urlFor(model.thumbnail.default).url()}

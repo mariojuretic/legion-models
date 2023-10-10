@@ -40,6 +40,12 @@ interface ModelDoc extends BaseType {
   };
 }
 
+interface SiteSettings extends BaseType {
+  _id: "settings";
+  _type: "settings";
+  theme: "dark" | "light";
+}
+
 interface SlugType {
   _type: "slug";
   current: string;
