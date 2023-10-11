@@ -14,7 +14,7 @@ export default function Menu() {
     <nav
       className={`brand-text fixed bottom-0 left-0 right-0 top-[52px] z-50 ${
         isOpen ? "flex" : "hidden"
-      } flex-col items-start bg-white p-4 dark:bg-black lg:sticky lg:bottom-auto lg:left-auto lg:right-auto lg:top-[100px] lg:flex lg:w-80 lg:self-start lg:p-8`}
+      } flex-col items-start bg-white p-4 dark:bg-black lg:sticky lg:bottom-auto lg:left-auto lg:right-auto lg:top-[100px] lg:flex lg:w-60 lg:self-start lg:p-8`}
     >
       <Link href="/about" onClick={closeMenu}>
         About

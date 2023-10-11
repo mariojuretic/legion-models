@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between bg-white dark:bg-black lg:bg-transparent">
       {/* Logo */}
-      <div className="p-4 lg:w-80 lg:p-8">
+      <div className="p-4 lg:w-60 lg:p-8">
         <h1
           className={`${drukWide.className} text-xl leading-none lg:text-3xl`}
         >
