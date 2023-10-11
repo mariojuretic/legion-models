@@ -4,7 +4,7 @@ import ModelsList from "@/components/ModelsList";
 import { client } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "model" && category == "models" && hidden == false]
+  *[_type == "model" && category == "models" && hidden == false] | order(name asc)
 `;
 
 export const revalidate = 120;
