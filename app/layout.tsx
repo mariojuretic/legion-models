@@ -14,7 +14,7 @@ import "./globals.css";
 //   ],
 // });
 
-const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400", "500"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 const query = groq`
   *[_type == "settings"][0]

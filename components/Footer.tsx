@@ -5,17 +5,17 @@ export default function Footer() {
     <footer className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:ml-80 lg:flex-row-reverse lg:justify-center lg:p-8">
       <ul className="flex flex-wrap items-center gap-x-4">
         <li className="flex">
-          <Link href="/privacy-policy" className="hover:font-medium">
+          <Link href="/privacy-policy" className="hover:font-bold">
             Privacy Policy
           </Link>
         </li>
         <li className="flex">
-          <Link href="/cookie-polivy" className="hover:font-medium">
+          <Link href="/cookie-polivy" className="hover:font-bold">
             Cookie Policy
           </Link>
         </li>
         <li className="flex">
-          <Link href="/terms-of-use" className="hover:font-medium">
+          <Link href="/terms-of-use" className="hover:font-bold">
             Terms of Use
           </Link>
         </li>
