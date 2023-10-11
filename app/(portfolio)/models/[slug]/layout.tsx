@@ -37,7 +37,7 @@ export default async function Layout({
         <h2 className="brand-text p-4 text-center lg:hidden">{model.name}</h2>
         {children}
       </div>
-      <ModelTabs name={model.name} />
+      <ModelTabs model={model} />
     </div>
   );
 }

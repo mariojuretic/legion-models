@@ -29,10 +29,14 @@ interface ContactPage extends BaseType {
 
 interface ModelDoc extends BaseType {
   _type: "model";
+  campaigns?: ImageType[];
   category: string;
+  covers?: ImageType[];
+  digitals?: ImageType[];
   hidden: boolean;
   name: string;
   portfolioImage: ImageType;
+  shows: ImageType[];
   slug: SlugType;
   thumbnail?: {
     default?: ImageType;

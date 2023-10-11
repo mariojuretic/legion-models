@@ -1,4 +1,4 @@
-import { defineType, defineField } from "sanity";
+import { defineType, defineField, defineArrayMember } from "sanity";
 
 export default defineType({
   name: "model",
@@ -66,6 +66,42 @@ export default defineType({
         }),
       ],
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "digitals",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "shows",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "covers",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "campaigns",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+        }),
+      ],
     }),
   ],
 });
