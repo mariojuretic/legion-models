@@ -16,22 +16,26 @@ export default function Menu() {
         isOpen ? "flex" : "hidden"
       } flex-col items-start bg-white p-4 dark:bg-black lg:sticky lg:bottom-auto lg:left-auto lg:right-auto lg:top-[100px] lg:flex lg:w-60 lg:self-start lg:p-8`}
     >
-      <Link href="/about" onClick={closeMenu}>
+      <Link href="/about" className="hover:font-medium" onClick={closeMenu}>
         About
       </Link>
-      <Link href="/models" onClick={closeMenu}>
+      <Link href="/models" className="hover:font-medium" onClick={closeMenu}>
         Models
       </Link>
-      <Link href="/new-faces" onClick={closeMenu}>
+      <Link href="/new-faces" className="hover:font-medium" onClick={closeMenu}>
         New Faces
       </Link>
-      <Link href="/get-scouted" onClick={closeMenu}>
+      <Link
+        href="/get-scouted"
+        className="hover:font-medium"
+        onClick={closeMenu}
+      >
         Get Scouted
       </Link>
-      <Link href="/news" onClick={closeMenu}>
+      <Link href="/news" className="hover:font-medium" onClick={closeMenu}>
         News
       </Link>
-      <Link href="/contact" onClick={closeMenu}>
+      <Link href="/contact" className="hover:font-medium" onClick={closeMenu}>
         Contact
       </Link>
     </nav>
