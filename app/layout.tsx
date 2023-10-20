@@ -24,6 +24,11 @@ export const revalidate = 120;
 
 export const metadata: Metadata = {
   title: "THE LEGION",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    userScalable: false,
+  },
 };
 
 export default async function Layout({

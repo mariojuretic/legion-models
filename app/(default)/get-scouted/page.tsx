@@ -1,3 +1,9 @@
+import GetScoutedForm from "@/components/GetScoutedForm";
+
 export default function Page() {
-  return <div>Get Scouted Page</div>;
+  return (
+    <main className="flex flex-1 items-center justify-center p-4 lg:p-8">
+      <GetScoutedForm />
+    </main>
+  );
 }
