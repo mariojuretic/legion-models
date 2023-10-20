@@ -46,7 +46,7 @@ export default function GetScoutedForm() {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="brand-text mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 lg:gap-8 xl:grid-cols-2"
+      className="brand-text mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 lg:gap-8 xl:grid-cols-2 2xl:gap-x-16"
     >
       <div className="flex gap-x-4 lg:gap-x-8 xl:col-span-2">
         <label

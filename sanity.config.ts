@@ -9,6 +9,7 @@ import {
   Photo,
   DocumentText,
   UserCircle,
+  Megaphone,
   Cog6Tooth,
 } from "./components/StudioIcons";
 
@@ -58,6 +59,7 @@ export default defineConfig({
             S.documentTypeListItem("model")
               .title("Model Database")
               .icon(UserCircle),
+            S.documentTypeListItem("news").title("News").icon(Megaphone),
             S.divider(),
             S.listItem()
               .id("settings")

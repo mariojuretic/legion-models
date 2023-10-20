@@ -44,6 +44,17 @@ interface ModelDoc extends BaseType {
   };
 }
 
+interface NewsDoc extends BaseType {
+  _type: "news";
+  excerpt?: string;
+  slug: SlugType;
+  thumbnail?: {
+    default?: ImageType;
+    hover?: ImageType;
+  };
+  title: string;
+}
+
 interface SiteSettings extends BaseType {
   _id: "settings";
   _type: "settings";
