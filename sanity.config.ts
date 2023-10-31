@@ -22,7 +22,7 @@ export default defineConfig({
 
   name: "legion-models",
   basePath: "/studio",
-  title: "THE LEGION",
+  title: "LEGION MODEL MANAGEMENT",
 
   plugins: [
     deskTool({

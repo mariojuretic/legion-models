@@ -3,13 +3,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+const DELAY_SECONDS = 2;
+
 export default function Redirect({ children }: { children: React.ReactNode }) {
   const { push } = useRouter();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       push("/models");
-    }, 5000);
+    }, DELAY_SECONDS * 1000);
 
     return () => {
       clearTimeout(timeout);

@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
-  gender: "male" | "female" | "nonbinary";
+  gender: "male" | "female";
   firstName: string;
   lastName: string;
   birthday: string;
@@ -77,21 +77,6 @@ export default function GetScoutedForm() {
           />
           <div className="flex h-3 w-3 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white" />
           <span>Female</span>
-        </label>
-
-        <label
-          htmlFor="gender-nonbinary"
-          className="flex cursor-pointer items-center gap-x-2"
-        >
-          <input
-            type="radio"
-            {...register("gender")}
-            id="gender-nonbinary"
-            value="nonbinary"
-            className="peer hidden"
-          />
-          <div className="flex h-3 w-3 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white" />
-          <span>Non Binary</span>
         </label>
       </div>
 
