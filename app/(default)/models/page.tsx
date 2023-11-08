@@ -7,7 +7,7 @@ const query = groq`
   *[_type == "model" && category == "models" && hidden == false] | order(name asc)
 `;
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const models: ModelDoc[] = await client.fetch(query);

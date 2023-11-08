@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { groq } from "next-sanity";
-// import localFont from "next/font/local";
 import { Roboto } from "next/font/google";
+import { groq } from "next-sanity";
 
 import { client } from "@/lib/sanity.client";
 
 import "./globals.css";
-
-// const helveticaNeue = localFont({
-//   src: [
-//     { path: "../fonts/HelveticaNeue-Roman.otf", weight: "400" },
-//     { path: "../fonts/HelveticaNeue-Medium.otf", weight: "500" },
-//   ],
-// });
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -20,10 +12,10 @@ const query = groq`
   *[_type == "settings"][0]
 `;
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "THE LEGION",
+  title: "LEGION MODEL MANAGEMENT",
   viewport: {
     width: "device-width",
     initialScale: 1,

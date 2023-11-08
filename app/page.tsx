@@ -20,7 +20,7 @@ export default async function Page() {
       <div className="relative h-[100svh] w-full overflow-hidden">
         <Image
           src={urlFor(randomHero.image!).url()}
-          alt="LEGION Model Management"
+          alt="LEGION MODEL MANAGEMENT"
           fill
           className="object-cover object-center"
           priority

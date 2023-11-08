@@ -7,7 +7,7 @@ const query = groq`
   *[_type == "news"] | order(_createdAt desc)
 `;
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const news: NewsDoc[] = await client.fetch(query);

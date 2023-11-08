@@ -7,7 +7,7 @@ const query = groq`
   *[_type == "contact"][0]
 `;
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const contact: ContactPage = await client.fetch(query);

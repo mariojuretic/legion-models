@@ -6,7 +6,7 @@ const query = groq`
   *[_type == "about"][0]
 `;
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const about: AboutPage = await client.fetch(query);

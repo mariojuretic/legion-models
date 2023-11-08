@@ -1,21 +1,15 @@
+import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
 
 import CloseModel from "@/components/CloseModel";
 import ModelTabs from "@/components/ModelTabs";
 import { client } from "@/lib/sanity.client";
 
-export const revalidate = 120;
-export const dynamicParams = false;
+const query = groq`
+  *[_type == "model" && slug.current == $slug && hidden == false][0]
+`;
 
-export async function generateStaticParams() {
-  const query = groq`
-    *[_type == "model" && hidden == false]
-  `;
-
-  const models: ModelDoc[] = await client.fetch(query);
-
-  return models.map((model) => ({ slug: model.slug.current }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function Layout({
   children,
@@ -24,11 +18,11 @@ export default async function Layout({
   children: React.ReactNode;
   params: { slug: string };
 }) {
-  const query = groq`
-    *[_type == "model" && slug.current == $slug][0]
-  `;
-
   const model: ModelDoc = await client.fetch(query, { slug });
+
+  if (!model) {
+    return notFound();
+  }
 
   return (
     <div className="relative flex min-h-[100svh] flex-col">
