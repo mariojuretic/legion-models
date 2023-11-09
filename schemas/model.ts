@@ -110,5 +110,19 @@ export default defineType({
         dateFormat: "MMMM D, YYYY",
       },
     }),
+    defineField({
+      name: "color",
+      type: "simplerColor",
+      options: {
+        colorList: [
+          { label: "Blue", value: "#2563eb" },
+          { label: "Red", value: "#dc2626" },
+          { label: "Green", value: "#22c55e" },
+          { label: "Yellow", value: "#facc15" },
+          { label: "Orange", value: "#f97316" },
+          { label: "Pink", value: "#f472b6" },
+        ],
+      },
+    }),
   ],
 });

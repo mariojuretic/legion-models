@@ -3,6 +3,7 @@ import { theme } from "https://themer.sanity.build/api/hues?default=737373;light
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
+import { simplerColorInput } from "sanity-plugin-simpler-color-input";
 
 import { schemaTypes } from "./schemas";
 import {
@@ -75,6 +76,7 @@ export default defineConfig({
           ]),
     }),
     visionTool(),
+    simplerColorInput(),
   ],
 
   schema: {

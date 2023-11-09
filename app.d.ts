@@ -31,6 +31,10 @@ interface ModelDoc extends BaseType {
   _type: "model";
   campaigns?: ImageType[];
   category: string;
+  color?: {
+    label: string;
+    value: string;
+  };
   covers?: ImageType[];
   dateOfBirth?: string;
   digitals?: ImageType[];
