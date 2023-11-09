@@ -103,5 +103,12 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "dateOfBirth",
+      type: "date",
+      options: {
+        dateFormat: "MMMM D, YYYY",
+      },
+    }),
   ],
 });
