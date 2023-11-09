@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
-  gender: "male" | "female";
+  gender: "male" | "female" | null;
   firstName: string;
   lastName: string;
   birthday: string;
@@ -24,7 +24,7 @@ export default function GetScoutedForm() {
     reset,
   } = useForm<Inputs>({
     defaultValues: {
-      gender: "male",
+      gender: null,
       firstName: "",
       lastName: "",
       birthday: "",
@@ -48,36 +48,41 @@ export default function GetScoutedForm() {
       onSubmit={handleSubmit(submitHandler)}
       className="brand-text mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 lg:gap-8 xl:grid-cols-2 2xl:gap-x-16"
     >
-      <div className="flex gap-x-4 lg:gap-x-8 xl:col-span-2">
-        <label
-          htmlFor="gender-male"
-          className="flex cursor-pointer items-center gap-x-2"
-        >
-          <input
-            type="radio"
-            {...register("gender")}
-            id="gender-male"
-            value="male"
-            className="peer hidden"
-          />
-          <div className="flex h-3 w-3 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white" />
-          <span>Male</span>
-        </label>
+      <div className="flex flex-col gap-y-2 xl:col-span-2">
+        <div className="flex gap-x-4 lg:gap-x-8">
+          <label
+            htmlFor="gender-male"
+            className="flex cursor-pointer items-center gap-x-2"
+          >
+            <input
+              type="radio"
+              {...register("gender", { required: "Gender is required." })}
+              id="gender-male"
+              value="male"
+              className="peer hidden"
+            />
+            <div className="flex h-3 w-3 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white" />
+            <span>Male</span>
+          </label>
 
-        <label
-          htmlFor="gender-female"
-          className="flex cursor-pointer items-center gap-x-2"
-        >
-          <input
-            type="radio"
-            {...register("gender")}
-            id="gender-female"
-            value="female"
-            className="peer hidden"
-          />
-          <div className="flex h-3 w-3 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white" />
-          <span>Female</span>
-        </label>
+          <label
+            htmlFor="gender-female"
+            className="flex cursor-pointer items-center gap-x-2"
+          >
+            <input
+              type="radio"
+              {...register("gender", { required: "Gender is required." })}
+              id="gender-female"
+              value="female"
+              className="peer hidden"
+            />
+            <div className="flex h-3 w-3 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white" />
+            <span>Female</span>
+          </label>
+        </div>
+        {errors.gender && (
+          <p className="text-red-600">{errors.gender.message}</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-y-4 lg:gap-y-8">
