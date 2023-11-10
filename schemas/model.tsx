@@ -1,4 +1,7 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
+import Image from "next/image";
+
+import urlFor from "@/lib/urlFor";
 
 export default defineType({
   name: "model",
@@ -124,5 +127,40 @@ export default defineType({
         ],
       },
     }),
+  ],
+  preview: {
+    select: {
+      name: "name",
+      portfolioImage: "portfolioImage",
+      color: "color",
+    },
+    prepare: ({ name, portfolioImage, color }) => ({
+      title: name,
+      media: (
+        <Image
+          src={urlFor(portfolioImage).url()}
+          alt={name}
+          fill
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            border: color ? `1px solid ${color.value}` : "none",
+          }}
+          sizes="35px"
+        />
+      ),
+    }),
+  },
+  orderings: [
+    {
+      title: "Name",
+      name: "name",
+      by: [{ field: "name", direction: "asc" }],
+    },
+    {
+      title: "Color",
+      name: "color",
+      by: [{ field: "color", direction: "asc" }],
+    },
   ],
 });
