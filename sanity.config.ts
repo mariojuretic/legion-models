@@ -11,6 +11,7 @@ import {
   DocumentText,
   UserCircle,
   Megaphone,
+  ArchiveBox,
   Cog6Tooth,
 } from "./components/StudioIcons";
 
@@ -60,6 +61,9 @@ export default defineConfig({
             S.documentTypeListItem("model")
               .title("Model Database")
               .icon(UserCircle),
+            S.documentTypeListItem("collection")
+              .title("Packages")
+              .icon(ArchiveBox),
             S.documentTypeListItem("news").title("News").icon(Megaphone),
             S.divider(),
             S.listItem()

@@ -3,6 +3,7 @@ import {
   DocumentTextIcon,
   UserCircleIcon,
   MegaphoneIcon,
+  ArchiveBoxIcon,
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
@@ -16,6 +17,10 @@ export function DocumentText() {
 
 export function UserCircle() {
   return <UserCircleIcon className="h-6 w-6" />;
+}
+
+export function ArchiveBox() {
+  return <ArchiveBoxIcon className="h-6 w-6" />;
 }
 
 export function Megaphone() {

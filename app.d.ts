@@ -51,6 +51,13 @@ interface ModelDoc extends BaseType {
   };
 }
 
+interface CollectionDoc extends BaseType {
+  _type: "collection";
+  models?: ModelDoc[];
+  name: string;
+  slug: SlugType;
+}
+
 interface NewsDoc extends BaseType {
   _type: "news";
   excerpt?: string;
