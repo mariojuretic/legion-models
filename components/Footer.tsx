@@ -10,7 +10,7 @@ export default function Footer() {
           </Link>
         </li>
         <li className="flex">
-          <Link href="/cookie-polivy" className="hover:font-bold">
+          <Link href="/cookie-policy" className="hover:font-bold">
             Cookie Policy
           </Link>
         </li>

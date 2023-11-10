@@ -12,11 +12,19 @@ import {
   UserCircle,
   Megaphone,
   ArchiveBox,
+  ShieldCheck,
   Cog6Tooth,
 } from "./components/StudioIcons";
 
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
-const singletonTypes = new Set(["about", "contact", "settings"]);
+const singletonTypes = new Set([
+  "about",
+  "contact",
+  "privacyPolicy",
+  "cookiePolicy",
+  "termsOfUse",
+  "settings",
+]);
 
 export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -58,13 +66,45 @@ export default defineConfig({
                   .schemaType("contact"),
               ),
             S.divider(),
-            S.documentTypeListItem("model")
-              .title("Model Database")
-              .icon(UserCircle),
+            S.documentTypeListItem("model").title("Models").icon(UserCircle),
             S.documentTypeListItem("collection")
               .title("Packages")
               .icon(ArchiveBox),
             S.documentTypeListItem("news").title("News").icon(Megaphone),
+            S.divider(),
+            S.listItem()
+              .id("privacyPolicy")
+              .title("Privacy Policy")
+              .icon(ShieldCheck)
+              .child(
+                S.document()
+                  .id("privacyPolicy")
+                  .title("Privacy Policy")
+                  .documentId("privacyPolicy")
+                  .schemaType("privacyPolicy"),
+              ),
+            S.listItem()
+              .id("cookiePolicy")
+              .title("Cookie Policy")
+              .icon(ShieldCheck)
+              .child(
+                S.document()
+                  .id("cookiePolicy")
+                  .title("Cookie Policy")
+                  .documentId("cookiePolicy")
+                  .schemaType("cookiePolicy"),
+              ),
+            S.listItem()
+              .id("termsOfUse")
+              .title("Terms of Use")
+              .icon(ShieldCheck)
+              .child(
+                S.document()
+                  .id("termsOfUse")
+                  .title("Terms of Use")
+                  .documentId("termsOfUse")
+                  .schemaType("termsOfUse"),
+              ),
             S.divider(),
             S.listItem()
               .id("settings")

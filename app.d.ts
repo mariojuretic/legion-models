@@ -71,6 +71,24 @@ interface NewsDoc extends BaseType {
   title: string;
 }
 
+interface PrivacyPolicyPage extends BaseType {
+  _id: "privacyPolicy";
+  _type: "privacyPolicy";
+  content: string;
+}
+
+interface CookiePolicyPage extends BaseType {
+  _id: "cookiePolicy";
+  _type: "cookiePolicy";
+  content: string;
+}
+
+interface TermsOfUsePage extends BaseType {
+  _id: "termsOfUse";
+  _type: "termsOfUse";
+  content: string;
+}
+
 interface SiteSettings extends BaseType {
   _id: "settings";
   _type: "settings";
