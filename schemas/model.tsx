@@ -1,5 +1,6 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
 import Image from "next/image";
+import moment from "moment";
 
 import urlFor from "@/lib/urlFor";
 
@@ -127,15 +128,42 @@ export default defineType({
         ],
       },
     }),
+    defineField({
+      name: "contract",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "contractExpirationDate",
+      type: "date",
+      hidden: ({ document }) => !document?.contract,
+      options: {
+        dateFormat: "MMMM D, YYYY",
+      },
+    }),
   ],
   preview: {
     select: {
       name: "name",
       portfolioImage: "portfolioImage",
       color: "color",
+      contract: "contract",
+      contractExpirationDate: "contractExpirationDate",
     },
-    prepare: ({ name, portfolioImage, color }) => ({
+    prepare: ({
+      name,
+      portfolioImage,
+      color,
+      contract,
+      contractExpirationDate,
+    }) => ({
       title: name,
+      subtitle:
+        contract &&
+        contractExpirationDate &&
+        `Contract until ${moment(contractExpirationDate).format(
+          "MMMM D, YYYY",
+        )}`,
       media: (
         <Image
           src={urlFor(portfolioImage).url()}

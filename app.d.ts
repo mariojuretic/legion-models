@@ -35,6 +35,8 @@ interface ModelDoc extends BaseType {
     label: string;
     value: string;
   };
+  contract: boolean;
+  contractExpirationDate?: string;
   covers?: ImageType[];
   dateOfBirth?: string;
   digitals?: ImageType[];
