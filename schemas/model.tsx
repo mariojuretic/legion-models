@@ -108,6 +108,10 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "instagram",
+      type: "string",
+    }),
+    defineField({
       name: "dateOfBirth",
       type: "date",
       options: {

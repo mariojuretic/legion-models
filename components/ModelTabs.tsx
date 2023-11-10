@@ -30,6 +30,16 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
           Campaigns
         </TabLink>
       )}
+
+      {model.instagram && (
+        <a
+          href={`https://instagram.com/${model.instagram}`}
+          target="_blank"
+          className="text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+        >
+          Instagram
+        </a>
+      )}
     </div>
   );
 }

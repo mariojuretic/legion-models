@@ -41,6 +41,7 @@ interface ModelDoc extends BaseType {
   dateOfBirth?: string;
   digitals?: ImageType[];
   hidden: boolean;
+  instagram?: string;
   name: string;
   portfolioImage: ImageType;
   shows: ImageType[];
