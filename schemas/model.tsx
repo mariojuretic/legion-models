@@ -108,6 +108,10 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "interview",
+      type: "text",
+    }),
+    defineField({
       name: "instagram",
       type: "string",
     }),

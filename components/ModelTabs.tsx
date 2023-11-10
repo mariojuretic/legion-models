@@ -31,6 +31,12 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
         </TabLink>
       )}
 
+      {model.interview && (
+        <TabLink slug={model.slug.current} tab="interview">
+          Interview
+        </TabLink>
+      )}
+
       {model.instagram && (
         <a
           href={`https://instagram.com/${model.instagram}`}

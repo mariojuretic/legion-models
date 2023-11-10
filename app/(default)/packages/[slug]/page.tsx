@@ -26,9 +26,9 @@ export default async function Page({
 
   return (
     <main className="flex-1 self-start p-4 lg:p-8">
-      <p className="brand-text pb-4 text-center lg:pb-8">
+      <h2 className="brand-text mb-4 text-center lg:mb-8">
         {collection.name} package
-      </p>
+      </h2>
 
       {!collection.models && (
         <p className="brand-text text-center">
