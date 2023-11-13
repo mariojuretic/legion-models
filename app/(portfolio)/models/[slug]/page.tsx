@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 
-import ImageWithSource from "@/components/ImageWithSource";
+import PortfolioImage from "@/components/PortfolioImage";
 import { client } from "@/lib/sanity.client";
 
 const query = groq`
@@ -24,7 +24,7 @@ export default async function Page({
 
   return (
     <main className="flex flex-1 p-4 lg:p-8">
-      <ImageWithSource image={model.portfolioImage} />
+      <PortfolioImage image={model.portfolioImage} name={model.name} />
     </main>
   );
 }
