@@ -44,6 +44,7 @@ interface ModelDoc extends BaseType {
   instagram?: string;
   interview?: string;
   name: string;
+  notes?: string;
   portfolioImage: ImageType;
   shows: ImageType[];
   slug: SlugType;

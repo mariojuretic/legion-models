@@ -149,6 +149,10 @@ export default defineType({
         dateFormat: "MMMM D, YYYY",
       },
     }),
+    defineField({
+      name: "notes",
+      type: "text",
+    }),
   ],
   preview: {
     select: {
