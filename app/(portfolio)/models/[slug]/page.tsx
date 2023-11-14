@@ -24,7 +24,11 @@ export default async function Page({
 
   return (
     <main className="flex flex-1 p-4 lg:p-8">
-      <PortfolioImage image={model.portfolioImage} name={model.name} />
+      <PortfolioImage
+        image={model.portfolioImage}
+        name={model.name}
+        alignment="center"
+      />
     </main>
   );
 }

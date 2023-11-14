@@ -8,9 +8,11 @@ import urlFor from "@/lib/urlFor";
 export default function PortfolioImage({
   image,
   name,
+  alignment,
 }: {
   image: ImageType;
   name: string;
+  alignment: "start" | "center" | "end";
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -46,10 +48,12 @@ export default function PortfolioImage({
     setImageHeight(renderedImageHeight);
   }, [image.dimensions, image.source]);
 
+  const alignItems = "items-" + alignment;
+
   return (
     <div
       ref={containerRef}
-      className="flex flex-1 flex-col items-center justify-center"
+      className={`flex flex-1 flex-col ${alignItems} justify-center`}
     >
       {imageWidth && imageHeight && (
         <Image
