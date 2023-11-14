@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
 
+import VerticalGallery from "@/components/VerticalGallery";
 import ImageSlider from "@/components/ImageSlider";
 import { client } from "@/lib/sanity.client";
 import generateSlides from "@/lib/generateSlides";
-import VerticalGallery from "@/components/VerticalGallery";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug][0] {
