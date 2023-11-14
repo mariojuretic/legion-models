@@ -23,9 +23,7 @@ export default function PortfolioImage({
     if (!containerRef.current || !image.dimensions) return;
 
     const containerWidth = containerRef.current.clientWidth;
-    const containerHeight = image.source
-      ? containerRef.current.clientHeight - 12
-      : containerRef.current.clientHeight;
+    const containerHeight = containerRef.current.clientHeight - 12;
 
     let renderedImageWidth = image.dimensions.width;
     let renderedImageHeight = image.dimensions.height;
