@@ -11,6 +11,7 @@ const nextConfig = {
   },
   experimental: {
     urlImports: ["https://themer.sanity.build/"],
+    serverActions: true,
   },
 };
 

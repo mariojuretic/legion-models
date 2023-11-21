@@ -6,4 +6,24 @@
   .brand-text {
     @apply text-[0.625rem] uppercase leading-[1.2] tracking-[0.125em];
   }
+
+  .custom-text-input {
+    @apply brand-text rounded-none border-0 border-b border-b-black/50 bg-transparent p-2 outline-none placeholder:text-black/50 focus:border-b-black dark:border-b-white/50 dark:placeholder:text-white/50 dark:focus:border-b-white;
+  }
+
+  .custom-checkbox-input {
+    @apply flex h-3 w-3 shrink-0 items-center justify-center border border-black/50 before:hidden before:h-2 before:w-2 before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white;
+  }
+
+  .custom-radio-input {
+    @apply flex h-3 w-3 shrink-0 items-center justify-center rounded-full border border-black/50 before:hidden before:h-2 before:w-2 before:rounded-full before:bg-black peer-checked:border-black peer-checked:before:block dark:border-white/50 dark:before:bg-white dark:peer-checked:border-white;
+  }
+
+  .custom-image-upload {
+    @apply flex aspect-square w-full cursor-pointer items-end justify-center bg-neutral-100 p-2 dark:bg-neutral-900;
+  }
+
+  .custom-image-upload-button {
+    @apply bg-white px-6 py-1 text-black dark:bg-black dark:text-white;
+  }
 }
