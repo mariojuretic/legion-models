@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -10,6 +11,10 @@ import { submitGetScoutedForm } from "@/app/actions";
 type GetScoutedFormInputs = z.infer<typeof GetScoutedFormSchema>;
 
 export default function GetScoutedForm() {
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -20,19 +25,21 @@ export default function GetScoutedForm() {
   });
 
   const submitHandler: SubmitHandler<GetScoutedFormInputs> = async (data) => {
+    setSubmitting(true);
+
+    setSuccessMessage(null);
+    setErrorMessage(null);
+
     const response = await submitGetScoutedForm(data);
 
-    if (!response) {
-      console.log("Something went wrong.");
-      return;
+    if (!response || !response.success) {
+      setErrorMessage("Something went wrong.");
+    } else {
+      setSuccessMessage("Application successful.");
+      reset();
     }
 
-    if (response.error) {
-      console.log(response.error);
-      return;
-    }
-
-    reset();
+    setSubmitting(false);
   };
 
   return (
@@ -91,6 +98,7 @@ export default function GetScoutedForm() {
             {...register("firstName")}
             id="first-name"
             placeholder="First Name"
+            autoComplete="off"
             className="custom-text-input"
           />
           {errors.firstName?.message && (
@@ -106,6 +114,7 @@ export default function GetScoutedForm() {
             {...register("lastName")}
             id="last-name"
             placeholder="Last Name"
+            autoComplete="off"
             className="custom-text-input"
           />
           {errors.lastName?.message && (
@@ -121,6 +130,7 @@ export default function GetScoutedForm() {
             {...register("birthday")}
             id="birthday"
             placeholder="Birthday"
+            autoComplete="off"
             className="custom-text-input"
           />
           {errors.birthday?.message && (
@@ -136,6 +146,7 @@ export default function GetScoutedForm() {
             {...register("email")}
             id="email"
             placeholder="E-mail"
+            autoComplete="off"
             className="custom-text-input"
           />
           {errors.email?.message && (
@@ -151,6 +162,7 @@ export default function GetScoutedForm() {
             {...register("height")}
             id="height"
             placeholder="Height"
+            autoComplete="off"
             className="custom-text-input"
           />
           {errors.height?.message && (
@@ -166,6 +178,7 @@ export default function GetScoutedForm() {
             {...register("countryCity")}
             id="country-city"
             placeholder="Country / City"
+            autoComplete="off"
             className="custom-text-input"
           />
           {errors.countryCity?.message && (
@@ -184,6 +197,7 @@ export default function GetScoutedForm() {
             {...register("instagram")}
             id="instagram"
             placeholder="Instagram"
+            autoComplete="off"
             className="custom-text-input"
           />
         </div>
@@ -278,10 +292,20 @@ export default function GetScoutedForm() {
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-center xl:col-start-2 xl:col-end-3">
-        <button className="brand-text cursor-pointer rounded-none border-0 bg-black px-6 py-2 text-white outline-none dark:bg-white dark:text-black">
-          Submit
+      <div className="flex flex-col items-center gap-2 xl:col-start-2 xl:col-end-3">
+        <button
+          disabled={submitting}
+          className="brand-text cursor-pointer rounded-none border-0 bg-black px-6 py-2 text-white outline-none disabled:cursor-not-allowed disabled:bg-black/50 dark:bg-white dark:text-black dark:disabled:bg-white/50"
+        >
+          {submitting ? "Submitting..." : "Submit"}
         </button>
+
+        {!submitting && errorMessage && (
+          <p className="text-red-600">{errorMessage}</p>
+        )}
+        {!submitting && successMessage && (
+          <p className="text-green-500">{successMessage}</p>
+        )}
       </div>
     </form>
   );
