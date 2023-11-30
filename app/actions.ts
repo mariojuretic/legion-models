@@ -37,8 +37,8 @@ export const submitGetScoutedForm = async (formData: FormData) => {
     const fullBodyShotArrBuff = await data.fullBodyShot.arrayBuffer();
 
     const msg: MailDataRequired = {
-      to: "mario@weblio.hr",
-      from: `${data.firstName} ${data.lastName} <sendgrid@em3332.weblio.hr>`,
+      to: process.env.SENDGRID_RECIPIENT,
+      from: `${data.firstName} ${data.lastName} <${process.env.SENDGRID_SENDER_IDENTITY}>`,
       replyTo: `${data.firstName} ${data.lastName} <${data.email}>`,
       subject: "Scouting application - LEGION Model Management",
       html: `
