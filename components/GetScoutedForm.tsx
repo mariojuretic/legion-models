@@ -8,7 +8,15 @@ import { z } from "zod";
 import { GetScoutedFormSchema } from "@/lib/schema";
 import { submitGetScoutedForm } from "@/app/actions";
 
-type GetScoutedFormInputs = z.infer<typeof GetScoutedFormSchema>;
+type GetScoutedFormInputs = Omit<
+  z.infer<typeof GetScoutedFormSchema>,
+  "headshot" | "profileHeadshot" | "halfBodyShot" | "fullBodyShot"
+> & {
+  headshot: FileList;
+  profileHeadshot: FileList;
+  halfBodyShot: FileList;
+  fullBodyShot: FileList;
+};
 
 export default function GetScoutedForm() {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -30,7 +38,15 @@ export default function GetScoutedForm() {
     setSuccessMessage(null);
     setErrorMessage(null);
 
-    const response = await submitGetScoutedForm(data);
+    const formData = new FormData();
+
+    formData.append("data", JSON.stringify(data));
+    formData.append("headshot", data.headshot[0]);
+    formData.append("profileHeadshot", data.profileHeadshot[0]);
+    formData.append("halfBodyShot", data.halfBodyShot[0]);
+    formData.append("fullBodyShot", data.fullBodyShot[0]);
+
+    const response = await submitGetScoutedForm(formData);
 
     if (!response || !response.success) {
       setErrorMessage("Something went wrong.");
@@ -273,20 +289,52 @@ export default function GetScoutedForm() {
 
         {/* Image Upload Grid */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="custom-image-upload">
+          {/* <div className="custom-image-upload">
             <span className="custom-image-upload-button">Upload</span>
+          </div> */}
+
+          <div className="flex flex-col gap-2">
+            <input
+              type="file"
+              {...register("headshot")}
+              accept="image/jpeg, image/png, image/webp"
+            />
+            {errors.headshot?.message && (
+              <p className="text-red-600">{errors.headshot.message}</p>
+            )}
           </div>
 
-          <div className="custom-image-upload">
-            <span className="custom-image-upload-button">Upload</span>
+          <div className="flex flex-col gap-2">
+            <input
+              type="file"
+              {...register("profileHeadshot")}
+              accept="image/jpeg, image/png, image/webp"
+            />
+            {errors.profileHeadshot?.message && (
+              <p className="text-red-600">{errors.profileHeadshot.message}</p>
+            )}
           </div>
 
-          <div className="custom-image-upload">
-            <span className="custom-image-upload-button">Upload</span>
+          <div className="flex flex-col gap-2">
+            <input
+              type="file"
+              {...register("halfBodyShot")}
+              accept="image/jpeg, image/png, image/webp"
+            />
+            {errors.halfBodyShot?.message && (
+              <p className="text-red-600">{errors.halfBodyShot.message}</p>
+            )}
           </div>
 
-          <div className="custom-image-upload">
-            <span className="custom-image-upload-button">Upload</span>
+          <div className="flex flex-col gap-2">
+            <input
+              type="file"
+              {...register("fullBodyShot")}
+              accept="image/jpeg, image/png, image/webp"
+            />
+            {errors.fullBodyShot?.message && (
+              <p className="text-red-600">{errors.fullBodyShot.message}</p>
+            )}
           </div>
         </div>
       </div>
