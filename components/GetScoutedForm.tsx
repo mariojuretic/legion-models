@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -23,14 +24,71 @@ export default function GetScoutedForm() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [headshotPreview, setHeadshotPreview] = useState<string | null>(null);
+  const [profileHeadshotPreview, setProfileHeadshotPreview] = useState<
+    string | null
+  >(null);
+  const [halfBodyShotPreview, setHalfBodyShotPreview] = useState<string | null>(
+    null,
+  );
+  const [fullBodyShotPreview, setFullBodyShotPreview] = useState<string | null>(
+    null,
+  );
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
+    watch,
   } = useForm<GetScoutedFormInputs>({
     resolver: zodResolver(GetScoutedFormSchema),
   });
+
+  const headshotFile = watch("headshot");
+  const profileHeadshotFile = watch("profileHeadshot");
+  const halfBodyShotFile = watch("halfBodyShot");
+  const fullBodyShotFile = watch("fullBodyShot");
+
+  useEffect(() => {
+    if (!headshotFile || headshotFile.length !== 1)
+      return setHeadshotPreview(null);
+
+    const previewUrl = URL.createObjectURL(headshotFile[0]);
+    setHeadshotPreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [headshotFile]);
+
+  useEffect(() => {
+    if (!profileHeadshotFile || profileHeadshotFile.length !== 1)
+      return setProfileHeadshotPreview(null);
+
+    const previewUrl = URL.createObjectURL(profileHeadshotFile[0]);
+    setProfileHeadshotPreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [profileHeadshotFile]);
+
+  useEffect(() => {
+    if (!halfBodyShotFile || halfBodyShotFile.length !== 1)
+      return setHalfBodyShotPreview(null);
+
+    const previewUrl = URL.createObjectURL(halfBodyShotFile[0]);
+    setHalfBodyShotPreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [halfBodyShotFile]);
+
+  useEffect(() => {
+    if (!fullBodyShotFile || fullBodyShotFile.length !== 1)
+      return setFullBodyShotPreview(null);
+
+    const previewUrl = URL.createObjectURL(fullBodyShotFile[0]);
+    setFullBodyShotPreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [fullBodyShotFile]);
 
   const submitHandler: SubmitHandler<GetScoutedFormInputs> = async (data) => {
     setSubmitting(true);
@@ -289,16 +347,27 @@ export default function GetScoutedForm() {
 
         {/* Image Upload Grid */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {/* <div className="custom-image-upload">
-            <span className="custom-image-upload-button">Upload</span>
-          </div> */}
-
           <div className="flex flex-col gap-2">
             <input
               type="file"
               {...register("headshot")}
+              id="headshot"
+              className="hidden"
               accept="image/jpeg, image/png, image/webp"
             />
+            <label htmlFor="headshot" className="custom-image-upload">
+              {headshotPreview && (
+                <Image
+                  src={headshotPreview}
+                  alt="Headshot preview"
+                  fill
+                  className="object-cover object-center"
+                />
+              )}
+              <span className="custom-image-upload-button">
+                {headshotPreview ? "Change" : "Upload"}
+              </span>
+            </label>
             {errors.headshot?.message && (
               <p className="text-red-600">{errors.headshot.message}</p>
             )}
@@ -308,8 +377,23 @@ export default function GetScoutedForm() {
             <input
               type="file"
               {...register("profileHeadshot")}
+              id="profile-headshot"
+              className="hidden"
               accept="image/jpeg, image/png, image/webp"
             />
+            <label htmlFor="profile-headshot" className="custom-image-upload">
+              {profileHeadshotPreview && (
+                <Image
+                  src={profileHeadshotPreview}
+                  alt="Profile headshot preview"
+                  fill
+                  className="object-cover object-center"
+                />
+              )}
+              <span className="custom-image-upload-button">
+                {profileHeadshotPreview ? "Change" : "Upload"}
+              </span>
+            </label>
             {errors.profileHeadshot?.message && (
               <p className="text-red-600">{errors.profileHeadshot.message}</p>
             )}
@@ -319,8 +403,23 @@ export default function GetScoutedForm() {
             <input
               type="file"
               {...register("halfBodyShot")}
+              id="half-body-shot"
+              className="hidden"
               accept="image/jpeg, image/png, image/webp"
             />
+            <label htmlFor="half-body-shot" className="custom-image-upload">
+              {halfBodyShotPreview && (
+                <Image
+                  src={halfBodyShotPreview}
+                  alt="Half-body shot preview"
+                  fill
+                  className="object-cover object-center"
+                />
+              )}
+              <span className="custom-image-upload-button">
+                {halfBodyShotPreview ? "Change" : "Upload"}
+              </span>
+            </label>
             {errors.halfBodyShot?.message && (
               <p className="text-red-600">{errors.halfBodyShot.message}</p>
             )}
@@ -330,8 +429,23 @@ export default function GetScoutedForm() {
             <input
               type="file"
               {...register("fullBodyShot")}
+              id="full-body-shot"
+              className="hidden"
               accept="image/jpeg, image/png, image/webp"
             />
+            <label htmlFor="full-body-shot" className="custom-image-upload">
+              {fullBodyShotPreview && (
+                <Image
+                  src={fullBodyShotPreview}
+                  alt="Full-body shot preview"
+                  fill
+                  className="object-cover object-center"
+                />
+              )}
+              <span className="custom-image-upload-button">
+                {fullBodyShotPreview ? "Change" : "Upload"}
+              </span>
+            </label>
             {errors.fullBodyShot?.message && (
               <p className="text-red-600">{errors.fullBodyShot.message}</p>
             )}

@@ -28,7 +28,7 @@ export const submitGetScoutedForm = async (formData: FormData) => {
 
   const result = GetScoutedFormSchema.safeParse(data);
 
-  if (!result.success) return result;
+  if (!result.success) return { success: false };
 
   try {
     const headshotArrBuff = await data.headshot.arrayBuffer();
@@ -80,7 +80,7 @@ export const submitGetScoutedForm = async (formData: FormData) => {
     };
 
     await sgMail.send(msg);
-    return result;
+    return { success: true };
   } catch (error) {
     console.log("Something went wrong.", error);
     return { success: false };
