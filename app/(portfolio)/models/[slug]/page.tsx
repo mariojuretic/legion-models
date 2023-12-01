@@ -1,14 +1,16 @@
 import { groq } from "next-sanity";
 
-import PortfolioImage from "@/components/PortfolioImage";
+import VerticalGallery from "@/components/VerticalGallery";
+import ImageSlider from "@/components/ImageSlider";
 import { client } from "@/lib/sanity.client";
+import generateSlides from "@/lib/generateSlides";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug][0] {
     ...,
-    "portfolioImage": {
-      ...portfolioImage,
-      "dimensions": portfolioImage.asset->metadata.dimensions
+    portfolio[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
     }
   }
 `;
@@ -22,13 +24,17 @@ export default async function Page({
 }) {
   const model: ModelDoc = await client.fetch(query, { slug });
 
+  const slides = generateSlides(model.portfolio);
+
   return (
-    <main className="flex flex-1 p-4 lg:p-8">
-      <PortfolioImage
-        image={model.portfolioImage}
-        name={model.name}
-        alignment="center"
-      />
-    </main>
+    <>
+      <main className="block lg:hidden">
+        <VerticalGallery slides={slides} name={model.name} />
+      </main>
+
+      <main className="hidden lg:flex lg:flex-1">
+        <ImageSlider slides={slides} name={model.name} />
+      </main>
+    </>
   );
 }

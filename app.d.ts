@@ -45,7 +45,7 @@ interface ModelDoc extends BaseType {
   interview?: string;
   name: string;
   notes?: string;
-  portfolioImage: ImageType;
+  portfolio: ImageType[];
   shows: ImageType[];
   slug: SlugType;
   thumbnail?: {

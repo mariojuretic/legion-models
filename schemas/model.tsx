@@ -61,15 +61,20 @@ export default defineType({
       },
     }),
     defineField({
-      name: "portfolioImage",
-      type: "image",
-      fields: [
-        defineField({
-          name: "source",
-          type: "string",
+      name: "portfolio",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+          fields: [
+            defineField({
+              name: "source",
+              type: "string",
+            }),
+          ],
         }),
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: "digitals",
@@ -181,14 +186,14 @@ export default defineType({
   preview: {
     select: {
       name: "name",
-      portfolioImage: "portfolioImage",
+      portfolio: "portfolio",
       color: "color",
       contract: "contract",
       contractExpirationDate: "contractExpirationDate",
     },
     prepare: ({
       name,
-      portfolioImage,
+      portfolio,
       color,
       contract,
       contractExpirationDate,
@@ -202,7 +207,7 @@ export default defineType({
         )}`,
       media: (
         <Image
-          src={urlFor(portfolioImage).url()}
+          src={urlFor(portfolio[0]).url()}
           alt={name}
           fill
           style={{
