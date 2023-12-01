@@ -1,6 +1,29 @@
+"use client";
+
+import { useParams, usePathname } from "next/navigation";
+
 import TabLink from "./TabLink";
 
 export default function ModelTabs({ model }: { model: ModelDoc }) {
+  const { slug } = useParams();
+  const pathname = usePathname();
+
+  const segments = pathname.split("/");
+  const endSegment = segments[segments.length - 1];
+
+  let downloadButtonHref;
+  let downloadFilename;
+
+  if (endSegment === slug && model.downloads?.portfolio?.downloadUrl) {
+    downloadButtonHref = model.downloads.portfolio.downloadUrl;
+    downloadFilename = slug + "-portfolio";
+  }
+
+  if (endSegment === "digitals" && model.downloads?.digitals?.downloadUrl) {
+    downloadButtonHref = model.downloads.digitals.downloadUrl;
+    downloadFilename = slug + "-digitals";
+  }
+
   return (
     <div className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:p-8">
       <h2 className="mr-4 hidden lg:block">{model.name}</h2>
@@ -44,6 +67,17 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
           className="text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
         >
           Instagram
+        </a>
+      )}
+
+      {downloadButtonHref && downloadFilename && (
+        <a
+          href={`${downloadButtonHref}?dl=${downloadFilename}.pdf`}
+          download
+          target="_blank"
+          className="text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+        >
+          Download
         </a>
       )}
     </div>

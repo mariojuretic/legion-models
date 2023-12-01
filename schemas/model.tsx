@@ -145,6 +145,29 @@ export default defineType({
       type: "string",
     }),
     defineField({
+      name: "downloads",
+      type: "object",
+      fields: [
+        defineField({
+          name: "portfolio",
+          type: "file",
+          options: {
+            accept: "application/pdf",
+          },
+        }),
+        defineField({
+          name: "digitals",
+          type: "file",
+          options: {
+            accept: "application/pdf",
+          },
+        }),
+      ],
+      options: {
+        columns: 2,
+      },
+    }),
+    defineField({
       name: "dateOfBirth",
       type: "date",
       options: {

@@ -6,7 +6,19 @@ import ModelTabs from "@/components/ModelTabs";
 import { client } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "model" && slug.current == $slug && hidden == false][0]
+  *[_type == "model" && slug.current == $slug && hidden == false][0] {
+    ...,
+    downloads {
+      portfolio {
+        ...,
+        "downloadUrl": asset->url
+      },
+      digitals {
+        ...,
+        "downloadUrl": asset->url
+      }
+    }
+  }
 `;
 
 export const dynamic = "force-dynamic";

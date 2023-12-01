@@ -40,6 +40,10 @@ interface ModelDoc extends BaseType {
   covers?: ImageType[];
   dateOfBirth?: string;
   digitals?: ImageType[];
+  downloads?: {
+    digitals?: FileType;
+    portfolio?: FileType;
+  };
   hidden: boolean;
   instagram?: string;
   interview?: string;
@@ -106,6 +110,12 @@ interface ImageType {
   asset: ReferenceType;
   dimensions?: ImageDimensionsType;
   source?: string;
+}
+
+interface FileType {
+  _type: "file";
+  asset: ReferenceType;
+  downloadUrl?: string;
 }
 
 interface ReferenceType {
