@@ -46,12 +46,18 @@ export default function PortfolioImage({
     setImageHeight(renderedImageHeight);
   }, [image.dimensions, image.source]);
 
-  const alignItems = "items-" + alignment;
+  const alignItems =
+    alignment === "start"
+      ? "flex-start"
+      : alignment === "center"
+      ? "center"
+      : "flex-end";
 
   return (
     <div
       ref={containerRef}
-      className={`flex flex-1 flex-col ${alignItems} justify-center`}
+      className={`flex flex-1 flex-col justify-center`}
+      style={{ alignItems }}
     >
       {imageWidth && imageHeight && (
         <Image
