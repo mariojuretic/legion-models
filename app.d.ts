@@ -56,6 +56,7 @@ interface ModelDoc extends BaseType {
     default?: ImageType;
     hover?: ImageType;
   };
+  videos?: VideoType[];
 }
 
 interface CollectionDoc extends BaseType {
@@ -118,9 +119,17 @@ interface FileType {
   downloadUrl?: string;
 }
 
+interface VideoType {
+  _type: "mux.video";
+  aspectRatio: string;
+  asset: ReferenceType;
+  playbackId: string;
+}
+
 interface ReferenceType {
   _ref: string;
   _type: "reference";
+  _weak?: boolean;
 }
 
 interface ImageDimensionsType {

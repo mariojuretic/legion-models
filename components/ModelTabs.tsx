@@ -36,6 +36,12 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
         </TabLink>
       )}
 
+      {model.videos && model.videos.length > 0 && (
+        <TabLink slug={model.slug.current} tab="video">
+          Video
+        </TabLink>
+      )}
+
       {model.shows && model.shows.length > 0 && (
         <TabLink slug={model.slug.current} tab="shows">
           Shows

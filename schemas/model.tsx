@@ -92,6 +92,15 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "videos",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "mux.video",
+        }),
+      ],
+    }),
+    defineField({
       name: "shows",
       type: "array",
       of: [

@@ -4,6 +4,7 @@ import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
 import { simplerColorInput } from "sanity-plugin-simpler-color-input";
+import { muxInput } from "sanity-plugin-mux-input";
 
 import { schemaTypes } from "./schemas";
 import {
@@ -121,6 +122,7 @@ export default defineConfig({
     }),
     visionTool(),
     simplerColorInput(),
+    muxInput(),
   ],
 
   schema: {
