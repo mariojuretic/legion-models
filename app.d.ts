@@ -68,13 +68,17 @@ interface CollectionDoc extends BaseType {
 
 interface NewsDoc extends BaseType {
   _type: "news";
+  details?: string;
   excerpt?: string;
+  images?: ImageType[];
   slug: SlugType;
   thumbnail?: {
     default?: ImageType;
     hover?: ImageType;
   };
   title: string;
+  type: "image" | "video";
+  videos?: VideoType[];
 }
 
 interface PrivacyPolicyPage extends BaseType {

@@ -17,7 +17,6 @@ export default function VerticalGallery({
   const [images, setImages] = useState<ImageType[]>();
 
   useEffect(() => {
-    console.log("useEffect running");
     if (!containerRef.current) return;
 
     const containerWidth = containerRef.current.clientWidth - 32;
