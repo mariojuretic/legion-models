@@ -27,7 +27,7 @@ export default function ImageSlider({
   return (
     <>
       <button
-        className="shrink-0 p-8 text-black enabled:hover:text-white"
+        className="shrink-0 p-8 text-white enabled:hover:text-black dark:text-black dark:enabled:hover:text-white"
         onClick={prevPage}
         disabled={page <= 1}
       >
@@ -66,7 +66,7 @@ export default function ImageSlider({
       </div>
 
       <button
-        className="shrink-0 p-8 text-black enabled:hover:text-white"
+        className="shrink-0 p-8 text-white enabled:hover:text-black dark:text-black dark:enabled:hover:text-white"
         onClick={nextPage}
         disabled={page >= slides.length}
       >
