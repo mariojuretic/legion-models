@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
 import urlFor from "@/lib/urlFor";
+import normalizeString from "@/lib/normalizeString";
+import { useSearchStore } from "@/store/SearchStore";
 
 function ModelCard({ model }: { model: ModelDoc }) {
   return (
@@ -41,9 +45,15 @@ function ModelCard({ model }: { model: ModelDoc }) {
 }
 
 export default function ModelsList({ models }: { models: ModelDoc[] }) {
+  const searchTerm = useSearchStore((state) => state.searchTerm);
+
+  const filteredModels = models.filter((model) =>
+    normalizeString(model.name).includes(normalizeString(searchTerm)),
+  );
+
   return (
     <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-      {models.map((model) => (
+      {filteredModels.map((model) => (
         <ModelCard key={model._id} model={model} />
       ))}
     </ul>
