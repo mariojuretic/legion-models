@@ -1,4 +1,6 @@
 import { defineType, defineField } from "sanity";
+import { SanityDocument } from "next-sanity";
+import moment from "moment";
 
 export default defineType({
   name: "news",
@@ -13,7 +15,12 @@ export default defineType({
       name: "slug",
       type: "slug",
       options: {
-        source: "title",
+        source: (doc: SanityDocument) => {
+          const title = doc.title as string;
+          const date = moment(doc._createdAt).format("YYYY-MM-DD");
+
+          return `${title}-${date}`;
+        },
       },
       validation: (Rule) => Rule.required(),
     }),
