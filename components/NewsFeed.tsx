@@ -16,10 +16,10 @@ function NewsCard({ newsData }: { newsData: NewsDoc }) {
               src={urlFor(newsData.thumbnail.default).url()}
               alt={newsData.title}
               fill
-              className={`z-10 object-cover object-center ${
+              className={`z-20 object-cover object-center ${
                 !newsData.thumbnail.hover
-                  ? "transition-transform duration-300 group-hover:scale-105"
-                  : ""
+                  ? "scale-100 transition-transform duration-300 group-hover:scale-105"
+                  : "opacity-100 transition-opacity duration-300 group-hover:opacity-0"
               }`}
             />
           )}
@@ -29,7 +29,7 @@ function NewsCard({ newsData }: { newsData: NewsDoc }) {
               src={urlFor(newsData.thumbnail.hover).url()}
               alt={newsData.title}
               fill
-              className="z-20 object-cover object-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="z-10 object-cover object-center"
             />
           )}
         </div>
