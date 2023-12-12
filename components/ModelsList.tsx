@@ -20,10 +20,10 @@ function ModelCard({ model }: { model: ModelDoc }) {
               src={urlFor(model.thumbnail.default).url()}
               alt={model.name}
               fill
-              className={`z-10 object-cover object-center ${
+              className={`z-20 object-cover object-center ${
                 !model.thumbnail.hover
-                  ? "transition-transform duration-300 group-hover:scale-105"
-                  : ""
+                  ? "scale-100 transition-transform duration-300 group-hover:scale-105"
+                  : "opacity-100 transition-opacity duration-300 group-hover:opacity-0"
               }`}
             />
           )}
@@ -33,7 +33,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
               src={urlFor(model.thumbnail.hover).url()}
               alt={model.name}
               fill
-              className="z-20 object-cover object-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="z-10 object-cover object-center"
             />
           )}
         </div>
