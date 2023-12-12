@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { groq } from "next-sanity";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { client } from "@/lib/sanity.client";
 
@@ -36,6 +37,7 @@ export default async function Layout({
         className={`${roboto.className} bg-white text-black dark:bg-black dark:text-white`}
       >
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
