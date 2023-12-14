@@ -472,10 +472,7 @@ export default function GetScoutedForm() {
 
       {/* Submit Button */}
       <div className="flex flex-col items-center gap-2 xl:col-start-2 xl:col-end-3">
-        <button
-          disabled={submitting}
-          className="brand-text cursor-pointer rounded-none border-0 bg-black px-6 py-2 text-white outline-none disabled:cursor-not-allowed disabled:bg-black/50 dark:bg-white dark:text-black dark:disabled:bg-white/50"
-        >
+        <button disabled={submitting} className="custom-submit-button">
           {submitting ? "Submitting..." : "Submit"}
         </button>
 

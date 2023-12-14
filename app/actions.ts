@@ -3,7 +3,7 @@
 import { z } from "zod";
 import sgMail, { MailDataRequired } from "@sendgrid/mail";
 
-import { GetScoutedFormSchema } from "@/lib/schema";
+import { GetScoutedFormSchema, NewsletterFormSchema } from "@/lib/schema";
 
 type GetScoutedFormInputs = Omit<
   z.infer<typeof GetScoutedFormSchema>,
@@ -14,6 +14,8 @@ type GetScoutedFormInputs = Omit<
   halfBodyShot: File;
   fullBodyShot: File;
 };
+
+type NewsletterFormInputs = z.infer<typeof NewsletterFormSchema>;
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
@@ -85,4 +87,14 @@ export const submitGetScoutedForm = async (formData: FormData) => {
     console.log("Something went wrong.", error);
     return { success: false };
   }
+};
+
+export const submitNewsletterForm = async (data: NewsletterFormInputs) => {
+  const result = NewsletterFormSchema.safeParse(data);
+
+  if (!result.success) return { success: false };
+
+  // Server side newsletter subscription code...
+
+  return { success: true };
 };

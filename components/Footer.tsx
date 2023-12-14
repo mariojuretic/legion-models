@@ -11,7 +11,9 @@ export default function Footer() {
         >
           Instagram
         </a>
-        <p>Newsletter</p>
+        <Link href="/newsletter" className="hover:font-bold">
+          Newsletter
+        </Link>
       </div>
 
       <div className="flex flex-wrap items-center gap-x-4 lg:flex-row-reverse">

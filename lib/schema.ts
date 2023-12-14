@@ -105,3 +105,11 @@ export const GetScoutedFormSchema = z.object({
       "JPEG, PNG and WebP files are accepted.",
     ),
 });
+
+export const NewsletterFormSchema = z.object({
+  firstName: z.string().min(1, "First name is required."),
+  email: z
+    .string()
+    .min(1, "E-mail is required.")
+    .email("Enter a valid e-mail address."),
+});
