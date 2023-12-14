@@ -9,6 +9,11 @@ import { z } from "zod";
 import { GetScoutedFormSchema } from "@/lib/schema";
 import { submitGetScoutedForm } from "@/app/actions";
 
+import headshotPlaceholder from "@/images/headshot.png";
+import profileHeadshotPlaceholder from "@/images/profile-headshot.png";
+import halfBodyShotPlaceholder from "@/images/half-body-shot.png";
+import fullBodyShotPlaceholder from "@/images/full-body-shot.png";
+
 type GetScoutedFormInputs = Omit<
   z.infer<typeof GetScoutedFormSchema>,
   "headshot" | "profileHeadshot" | "halfBodyShot" | "fullBodyShot"
@@ -356,14 +361,14 @@ export default function GetScoutedForm() {
               accept="image/jpeg, image/png, image/webp"
             />
             <label htmlFor="headshot" className="custom-image-upload">
-              {headshotPreview && (
-                <Image
-                  src={headshotPreview}
-                  alt="Headshot preview"
-                  fill
-                  className="object-cover object-center"
-                />
-              )}
+              <Image
+                src={headshotPreview ? headshotPreview : headshotPlaceholder}
+                alt="Headshot preview"
+                fill
+                className={`object-cover object-center ${
+                  !headshotPreview && "opacity-10 invert dark:invert-0"
+                }`}
+              />
               <span className="custom-image-upload-button">
                 {headshotPreview ? "Change" : "Upload"}
               </span>
@@ -382,14 +387,18 @@ export default function GetScoutedForm() {
               accept="image/jpeg, image/png, image/webp"
             />
             <label htmlFor="profile-headshot" className="custom-image-upload">
-              {profileHeadshotPreview && (
-                <Image
-                  src={profileHeadshotPreview}
-                  alt="Profile headshot preview"
-                  fill
-                  className="object-cover object-center"
-                />
-              )}
+              <Image
+                src={
+                  profileHeadshotPreview
+                    ? profileHeadshotPreview
+                    : profileHeadshotPlaceholder
+                }
+                alt="Profile headshot preview"
+                fill
+                className={`object-cover object-center ${
+                  !profileHeadshotPreview && "opacity-10 invert dark:invert-0"
+                }`}
+              />
               <span className="custom-image-upload-button">
                 {profileHeadshotPreview ? "Change" : "Upload"}
               </span>
@@ -408,14 +417,18 @@ export default function GetScoutedForm() {
               accept="image/jpeg, image/png, image/webp"
             />
             <label htmlFor="half-body-shot" className="custom-image-upload">
-              {halfBodyShotPreview && (
-                <Image
-                  src={halfBodyShotPreview}
-                  alt="Half-body shot preview"
-                  fill
-                  className="object-cover object-center"
-                />
-              )}
+              <Image
+                src={
+                  halfBodyShotPreview
+                    ? halfBodyShotPreview
+                    : halfBodyShotPlaceholder
+                }
+                alt="Half-body shot preview"
+                fill
+                className={`object-cover object-center ${
+                  !halfBodyShotPreview && "opacity-10 invert dark:invert-0"
+                }`}
+              />
               <span className="custom-image-upload-button">
                 {halfBodyShotPreview ? "Change" : "Upload"}
               </span>
@@ -434,14 +447,18 @@ export default function GetScoutedForm() {
               accept="image/jpeg, image/png, image/webp"
             />
             <label htmlFor="full-body-shot" className="custom-image-upload">
-              {fullBodyShotPreview && (
-                <Image
-                  src={fullBodyShotPreview}
-                  alt="Full-body shot preview"
-                  fill
-                  className="object-cover object-center"
-                />
-              )}
+              <Image
+                src={
+                  fullBodyShotPreview
+                    ? fullBodyShotPreview
+                    : fullBodyShotPlaceholder
+                }
+                alt="Full-body shot preview"
+                fill
+                className={`object-cover object-center ${
+                  !fullBodyShotPreview && "opacity-10 invert dark:invert-0"
+                }`}
+              />
               <span className="custom-image-upload-button">
                 {fullBodyShotPreview ? "Change" : "Upload"}
               </span>

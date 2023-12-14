@@ -20,7 +20,7 @@
   }
 
   .custom-image-upload {
-    @apply relative flex aspect-square w-full cursor-pointer items-end justify-center overflow-hidden bg-neutral-100 p-2 dark:bg-neutral-900;
+    @apply relative flex aspect-square w-full cursor-pointer items-end justify-center overflow-hidden p-2;
   }
 
   .custom-image-upload-button {
