@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import sgMail, { MailDataRequired } from "@sendgrid/mail";
+import mailchimp from "@mailchimp/mailchimp_marketing";
 
 import { GetScoutedFormSchema, NewsletterFormSchema } from "@/lib/schema";
 
@@ -18,6 +19,11 @@ type GetScoutedFormInputs = Omit<
 type NewsletterFormInputs = z.infer<typeof NewsletterFormSchema>;
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+
+mailchimp.setConfig({
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_SERVER_PREFIX,
+});
 
 export const submitGetScoutedForm = async (formData: FormData) => {
   const data: GetScoutedFormInputs = {
@@ -94,7 +100,24 @@ export const submitNewsletterForm = async (data: NewsletterFormInputs) => {
 
   if (!result.success) return { success: false };
 
-  // Server side newsletter subscription code...
+  try {
+    const listId = process.env.MAILCHIMP_AUDIENCE_ID!;
+    const subscribingUser = {
+      firstName: data.firstName,
+      email: data.email,
+    };
 
-  return { success: true };
+    const response = await mailchimp.lists.addListMember(listId, {
+      email_address: subscribingUser.email,
+      status: "pending",
+      merge_fields: {
+        FNAME: subscribingUser.firstName,
+      },
+    });
+
+    return { success: true, status: response.status };
+  } catch (error) {
+    console.log("Something went wrong.", error);
+    return { success: false };
+  }
 };

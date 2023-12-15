@@ -35,7 +35,12 @@ export default function NewsletterForm() {
     if (!response || !response.success) {
       setErrorMessage("Something went wrong.");
     } else {
-      setSuccessMessage("Subscription successful.");
+      const message =
+        response.status === "subscribed"
+          ? "Subscription successful."
+          : "Please confirm your e-mail address.";
+
+      setSuccessMessage(message);
       reset();
     }
 
