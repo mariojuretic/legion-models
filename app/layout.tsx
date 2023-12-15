@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import localFont from "next/font/local";
 import { groq } from "next-sanity";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -7,7 +7,18 @@ import { client } from "@/lib/sanity.client";
 
 import "./globals.css";
 
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
+const neueHaasGroteskText = localFont({
+  src: [
+    {
+      path: "../fonts/NeueHaasGroteskText-Regular.otf",
+      weight: "400",
+    },
+    {
+      path: "../fonts/NeueHaasGroteskText-Bold.otf",
+      weight: "700",
+    },
+  ],
+});
 
 const query = groq`
   *[_type == "settings"][0]
@@ -34,7 +45,7 @@ export default async function Layout({
   return (
     <html lang="en" className={theme}>
       <body
-        className={`${roboto.className} bg-white text-black dark:bg-black dark:text-white`}
+        className={`${neueHaasGroteskText.className} bg-white text-black dark:bg-black dark:text-white`}
       >
         {children}
         <SpeedInsights />

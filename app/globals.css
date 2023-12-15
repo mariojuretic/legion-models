@@ -4,7 +4,7 @@
 
 @layer components {
   .brand-text {
-    @apply text-[0.625rem] uppercase leading-[1.2] tracking-[0.125em];
+    @apply text-[0.625rem] uppercase leading-[1.3] tracking-[0.03em];
   }
 
   .custom-text-input {
