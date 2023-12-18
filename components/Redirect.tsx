@@ -10,7 +10,7 @@ export default function Redirect({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      push("/models");
+      push("/main-board");
     }, DELAY_SECONDS * 1000);
 
     return () => {

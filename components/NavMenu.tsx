@@ -19,11 +19,11 @@ export default function Menu() {
       <Link href="/about" className="hover:font-bold" onClick={closeMenu}>
         About
       </Link>
-      <Link href="/models" className="hover:font-bold" onClick={closeMenu}>
-        Models
+      <Link href="/main-board" className="hover:font-bold" onClick={closeMenu}>
+        Main Board
       </Link>
-      <Link href="/new-faces" className="hover:font-bold" onClick={closeMenu}>
-        New Faces
+      <Link href="/development" className="hover:font-bold" onClick={closeMenu}>
+        Development
       </Link>
       <Link href="/get-scouted" className="hover:font-bold" onClick={closeMenu}>
         Get Scouted

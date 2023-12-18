@@ -12,7 +12,7 @@ import { useSearchStore } from "@/store/SearchStore";
 
 const drukWide = localFont({ src: "../fonts/DrukWide-Bold.ttf" });
 
-const SEARCHABLE_PAGES = ["models", "new-faces"];
+const SEARCHABLE_PAGES = ["main-board", "development"];
 
 export default function Header() {
   const pathname = usePathname();
@@ -41,7 +41,7 @@ export default function Header() {
           <h1
             className={`${drukWide.className} text-xl leading-none lg:text-3xl`}
           >
-            <Link href="/models" className="inline-block">
+            <Link href="/main-board" className="inline-block">
               LEGION
             </Link>
           </h1>
