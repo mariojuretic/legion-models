@@ -55,7 +55,7 @@ export default function Header() {
 
         {/* Buttons */}
         <div className="flex items-center lg:hidden">
-          {searchable && !isVisible && (
+          {searchable && (
             <button className="p-4" onClick={() => showSearch()}>
               <MagnifyingGlassIcon className="h-5 w-5" />
             </button>

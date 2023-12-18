@@ -18,8 +18,7 @@ export default function Menu() {
     state.closeMenu,
   ]);
 
-  const [isVisible, showSearch, hideSearch] = useSearchStore((state) => [
-    state.isVisible,
+  const [showSearch, hideSearch] = useSearchStore((state) => [
     state.showSearch,
     state.hideSearch,
   ]);
@@ -81,7 +80,7 @@ export default function Menu() {
         Contact
       </Link>
 
-      {searchable && !isVisible && (
+      {searchable && (
         <button
           className="brand-text mt-[13px] hidden hover:font-bold lg:block"
           onClick={() => showSearch()}
