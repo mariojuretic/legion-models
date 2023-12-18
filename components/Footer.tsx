@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:ml-60 lg:flex-row-reverse lg:justify-between lg:p-8">
       <div className="flex flex-wrap items-center gap-x-4">
         <a
-          href="https://instagram.com/"
+          href="https://instagram.com/legionmodels"
           target="_blank"
           className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
         >
