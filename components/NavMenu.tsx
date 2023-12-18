@@ -1,14 +1,36 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { useMenuStore } from "@/store/MenuStore";
+import { useSearchStore } from "@/store/SearchStore";
+import { useEffect, useState } from "react";
+
+const SEARCHABLE_PAGES = ["main-board", "development"];
 
 export default function Menu() {
+  const pathname = usePathname();
+  const [searchable, setSearchable] = useState<boolean>(false);
+
   const [isOpen, closeMenu] = useMenuStore((state) => [
     state.isOpen,
     state.closeMenu,
   ]);
+
+  const [isVisible, showSearch, hideSearch] = useSearchStore((state) => [
+    state.isVisible,
+    state.showSearch,
+    state.hideSearch,
+  ]);
+
+  useEffect(() => {
+    hideSearch();
+
+    setSearchable(
+      SEARCHABLE_PAGES.some((page) => pathname.split("/").includes(page)),
+    );
+  }, [pathname, hideSearch]);
 
   return (
     <nav
@@ -58,6 +80,15 @@ export default function Menu() {
       >
         Contact
       </Link>
+
+      {searchable && !isVisible && (
+        <button
+          className="brand-text mt-[13px] hidden hover:font-bold lg:block"
+          onClick={() => showSearch()}
+        >
+          Search
+        </button>
+      )}
     </nav>
   );
 }
