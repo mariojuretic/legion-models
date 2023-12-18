@@ -70,7 +70,7 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
         <a
           href={`https://instagram.com/${model.instagram}`}
           target="_blank"
-          className="text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+          className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
         >
           Instagram
         </a>
@@ -81,7 +81,7 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
           href={`${downloadButtonHref}?dl=${downloadFilename}.pdf`}
           download
           target="_blank"
-          className="text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+          className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
         >
           Download
         </a>

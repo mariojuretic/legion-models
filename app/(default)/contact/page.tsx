@@ -19,10 +19,14 @@ export default async function Page() {
 
         {contact.phones && contact.phones.length > 0 && (
           <div className="flex flex-col items-start">
-            <p>Telephone</p>
+            <p className="leading-[2.6] lg:leading-[1.3]">Telephone</p>
 
             {contact.phones.map((phone) => (
-              <a key={phone} href={`tel:${phone.replace(/\s+/g, "")}`}>
+              <a
+                key={phone}
+                href={`tel:${phone.replace(/\s+/g, "")}`}
+                className="leading-[2.6] lg:leading-[1.3]"
+              >
                 {phone}
               </a>
             ))}
@@ -31,10 +35,14 @@ export default async function Page() {
 
         {contact.emails && contact.emails.length > 0 && (
           <div className="flex flex-col items-start">
-            <p>Email</p>
+            <p className="leading-[2.6] lg:leading-[1.3]">Email</p>
 
             {contact.emails.map((email) => (
-              <a key={email} href={`mailto:${email}`} className="underline">
+              <a
+                key={email}
+                href={`mailto:${email}`}
+                className="leading-[2.6] underline lg:leading-[1.3]"
+              >
                 {email}
               </a>
             ))}
@@ -42,15 +50,32 @@ export default async function Page() {
         )}
 
         <div className="flex flex-col items-start">
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/cookie-policy">Cookie Policy</Link>
-          <Link href="/terms-of-use">Terms of Use</Link>
+          <Link
+            href="/privacy-policy"
+            className="leading-[2.6] lg:leading-[1.3]"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/cookie-policy"
+            className="leading-[2.6] lg:leading-[1.3]"
+          >
+            Cookie Policy
+          </Link>
+          <Link href="/terms-of-use" className="leading-[2.6] lg:leading-[1.3]">
+            Terms of Use
+          </Link>
         </div>
 
         {contact.socials && contact.socials.length > 0 && (
           <div className="flex flex-col items-start">
             {contact.socials.map((social) => (
-              <a key={social.name} href={social.url} target="_blank">
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                className="leading-[2.6] lg:leading-[1.3]"
+              >
                 {social.name}
               </a>
             ))}

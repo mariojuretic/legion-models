@@ -7,11 +7,14 @@ export default function Footer() {
         <a
           href="https://instagram.com/"
           target="_blank"
-          className="hover:font-bold"
+          className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
         >
           Instagram
         </a>
-        <Link href="/newsletter" className="hover:font-bold">
+        <Link
+          href="/newsletter"
+          className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+        >
           Newsletter
         </Link>
       </div>
@@ -19,22 +22,31 @@ export default function Footer() {
       <div className="flex flex-wrap items-center gap-x-4 lg:flex-row-reverse">
         <ul className="flex flex-wrap items-center gap-x-4">
           <li className="flex">
-            <Link href="/privacy-policy" className="hover:font-bold">
+            <Link
+              href="/privacy-policy"
+              className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+            >
               Privacy Policy
             </Link>
           </li>
           <li className="flex">
-            <Link href="/cookie-policy" className="hover:font-bold">
+            <Link
+              href="/cookie-policy"
+              className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+            >
               Cookie Policy
             </Link>
           </li>
           <li className="flex">
-            <Link href="/terms-of-use" className="hover:font-bold">
+            <Link
+              href="/terms-of-use"
+              className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+            >
               Terms of Use
             </Link>
           </li>
         </ul>
-        <p>Copyright by LEGION</p>
+        <p className="leading-[2.6] lg:leading-[1.3]">Copyright by LEGION</p>
       </div>
 
       <div className="hidden h-0 w-0 lg:block" />

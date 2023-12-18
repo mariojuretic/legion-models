@@ -26,7 +26,7 @@ export default function TabLink({
         isActive ? "text-black" : "text-black/50"
       } hover:text-black ${
         isActive ? "dark:text-white" : "dark:text-white/50"
-      } dark:hover:text-white`}
+      } leading-[2.6] dark:hover:text-white lg:leading-[1.3]`}
     >
       {children}
     </Link>
