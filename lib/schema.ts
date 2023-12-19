@@ -12,6 +12,7 @@ export const GetScoutedFormSchema = z.object({
     .string()
     .min(1, "E-mail is required.")
     .email("Enter a valid e-mail address."),
+  phone: z.string().min(1, "Phone is required."),
   height: z.string().min(1, "Height is required."),
   countryCity: z.string().min(1, "Country / City is required."),
   instagram: z.string(),

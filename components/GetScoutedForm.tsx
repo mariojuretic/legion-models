@@ -233,6 +233,22 @@ export default function GetScoutedForm() {
           )}
         </div>
 
+        {/* Text Input - Phone */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email">Phone*</label>
+          <input
+            type="text"
+            {...register("phone")}
+            id="phone"
+            placeholder="Phone"
+            autoComplete="off"
+            className="custom-text-input"
+          />
+          {errors.phone?.message && (
+            <p className="text-red-600">{errors.phone.message}</p>
+          )}
+        </div>
+
         {/* Text Input - Height */}
         <div className="flex flex-col gap-2">
           <label htmlFor="height">Height*</label>

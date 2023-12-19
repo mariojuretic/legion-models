@@ -54,6 +54,7 @@ export const submitGetScoutedForm = async (formData: FormData) => {
           <p>FULL NAME: ${data.firstName.toUpperCase()} ${data.lastName.toUpperCase()}</p>
           <p>DATE OF BIRTH: ${data.birthday.toUpperCase()}</p>
           <p>E-MAIL: ${data.email.toUpperCase()}</p>
+          <p>PHONE: ${data.phone.toUpperCase()}</p>
           <p>HEIGHT: ${data.height.toUpperCase()}</p>
           <p>LOCATION: ${data.countryCity.toUpperCase()}</p>
           <p>INSTAGRAM: ${data.instagram.toUpperCase()}</p>
