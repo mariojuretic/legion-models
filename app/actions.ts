@@ -48,15 +48,15 @@ export const submitGetScoutedForm = async (formData: FormData) => {
       to: process.env.SENDGRID_RECIPIENT,
       from: `${data.firstName} ${data.lastName} <${process.env.SENDGRID_SENDER_IDENTITY}>`,
       replyTo: `${data.firstName} ${data.lastName} <${data.email}>`,
-      subject: "Scouting application - LEGION Model Management",
+      subject: "GET SCOUTED - LEGION MODEL MANAGEMENT",
       html: `
         <div>
-          <p>Full Name: ${data.firstName} ${data.lastName}</p>
-          <p>Date of Birth: ${data.birthday}</p>
-          <p>E-mail: ${data.email}</p>
-          <p>Height: ${data.height}</p>
-          <p>Location: ${data.countryCity}</p>
-          <p>Instagram: ${data.instagram}</p>
+          <p>FULL NAME: ${data.firstName.toUpperCase()} ${data.lastName.toUpperCase()}</p>
+          <p>DATE OF BIRTH: ${data.birthday.toUpperCase()}</p>
+          <p>E-MAIL: ${data.email.toUpperCase()}</p>
+          <p>HEIGHT: ${data.height.toUpperCase()}</p>
+          <p>LOCATION: ${data.countryCity.toUpperCase()}</p>
+          <p>INSTAGRAM: ${data.instagram.toUpperCase()}</p>
         </div>
       `,
       attachments: [
