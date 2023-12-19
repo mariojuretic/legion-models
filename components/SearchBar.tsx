@@ -24,9 +24,9 @@ export default function SearchBar() {
       <button
         type="button"
         onClick={() => hideSearch()}
-        className="brand-text rounded-none border-x-0 border-y border-transparent border-b-black/50 bg-transparent p-2 outline-none peer-focus:border-b-black dark:border-b-white/50 dark:peer-focus:border-b-white"
+        className="brand-text rounded-none border-x-0 border-y border-transparent border-b-black/50 bg-transparent px-2 py-2 outline-none hover:font-bold peer-focus:border-b-black dark:border-b-white/50 dark:peer-focus:border-b-white lg:px-6"
       >
-        Clear
+        Close
       </button>
     </form>
   );
