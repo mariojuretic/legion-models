@@ -10,7 +10,7 @@ export default function SearchBar() {
   ]);
 
   return (
-    <form className="flex grow items-center self-stretch bg-white px-4 pb-4 dark:bg-black lg:p-8">
+    <form className="flex grow items-center self-stretch bg-white px-4 pb-4 dark:bg-black lg:p-8 lg:pl-0">
       <input
         type="text"
         value={searchTerm}

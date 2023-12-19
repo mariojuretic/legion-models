@@ -12,7 +12,7 @@ export default async function Page() {
   const about: AboutPage = await client.fetch(query);
 
   return (
-    <main className="flex flex-1 items-center justify-center p-4 lg:p-8">
+    <main className="flex flex-1 items-center justify-center p-4 lg:p-8 lg:pl-0">
       <div className="brand-text max-w-[100ch] whitespace-pre-line">
         <p>{about.description}</p>
       </div>
