@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import localFont from "next/font/local";
 import {
-  Bars3BottomRightIcon,
+  Bars3Icon,
   XMarkIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
@@ -65,7 +65,7 @@ export default function Header() {
             {isOpen ? (
               <XMarkIcon className="h-5 w-5" />
             ) : (
-              <Bars3BottomRightIcon className="h-5 w-5" />
+              <Bars3Icon className="h-5 w-5" />
             )}
           </button>
         </div>
