@@ -6,7 +6,13 @@ import MuxPlayer from "@mux/mux-player-react";
 
 import "@mux/mux-player-react/themes/minimal";
 
-export default function VideoSlider({ videos }: { videos: VideoType[] }) {
+export default function VideoSlider({
+  videos,
+  withPadding = false,
+}: {
+  videos: VideoType[];
+  withPadding?: boolean;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [page, setPage] = useState(1);
@@ -63,7 +69,7 @@ export default function VideoSlider({ videos }: { videos: VideoType[] }) {
         <ChevronLeftIcon className="h-10 w-10" />
       </button>
 
-      <div className="flex-1 p-8">
+      <div className={`flex-1 ${withPadding ? "py-8" : "p-0"}`}>
         <div
           ref={containerRef}
           className="flex h-full w-full items-center justify-center"

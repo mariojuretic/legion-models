@@ -56,7 +56,7 @@ export default async function Page({
             withPadding
           />
         ) : (
-          <VideoSlider videos={post.videos!} />
+          <VideoSlider videos={post.videos!} withPadding />
         )}
       </main>
     </>
