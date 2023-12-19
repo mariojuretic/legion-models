@@ -340,8 +340,9 @@ export default function GetScoutedForm() {
               />
               <div className="custom-checkbox-input" />
               <span>
-                All photos must be raw and unretouched additionally, please do
-                not submit any photos that contain a digital filter.
+                All photos must be raw and unretouched additionally. Please do
+                not submit any photos that contain a digital filter. Do not wear
+                makeup. Take images in front facing natural daylight.
               </span>
             </label>
             {errors.acceptPhotos?.message && (
