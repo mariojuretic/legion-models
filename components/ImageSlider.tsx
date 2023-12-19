@@ -7,9 +7,11 @@ import PortfolioImage from "./PortfolioImage";
 export default function ImageSlider({
   slides,
   name,
+  withPadding = false,
 }: {
   slides: ImageType[][];
   name: string;
+  withPadding?: boolean;
 }) {
   const [page, setPage] = useState(1);
 
@@ -24,7 +26,11 @@ export default function ImageSlider({
   };
 
   return (
-    <div className="relative grid flex-1 grid-cols-2 gap-x-8 p-8">
+    <div
+      className={`relative grid flex-1 grid-cols-2 gap-x-8 ${
+        withPadding ? "p-8" : "px-8"
+      }`}
+    >
       {currentSlide.length === 1 && (
         <div className="col-span-2 flex">
           <PortfolioImage

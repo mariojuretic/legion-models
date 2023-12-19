@@ -53,6 +53,7 @@ export default async function Page({
           <ImageSlider
             slides={generateSlides(post.images!)}
             name={post.title}
+            withPadding
           />
         ) : (
           <VideoSlider videos={post.videos!} />
