@@ -267,7 +267,7 @@ export default function GetScoutedForm() {
       </div>
 
       {/* Inputs - Right Column */}
-      <div className="flex flex-col gap-4 lg:gap-8 xl:gap-16">
+      <div className="flex flex-col gap-4 lg:gap-8 xl:justify-between xl:gap-0">
         <div className="flex flex-col gap-4 lg:gap-8">
           {/* Text Input - Country / City */}
           <div className="flex flex-col gap-2">
