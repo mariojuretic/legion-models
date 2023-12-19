@@ -264,37 +264,39 @@ export default function GetScoutedForm() {
             <p className="text-red-600">{errors.height.message}</p>
           )}
         </div>
-
-        {/* Text Input - Country / City */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="country-city">Country / City*</label>
-          <input
-            type="text"
-            {...register("countryCity")}
-            id="country-city"
-            placeholder="Country / City"
-            autoComplete="off"
-            className="custom-text-input"
-          />
-          {errors.countryCity?.message && (
-            <p className="text-red-600">{errors.countryCity.message}</p>
-          )}
-        </div>
       </div>
 
       {/* Inputs - Right Column */}
       <div className="flex flex-col gap-4 lg:gap-8 xl:gap-16">
-        {/* Text Input - Instagram */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="instagram">Instagram</label>
-          <input
-            type="text"
-            {...register("instagram")}
-            id="instagram"
-            placeholder="Instagram"
-            autoComplete="off"
-            className="custom-text-input"
-          />
+        <div className="flex flex-col gap-4 lg:gap-8">
+          {/* Text Input - Country / City */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="country-city">Country / City*</label>
+            <input
+              type="text"
+              {...register("countryCity")}
+              id="country-city"
+              placeholder="Country / City"
+              autoComplete="off"
+              className="custom-text-input"
+            />
+            {errors.countryCity?.message && (
+              <p className="text-red-600">{errors.countryCity.message}</p>
+            )}
+          </div>
+
+          {/* Text Input - Instagram */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="instagram">Instagram</label>
+            <input
+              type="text"
+              {...register("instagram")}
+              id="instagram"
+              placeholder="Instagram"
+              autoComplete="off"
+              className="custom-text-input"
+            />
+          </div>
         </div>
 
         {/* Checkboxes Container */}
