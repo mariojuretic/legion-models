@@ -1,0 +1,62 @@
+@tailwind utilities;
+
+@layer utilities {
+  .video-button-text {
+    @apply text-[0.625rem] font-normal uppercase leading-[1.3] tracking-[0.03em];
+  }
+}
+
+media-play-button,
+media-time-display,
+media-time-range,
+media-mute-button,
+media-fullscreen-button {
+  @apply video-button-text bg-white p-2 text-black dark:bg-black dark:text-white lg:px-4;
+}
+
+media-time-range {
+  --media-preview-transition-property: none;
+
+  --media-control-display: none;
+  --media-control-padding: 0;
+  --media-control-background: transparent;
+  --media-control-hover-background: transparent;
+  --media-control-height: auto;
+
+  --media-range-thumb-width: 1px;
+  --media-range-thumb-height: 16px;
+  --media-range-thumb-border-radius: 0;
+  --media-range-thumb-background: theme(colors.black);
+  --media-range-thumb-box-shadow: none;
+  --media-range-thumb-transition: none;
+
+  --media-range-bar-color: theme(colors.black);
+
+  --media-range-track-height: 1px;
+  --media-range-track-border-radius: 0;
+  --media-range-track-background: theme(colors.black / 20%);
+
+  --media-time-range-hover-bottom: -8px;
+  --media-time-range-hover-height: 32px;
+
+  --media-range-track-pointer-background: theme(colors.black / 20%);
+  --media-range-track-pointer-border-right: 0;
+}
+
+@media (min-width: 1024px) {
+  media-time-range {
+    --media-range-thumb-height: 13px;
+    --media-time-range-hover-height: 29px;
+  }
+}
+
+html.dark media-time-range {
+  --media-range-thumb-background: theme(colors.white);
+  --media-range-bar-color: theme(colors.white);
+  --media-range-track-background: theme(colors.white / 20%);
+  --media-range-track-pointer-background: theme(colors.white / 20%);
+}
+
+media-time-range media-time-display {
+  @apply -mb-[7.5px] p-0 leading-[1.55] lg:-mb-1.5 lg:leading-[1.4];
+}

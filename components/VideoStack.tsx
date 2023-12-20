@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import MuxPlayer from "@mux/mux-player-react";
 
-import "@mux/mux-player-react/themes/minimal";
+import VideoPlayer from "./VideoPlayer";
 
 export default function VideoStack({ videos }: { videos: VideoType[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,14 +23,11 @@ export default function VideoStack({ videos }: { videos: VideoType[] }) {
             const aspectRatio = eval(video.aspectRatio.replace(":", "/"));
 
             return (
-              <MuxPlayer
+              <VideoPlayer
                 key={video.playbackId}
                 playbackId={video.playbackId}
-                style={{
-                  width: containerWidth,
-                  height: containerWidth / aspectRatio,
-                }}
-                theme="minimal"
+                width={containerWidth}
+                height={containerWidth / aspectRatio}
               />
             );
           })}

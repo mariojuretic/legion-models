@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import MuxPlayer from "@mux/mux-player-react";
 
-import "@mux/mux-player-react/themes/minimal";
+import VideoPlayer from "./VideoPlayer";
 
 export default function VideoSlider({
   videos,
@@ -75,10 +74,10 @@ export default function VideoSlider({
           className="flex h-full w-full items-center justify-center"
         >
           {videoWidth && videoHeight && (
-            <MuxPlayer
+            <VideoPlayer
               playbackId={currentVideo.playbackId}
-              style={{ width: videoWidth, height: videoHeight }}
-              theme="minimal"
+              width={videoWidth}
+              height={videoHeight}
             />
           )}
         </div>
