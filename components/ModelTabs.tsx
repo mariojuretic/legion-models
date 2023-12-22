@@ -3,6 +3,7 @@
 import { useParams, usePathname } from "next/navigation";
 
 import TabLink from "./TabLink";
+import { useMeasuresStore } from "@/store/MeasuresStore";
 
 export default function ModelTabs({ model }: { model: ModelDoc }) {
   const { slug } = useParams();
@@ -23,6 +24,10 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
     downloadButtonHref = model.downloads.digitals.downloadUrl;
     downloadFilename = slug + "-digitals";
   }
+
+  const [measuresActive, showMeasures, hideMeasures] = useMeasuresStore(
+    (state) => [state.active, state.showMeasures, state.hideMeasures],
+  );
 
   return (
     <div className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:p-8">
@@ -74,6 +79,15 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
         >
           Instagram
         </a>
+      )}
+
+      {model.measures && model.measures.length > 0 && (
+        <span
+          className="cursor-pointer leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
+          onClick={measuresActive ? hideMeasures : showMeasures}
+        >
+          Measures
+        </span>
       )}
 
       {downloadButtonHref && downloadFilename && (

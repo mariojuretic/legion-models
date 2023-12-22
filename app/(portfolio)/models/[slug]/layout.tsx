@@ -3,6 +3,7 @@ import { groq } from "next-sanity";
 
 import CloseModel from "@/components/CloseModel";
 import ModelTabs from "@/components/ModelTabs";
+import Measures from "@/components/Measures";
 import { client } from "@/lib/sanity.client";
 
 const query = groq`
@@ -43,6 +44,11 @@ export default async function Layout({
         <h2 className="brand-text p-4 text-center lg:hidden">{model.name}</h2>
         {children}
       </div>
+
+      {model.measures && model.measures.length > 0 && (
+        <Measures measures={model.measures} />
+      )}
+
       <ModelTabs model={model} />
     </div>
   );

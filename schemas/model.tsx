@@ -154,6 +154,31 @@ export default defineType({
       type: "string",
     }),
     defineField({
+      name: "measures",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              type: "string",
+            }),
+            defineField({
+              name: "value_eu",
+              type: "string",
+              title: "Value - EU",
+            }),
+            defineField({
+              name: "value_us",
+              type: "string",
+              title: "Value - US",
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "downloads",
       type: "object",
       fields: [

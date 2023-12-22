@@ -47,6 +47,7 @@ interface ModelDoc extends BaseType {
   hidden: boolean;
   instagram?: string;
   interview?: string;
+  measures?: MeasureObj[];
   name: string;
   notes?: string;
   portfolio: ImageType[];
@@ -146,4 +147,10 @@ interface ImageDimensionsType {
 interface SocialObj {
   name: string;
   url: string;
+}
+
+interface MeasureObj {
+  label?: string;
+  value_eu?: string;
+  value_us?: string;
 }
