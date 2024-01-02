@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import PortfolioImage from "./PortfolioImage";
 
@@ -13,17 +14,49 @@ export default function ImageSlider({
   name: string;
   withPadding?: boolean;
 }) {
-  const [page, setPage] = useState(1);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const currentSlide = slides[page - 1];
+  const [currentPage, setCurrentPage] = useState<number | null>(null);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+
+    if (!pageParam) {
+      router.push(pathname + "?" + createQueryString("page", "1"));
+    } else {
+      setCurrentPage(Number(pageParam));
+    }
+  }, [searchParams, router, pathname, createQueryString]);
 
   const nextPage = () => {
-    setPage((currentPage) => currentPage + 1);
+    if (!currentPage) return;
+    router.push(
+      pathname + "?" + createQueryString("page", (currentPage + 1).toString()),
+    );
   };
 
   const prevPage = () => {
-    setPage((currentPage) => currentPage - 1);
+    if (!currentPage) return;
+    router.push(
+      pathname + "?" + createQueryString("page", (currentPage - 1).toString()),
+    );
   };
+
+  if (!currentPage) return null;
+
+  const currentSlide = slides[currentPage - 1];
 
   return (
     <div
@@ -60,14 +93,14 @@ export default function ImageSlider({
         </>
       )}
 
-      {page > 1 && (
+      {currentPage > 1 && (
         <div
           className="hover:cursor-chevron-left-black dark:hover:cursor-chevron-left-white absolute left-0 top-0 h-full w-1/2"
           onClick={prevPage}
         />
       )}
 
-      {page < slides.length && (
+      {currentPage < slides.length && (
         <div
           className="hover:cursor-chevron-right-black dark:hover:cursor-chevron-right-white absolute right-0 top-0 h-full w-1/2"
           onClick={nextPage}
