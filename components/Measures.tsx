@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { useMeasuresStore } from "@/store/MeasuresStore";
 
@@ -50,6 +50,7 @@ function MeasuresBox({ measures }: { measures: MeasureObj[] }) {
 
 export default function Measures({ measures }: { measures: MeasureObj[] }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [active, hideMeasures] = useMeasuresStore((state) => [
     state.active,
@@ -58,7 +59,7 @@ export default function Measures({ measures }: { measures: MeasureObj[] }) {
 
   useEffect(() => {
     hideMeasures();
-  }, [pathname, hideMeasures]);
+  }, [pathname, searchParams, hideMeasures]);
 
   return active ? <MeasuresBox measures={measures} /> : null;
 }
