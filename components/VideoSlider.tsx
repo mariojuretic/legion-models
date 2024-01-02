@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import VideoPlayer from "./VideoPlayer";
@@ -12,25 +13,55 @@ export default function VideoSlider({
   videos: VideoType[];
   withPadding?: boolean;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number | null>(null);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+
+    if (!pageParam) {
+      router.push(pathname + "?" + createQueryString("page", "1"));
+    } else {
+      setCurrentPage(Number(pageParam));
+    }
+  }, [searchParams, router, pathname, createQueryString]);
+
+  const nextPage = () => {
+    if (!currentPage) return;
+    router.push(
+      pathname + "?" + createQueryString("page", (currentPage + 1).toString()),
+    );
+  };
+
+  const prevPage = () => {
+    if (!currentPage) return;
+    router.push(
+      pathname + "?" + createQueryString("page", (currentPage - 1).toString()),
+    );
+  };
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [videoWidth, setVideoWidth] = useState<number>();
   const [videoHeight, setVideoHeight] = useState<number>();
 
-  const currentVideo = videos[page - 1];
-
-  const nextPage = () => {
-    setPage((currentPage) => currentPage + 1);
-  };
-
-  const prevPage = () => {
-    setPage((currentPage) => currentPage - 1);
-  };
+  const currentVideo = currentPage ? videos[currentPage - 1] : null;
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !currentVideo) return;
 
     const containerWidth = containerRef.current.clientWidth;
     const containerHeight = containerRef.current.clientHeight;
@@ -56,14 +87,16 @@ export default function VideoSlider({
 
     setVideoWidth(renderWidth);
     setVideoHeight(renderHeight);
-  }, [currentVideo.aspectRatio]);
+  }, [currentVideo]);
+
+  if (!currentPage || !currentVideo) return null;
 
   return (
     <>
       <button
         className="shrink-0 p-8 text-white enabled:hover:text-black dark:text-black dark:enabled:hover:text-white"
         onClick={prevPage}
-        disabled={page <= 1}
+        disabled={currentPage <= 1}
       >
         <ChevronLeftIcon className="h-10 w-10" />
       </button>
@@ -86,7 +119,7 @@ export default function VideoSlider({
       <button
         className="shrink-0 p-8 text-white enabled:hover:text-black dark:text-black dark:enabled:hover:text-white"
         onClick={nextPage}
-        disabled={page >= videos.length}
+        disabled={currentPage >= videos.length}
       >
         <ChevronRightIcon className="h-10 w-10" />
       </button>
