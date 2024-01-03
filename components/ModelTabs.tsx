@@ -3,11 +3,27 @@
 import { useParams, usePathname } from "next/navigation";
 
 import TabLink from "./TabLink";
-import { useMeasuresStore } from "@/store/MeasuresStore";
+import { useTabsStore } from "@/store/TabsStore";
 
 export default function ModelTabs({ model }: { model: ModelDoc }) {
   const { slug } = useParams();
   const pathname = usePathname();
+
+  const [
+    measuresActive,
+    showMeasures,
+    hideMeasures,
+    thumbnailsActive,
+    showThumbnails,
+    hideThumbnails,
+  ] = useTabsStore((state) => [
+    state.measuresActive,
+    state.showMeasures,
+    state.hideMeasures,
+    state.thumbnailsActive,
+    state.showThumbnails,
+    state.hideThumbnails,
+  ]);
 
   const segments = pathname.split("/");
   const endSegment = segments[segments.length - 1];
@@ -25,9 +41,30 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
     downloadFilename = slug + "-digitals";
   }
 
-  const [measuresActive, showMeasures, hideMeasures] = useMeasuresStore(
-    (state) => [state.active, state.showMeasures, state.hideMeasures],
-  );
+  let thumbnails = model.portfolio;
+
+  if (endSegment == "digitals" && model.digitals && model.digitals.length > 0) {
+    thumbnails = model.digitals;
+  }
+
+  if (endSegment == "shows" && model.shows && model.shows.length > 0) {
+    thumbnails = model.shows;
+  }
+
+  if (endSegment == "covers" && model.covers && model.covers.length > 0) {
+    thumbnails = model.covers;
+  }
+
+  if (
+    endSegment == "campaigns" &&
+    model.campaigns &&
+    model.campaigns.length > 0
+  ) {
+    thumbnails = model.campaigns;
+  }
+
+  const tabsWithThumbnails = [slug, "digitals", "shows", "covers", "campaigns"];
+  const hasThumbnails = tabsWithThumbnails.includes(endSegment);
 
   return (
     <div className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:p-8">
@@ -99,6 +136,17 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
         >
           Download
         </a>
+      )}
+
+      {hasThumbnails && (
+        <span
+          className="hidden cursor-pointer text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:block"
+          onClick={
+            thumbnailsActive ? hideThumbnails : () => showThumbnails(thumbnails)
+          }
+        >
+          Thumbnails
+        </span>
       )}
     </div>
   );

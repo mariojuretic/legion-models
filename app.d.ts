@@ -115,6 +115,7 @@ interface ImageType {
   _type: "image";
   asset: ReferenceType;
   dimensions?: ImageDimensionsType;
+  sliderPage?: number;
   source?: string;
 }
 

@@ -2,13 +2,34 @@ import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
 
 import CloseModel from "@/components/CloseModel";
-import ModelTabs from "@/components/ModelTabs";
 import Measures from "@/components/Measures";
+import Thumbnails from "@/components/Thumbnails";
+import ModelTabs from "@/components/ModelTabs";
 import { client } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug && hidden == false][0] {
     ...,
+    portfolio[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
+    },
+    digitals[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
+    },
+    shows[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
+    },
+    covers[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
+    },
+    campaigns[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
+    },
     downloads {
       portfolio {
         ...,
@@ -48,6 +69,8 @@ export default async function Layout({
       {model.measures && model.measures.length > 0 && (
         <Measures measures={model.measures} />
       )}
+
+      <Thumbnails modelName={model.name} />
 
       <ModelTabs model={model} />
     </div>

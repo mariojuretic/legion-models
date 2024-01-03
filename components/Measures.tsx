@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import { useMeasuresStore } from "@/store/MeasuresStore";
+import { useTabsStore } from "@/store/TabsStore";
 
 function MeasuresBox({ measures }: { measures: MeasureObj[] }) {
   const [units, setUnits] = useState<"eu" | "us">("eu");
@@ -52,8 +52,8 @@ export default function Measures({ measures }: { measures: MeasureObj[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [active, hideMeasures] = useMeasuresStore((state) => [
-    state.active,
+  const [measuresActive, hideMeasures] = useTabsStore((state) => [
+    state.measuresActive,
     state.hideMeasures,
   ]);
 
@@ -61,5 +61,5 @@ export default function Measures({ measures }: { measures: MeasureObj[] }) {
     hideMeasures();
   }, [pathname, searchParams, hideMeasures]);
 
-  return active ? <MeasuresBox measures={measures} /> : null;
+  return measuresActive ? <MeasuresBox measures={measures} /> : null;
 }
