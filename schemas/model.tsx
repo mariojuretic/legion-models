@@ -29,11 +29,11 @@ export default defineType({
         list: [
           {
             value: "new-faces",
-            title: "New Faces",
+            title: "Development",
           },
           {
             value: "models",
-            title: "Models",
+            title: "Main Board",
           },
         ],
       },
