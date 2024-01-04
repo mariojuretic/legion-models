@@ -60,7 +60,7 @@ export default function ImageSlider({
 
   return (
     <div
-      className={`relative grid flex-1 grid-cols-2 gap-x-8 ${
+      className={`relative grid flex-1 grid-cols-2 gap-x-4 ${
         withPadding ? "p-8" : "px-8"
       }`}
     >
