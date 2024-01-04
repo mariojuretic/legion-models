@@ -22,7 +22,7 @@ export default async function Page({
 
   return (
     <main className="flex flex-1 items-center justify-center p-4 lg:p-8">
-      <div className="brand-text max-w-[100ch] whitespace-pre-line">
+      <div className="brand-text max-w-[125ch] whitespace-pre-line">
         <p>{model.interview}</p>
       </div>
     </main>
