@@ -29,6 +29,19 @@ const CustomImage = ({
   }, []);
 
   useLayoutEffect(() => {
+    const resizeHandler = () => {
+      if (!containerRef.current) return;
+
+      setContainerWidth(containerRef.current.clientWidth);
+      setContainerHeight(containerRef.current.clientHeight);
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
+
+  useLayoutEffect(() => {
     if (!containerWidth || !containerHeight) return;
     if (!image.dimensions) return;
 

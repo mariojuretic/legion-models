@@ -24,37 +24,43 @@ const ImageStack = ({
   }, []);
 
   useLayoutEffect(() => {
+    const resizeHandler = () => {
+      if (!containerRef.current) return;
+
+      setContainerWidth(containerRef.current.clientWidth);
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
+
+  useLayoutEffect(() => {
     if (!containerWidth) return;
 
-    const flattenedImages = slides.flat();
+    const resizedImages = slides.flat().map((image) => {
+      if (!image.dimensions) return image;
 
-    for (const image of flattenedImages) {
-      if (!image.dimensions) return;
+      const newDimensions = { ...image.dimensions };
 
       // Limit image width...
-      if (image.dimensions.width > containerWidth) {
-        const resizeFactor = containerWidth / image.dimensions.width;
-        image.dimensions.width = Math.floor(
-          image.dimensions.width * resizeFactor,
-        );
-        image.dimensions.height = Math.floor(
-          image.dimensions.height * resizeFactor,
-        );
+      if (newDimensions.width > containerWidth) {
+        const resizeFactor = containerWidth / newDimensions.width;
+        newDimensions.width = Math.floor(newDimensions.width * resizeFactor);
+        newDimensions.height = Math.floor(newDimensions.height * resizeFactor);
       }
 
       // Limit image height...
-      if (image.dimensions.height > containerWidth) {
-        const resizeFactor = containerWidth / image.dimensions.height;
-        image.dimensions.width = Math.floor(
-          image.dimensions.width * resizeFactor,
-        );
-        image.dimensions.height = Math.floor(
-          image.dimensions.height * resizeFactor,
-        );
+      if (newDimensions.height > containerWidth) {
+        const resizeFactor = containerWidth / newDimensions.height;
+        newDimensions.width = Math.floor(newDimensions.width * resizeFactor);
+        newDimensions.height = Math.floor(newDimensions.height * resizeFactor);
       }
-    }
 
-    setImages(flattenedImages);
+      return { ...image, dimensions: newDimensions };
+    });
+
+    setImages(resizedImages);
   }, [containerWidth, slides]);
 
   return (

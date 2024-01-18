@@ -15,6 +15,18 @@ const VideoStack = ({ videos }: { videos: VideoType[] }) => {
     setContainerWidth(containerRef.current.clientWidth);
   }, []);
 
+  useLayoutEffect(() => {
+    const resizeHandler = () => {
+      if (!containerRef.current) return;
+
+      setContainerWidth(containerRef.current.clientWidth);
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
+
   return (
     <div className="p-4">
       <div ref={containerRef} className="flex flex-col items-center gap-4">

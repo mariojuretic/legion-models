@@ -101,6 +101,19 @@ const Video = ({ video }: { video: VideoType }) => {
   }, []);
 
   useLayoutEffect(() => {
+    const resizeHandler = () => {
+      if (!containerRef.current) return;
+
+      setContainerWidth(containerRef.current.clientWidth);
+      setContainerHeight(containerRef.current.clientHeight);
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
+
+  useLayoutEffect(() => {
     if (!containerWidth || !containerHeight) return;
 
     const videoAspectRatio = eval(video.aspectRatio.replace(":", "/"));
