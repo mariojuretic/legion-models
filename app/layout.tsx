@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { groq } from "next-sanity";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import { client } from "@/lib/sanity.client";
 
@@ -50,6 +51,7 @@ export default async function Layout({
         {children}
         <SpeedInsights />
       </body>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
     </html>
   );
 }
