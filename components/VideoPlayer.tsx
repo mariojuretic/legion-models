@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import MuxVideo from "@mux/mux-video-react";
 import {
   MediaController,
   MediaControlBar,
@@ -9,7 +11,6 @@ import {
   MediaMuteButton,
   MediaFullscreenButton,
 } from "media-chrome/dist/react";
-import MuxVideo from "@mux/mux-video-react";
 import {
   PlayIcon,
   PauseIcon,
@@ -30,11 +31,42 @@ export default function VideoPlayer({
   width: number;
   height: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [fullscreen, setFullscreen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      if (!ref.current) return;
+
+      for (const mutation of mutations) {
+        if (mutation.attributeName === "mediaisfullscreen") {
+          const isFullscreen = ref.current.hasAttribute("mediaisfullscreen");
+          setFullscreen(isFullscreen);
+        }
+      }
+    });
+
+    mutationObserver.observe(ref.current, { attributes: true });
+
+    return () => mutationObserver.disconnect();
+  }, []);
+
   const src = `https://stream.mux.com/${playbackId}.m3u8`;
 
   return (
-    <MediaController>
-      <MuxVideo slot="media" src={src} muted style={{ width, height }} />
+    <MediaController ref={ref}>
+      <MuxVideo
+        slot="media"
+        src={src}
+        muted
+        style={{
+          width: fullscreen ? "100%" : width,
+          height: fullscreen ? "100%" : height,
+        }}
+      />
 
       <MediaControlBar>
         <MediaPlayButton>
