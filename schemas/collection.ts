@@ -30,5 +30,10 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "share",
+      type: "string",
+      readOnly: true,
+    }),
   ],
 });
