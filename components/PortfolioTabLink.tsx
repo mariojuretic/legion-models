@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function TabLink({
+const PortfolioTabLink = ({
   children,
   slug,
   tab,
@@ -11,13 +11,13 @@ export default function TabLink({
   children: React.ReactNode;
   slug: string;
   tab?: string;
-}) {
+}) => {
   const pathname = usePathname();
 
-  const segments = pathname.split("/");
-  const endSegment = segments[segments.length - 1];
+  const pathSegments = pathname.split("/");
+  const endPathSegment = pathSegments[pathSegments.length - 1];
 
-  const isActive = tab ? endSegment === tab : endSegment === slug;
+  const isActive = tab ? endPathSegment === tab : endPathSegment === slug;
 
   return (
     <Link
@@ -31,4 +31,6 @@ export default function TabLink({
       {children}
     </Link>
   );
-}
+};
+
+export default PortfolioTabLink;

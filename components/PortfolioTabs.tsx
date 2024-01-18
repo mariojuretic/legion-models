@@ -2,10 +2,10 @@
 
 import { useParams, usePathname } from "next/navigation";
 
-import TabLink from "./TabLink";
 import { useTabsStore } from "@/store/TabsStore";
+import PortfolioTabLink from "./PortfolioTabLink";
 
-export default function ModelTabs({ model }: { model: ModelDoc }) {
+const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
   const { slug } = useParams();
   const pathname = usePathname();
 
@@ -25,38 +25,41 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
     state.hideThumbnails,
   ]);
 
-  const segments = pathname.split("/");
-  const endSegment = segments[segments.length - 1];
+  const pathSegments = pathname.split("/");
+  const endPathSegment = pathSegments[pathSegments.length - 1];
 
-  let downloadButtonHref;
-  let downloadFilename;
+  let downloadHref, downloadFilename;
 
-  if (endSegment === slug && model.downloads?.portfolio?.downloadUrl) {
-    downloadButtonHref = model.downloads.portfolio.downloadUrl;
+  if (endPathSegment === slug && model.downloads?.portfolio?.downloadUrl) {
+    downloadHref = model.downloads.portfolio.downloadUrl;
     downloadFilename = slug + "-portfolio";
   }
 
-  if (endSegment === "digitals" && model.downloads?.digitals?.downloadUrl) {
-    downloadButtonHref = model.downloads.digitals.downloadUrl;
+  if (endPathSegment === "digitals" && model.downloads?.digitals?.downloadUrl) {
+    downloadHref = model.downloads.digitals.downloadUrl;
     downloadFilename = slug + "-digitals";
   }
 
   let thumbnails = model.portfolio;
 
-  if (endSegment == "digitals" && model.digitals && model.digitals.length > 0) {
+  if (
+    endPathSegment === "digitals" &&
+    model.digitals &&
+    model.digitals?.length > 0
+  ) {
     thumbnails = model.digitals;
   }
 
-  if (endSegment == "shows" && model.shows && model.shows.length > 0) {
+  if (endPathSegment === "shows" && model.shows && model.shows.length > 0) {
     thumbnails = model.shows;
   }
 
-  if (endSegment == "covers" && model.covers && model.covers.length > 0) {
+  if (endPathSegment === "covers" && model.covers && model.covers.length > 0) {
     thumbnails = model.covers;
   }
 
   if (
-    endSegment == "campaigns" &&
+    endPathSegment === "campaigns" &&
     model.campaigns &&
     model.campaigns.length > 0
   ) {
@@ -64,48 +67,48 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
   }
 
   const tabsWithThumbnails = [slug, "digitals", "shows", "covers", "campaigns"];
-  const hasThumbnails = tabsWithThumbnails.includes(endSegment);
+  const hasThumbnails = tabsWithThumbnails.includes(endPathSegment);
 
   return (
-    <div className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:p-8">
+    <div className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:fixed lg:bottom-0 lg:w-full lg:p-8">
       <h2 className="mr-4 hidden lg:block">{model.name}</h2>
 
-      <TabLink slug={model.slug.current}>Portfolio</TabLink>
+      <PortfolioTabLink slug={model.slug.current}>Portfolio</PortfolioTabLink>
 
       {model.digitals && model.digitals.length > 0 && (
-        <TabLink slug={model.slug.current} tab="digitals">
+        <PortfolioTabLink slug={model.slug.current} tab="digitals">
           Digitals
-        </TabLink>
+        </PortfolioTabLink>
       )}
 
       {model.videos && model.videos.length > 0 && (
-        <TabLink slug={model.slug.current} tab="video">
+        <PortfolioTabLink slug={model.slug.current} tab="video">
           Video
-        </TabLink>
+        </PortfolioTabLink>
       )}
 
       {model.shows && model.shows.length > 0 && (
-        <TabLink slug={model.slug.current} tab="shows">
+        <PortfolioTabLink slug={model.slug.current} tab="shows">
           Shows
-        </TabLink>
+        </PortfolioTabLink>
       )}
 
       {model.covers && model.covers.length > 0 && (
-        <TabLink slug={model.slug.current} tab="covers">
+        <PortfolioTabLink slug={model.slug.current} tab="covers">
           Covers
-        </TabLink>
+        </PortfolioTabLink>
       )}
 
       {model.campaigns && model.campaigns.length > 0 && (
-        <TabLink slug={model.slug.current} tab="campaigns">
+        <PortfolioTabLink slug={model.slug.current} tab="campaigns">
           Campaigns
-        </TabLink>
+        </PortfolioTabLink>
       )}
 
       {model.interview && (
-        <TabLink slug={model.slug.current} tab="interview">
+        <PortfolioTabLink slug={model.slug.current} tab="interview">
           Interview
-        </TabLink>
+        </PortfolioTabLink>
       )}
 
       {model.instagram && (
@@ -127,9 +130,9 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
         </span>
       )}
 
-      {downloadButtonHref && downloadFilename && (
+      {downloadHref && downloadFilename && (
         <a
-          href={`${downloadButtonHref}?dl=${downloadFilename}.pdf`}
+          href={`${downloadHref}?dl=${downloadFilename}.pdf`}
           download
           target="_blank"
           className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
@@ -150,4 +153,6 @@ export default function ModelTabs({ model }: { model: ModelDoc }) {
       )}
     </div>
   );
-}
+};
+
+export default PortfolioTabs;

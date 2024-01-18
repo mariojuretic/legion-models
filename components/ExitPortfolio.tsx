@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
-export default function CloseModel({ category }: { category: string }) {
+const ExitPortfolio = ({ category }: { category: string }) => {
   const href =
     category === "models"
       ? "/main-board"
@@ -10,14 +10,16 @@ export default function CloseModel({ category }: { category: string }) {
       : "/";
 
   return (
-    <div className="flex items-center justify-end lg:h-[100px]">
+    <div className="flex items-center justify-end lg:fixed lg:top-0 lg:h-[100px] lg:w-full lg:p-8">
       <Link href={href} className="p-4 lg:hidden">
         <XMarkIcon className="h-5 w-5" />
       </Link>
 
-      <Link href={href} className="brand-text mr-8 hidden lg:block">
+      <Link href={href} className="brand-text hidden lg:block">
         Close
       </Link>
     </div>
   );
-}
+};
+
+export default ExitPortfolio;

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
 
-import VerticalGallery from "@/components/VerticalGallery";
+import ImageStack from "@/components/ImageStack";
 import VideoStack from "@/components/VideoStack";
 import ImageSlider from "@/components/ImageSlider";
 import VideoSlider from "@/components/VideoSlider";
@@ -25,11 +25,7 @@ const query = groq`
 
 export const dynamic = "force-dynamic";
 
-export default async function Page({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) {
+const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post: NewsDoc = await client.fetch(query, { slug });
 
   if (post.type === "image" && !post.images) return notFound();
@@ -37,18 +33,15 @@ export default async function Page({
 
   return (
     <>
-      <main className="block flex-1 pb-4 lg:hidden lg:pb-0">
+      <main className="mb-4 lg:hidden">
         {post.type === "image" ? (
-          <VerticalGallery
-            slides={generateSlides(post.images!)}
-            name={post.title}
-          />
+          <ImageStack slides={generateSlides(post.images!)} name={post.title} />
         ) : (
           <VideoStack videos={post.videos!} />
         )}
       </main>
 
-      <main className="hidden pb-4 lg:flex lg:flex-1 lg:pb-0">
+      <main className="hidden h-full w-full lg:block">
         {post.type === "image" ? (
           <ImageSlider
             slides={generateSlides(post.images!)}
@@ -61,4 +54,6 @@ export default async function Page({
       </main>
     </>
   );
-}
+};
+
+export default Page;

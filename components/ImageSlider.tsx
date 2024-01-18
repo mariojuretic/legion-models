@@ -1,11 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import PortfolioImage from "./PortfolioImage";
+import CustomImage from "./CustomImage";
 
-export default function ImageSlider({
+const ImageSlider = ({
   slides,
   name,
   withPadding = false,
@@ -13,14 +13,14 @@ export default function ImageSlider({
   slides: ImageType[][];
   name: string;
   withPadding?: boolean;
-}) {
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const [currentPage, setCurrentPage] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState<number | null>();
 
-  const createQueryString = useCallback(
+  const createUrlString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
@@ -30,28 +30,28 @@ export default function ImageSlider({
     [searchParams],
   );
 
-  useEffect(() => {
-    const pageParam = searchParams.get("page");
+  useLayoutEffect(() => {
+    const existingPageParam = searchParams.get("page");
 
-    if (!pageParam) {
-      router.push(pathname + "?" + createQueryString("page", "1"));
+    if (!existingPageParam) {
+      router.push(pathname + "?" + createUrlString("page", "1"));
     } else {
-      setCurrentPage(Number(pageParam));
+      setCurrentPage(Number(existingPageParam));
     }
-  }, [searchParams, router, pathname, createQueryString]);
+  }, [searchParams, router, pathname, createUrlString]);
 
-  const nextPage = () => {
+  const nextPageHandler = () => {
     if (!currentPage) return;
-    router.push(
-      pathname + "?" + createQueryString("page", (currentPage + 1).toString()),
-    );
+
+    const nextPage = currentPage + 1;
+    router.push(pathname + "?" + createUrlString("page", nextPage.toString()));
   };
 
-  const prevPage = () => {
+  const prevPageHandler = () => {
     if (!currentPage) return;
-    router.push(
-      pathname + "?" + createQueryString("page", (currentPage - 1).toString()),
-    );
+
+    const prevPage = currentPage - 1;
+    router.push(pathname + "?" + createUrlString("page", prevPage.toString()));
   };
 
   if (!currentPage) return null;
@@ -59,32 +59,21 @@ export default function ImageSlider({
   const currentSlide = slides[currentPage - 1];
 
   return (
-    <div
-      className={`relative grid flex-1 grid-cols-2 gap-x-4 ${
-        withPadding ? "p-8" : "px-8"
-      }`}
-    >
+    <div className={`relative h-full w-full ${withPadding ? "p-8" : "px-8"}`}>
       {currentSlide.length === 1 && (
-        <div className="col-span-2 flex">
-          <PortfolioImage
-            image={currentSlide[0]}
-            name={name}
-            alignment="center"
-          />
+        <div className="h-full w-full pb-[13px]">
+          <CustomImage image={currentSlide[0]} name={name} />
         </div>
       )}
 
       {currentSlide.length === 2 && (
         <>
-          <div className="flex">
-            <PortfolioImage
-              image={currentSlide[0]}
-              name={name}
-              alignment="end"
-            />
+          <div className="inline-block h-full w-1/2 pb-[13px] pr-2">
+            <CustomImage image={currentSlide[0]} name={name} alignment="end" />
           </div>
-          <div className="flex">
-            <PortfolioImage
+
+          <div className="inline-block h-full w-1/2 pb-[13px] pl-2">
+            <CustomImage
               image={currentSlide[1]}
               name={name}
               alignment="start"
@@ -96,16 +85,18 @@ export default function ImageSlider({
       {currentPage > 1 && (
         <div
           className="hover:cursor-chevron-left-black dark:hover:cursor-chevron-left-white absolute left-0 top-0 h-full w-1/2"
-          onClick={prevPage}
+          onClick={prevPageHandler}
         />
       )}
 
       {currentPage < slides.length && (
         <div
           className="hover:cursor-chevron-right-black dark:hover:cursor-chevron-right-white absolute right-0 top-0 h-full w-1/2"
-          onClick={nextPage}
+          onClick={nextPageHandler}
         />
       )}
     </div>
   );
-}
+};
+
+export default ImageSlider;

@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import VideoPlayer from "./VideoPlayer";
 
-export default function VideoStack({ videos }: { videos: VideoType[] }) {
+const VideoStack = ({ videos }: { videos: VideoType[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [containerWidth, setContainerWidth] = useState<number>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!containerRef.current) return;
 
     setContainerWidth(containerRef.current.clientWidth);
@@ -34,4 +34,6 @@ export default function VideoStack({ videos }: { videos: VideoType[] }) {
       </div>
     </div>
   );
-}
+};
+
+export default VideoStack;

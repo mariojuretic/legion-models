@@ -18,11 +18,7 @@ const query = groq`
 
 export const dynamic = "force-dynamic";
 
-export default async function Page({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) {
+const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
   const model: ModelDoc = await client.fetch(query, { slug });
 
   if (!model.videos) {
@@ -31,13 +27,15 @@ export default async function Page({
 
   return (
     <>
-      <main className="block lg:hidden">
+      <main className="lg:hidden">
         <VideoStack videos={model.videos} />
       </main>
 
-      <main className="hidden lg:flex lg:flex-1">
+      <main className="hidden h-full w-full lg:block">
         <VideoSlider videos={model.videos} />
       </main>
     </>
   );
-}
+};
+
+export default Page;
