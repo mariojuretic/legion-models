@@ -32,8 +32,10 @@ export default function VideoPlayer({
   height: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   const [fullscreen, setFullscreen] = useState<boolean>(false);
+  const [paused, setPaused] = useState<boolean>(true);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -46,6 +48,14 @@ export default function VideoPlayer({
           const isFullscreen = ref.current.hasAttribute("mediaisfullscreen");
           setFullscreen(isFullscreen);
         }
+
+        if (
+          mutation.attributeName === "mediahasplayed" ||
+          mutation.attributeName === "mediapaused"
+        ) {
+          const isPaused = ref.current.hasAttribute("mediapaused");
+          setPaused(isPaused);
+        }
       }
     });
 
@@ -54,10 +64,46 @@ export default function VideoPlayer({
     return () => mutationObserver.disconnect();
   }, []);
 
+  useEffect(() => {
+    const mouseMoveHandler = (ev: globalThis.MouseEvent) => {
+      if (!ref.current || !cursorRef.current) return;
+
+      // Determine cursor coordinates
+      const mouseX = ev.clientX;
+      const mouseY = ev.clientY;
+
+      // Get target area boundaries without bottom control bar
+      const { left, top } = ref.current.getBoundingClientRect();
+      const right = left + width;
+      const bottom = top + height - 29;
+
+      // Get custom cursor dimensions
+      const cursorWidth = cursorRef.current.clientWidth;
+      const cursorHeight = cursorRef.current.clientHeight;
+
+      // Check if cursor is inside of target area
+      if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
+        // Show custom cursor and set position relative to target area
+        cursorRef.current.style.left = mouseX - left - cursorWidth / 2 + "px";
+        cursorRef.current.style.top = mouseY - top - cursorHeight / 2 + "px";
+        cursorRef.current.style.display = "block";
+      } else {
+        // Hide custom cursor
+        cursorRef.current.style.display = "none";
+        cursorRef.current.style.left = "0px";
+        cursorRef.current.style.top = "0px";
+      }
+    };
+
+    window.addEventListener("mousemove", mouseMoveHandler);
+
+    return () => window.removeEventListener("mousemove", mouseMoveHandler);
+  }, [width, height]);
+
   const src = `https://stream.mux.com/${playbackId}.m3u8`;
 
   return (
-    <MediaController ref={ref}>
+    <MediaController ref={ref} className="group cursor-none">
       <MuxVideo
         slot="media"
         src={src}
@@ -68,7 +114,7 @@ export default function VideoPlayer({
         }}
       />
 
-      <MediaControlBar>
+      <MediaControlBar className="cursor-pointer">
         <MediaPlayButton>
           <span slot="play" className="hidden lg:block">
             PLAY
@@ -135,6 +181,14 @@ export default function VideoPlayer({
           </span>
         </MediaFullscreenButton>
       </MediaControlBar>
+
+      <span
+        ref={cursorRef}
+        className="brand-text pointer-events-none absolute leading-none drop-shadow"
+        style={{ display: "none", left: "0px", top: "0px" }}
+      >
+        {paused ? "PLAY" : "PAUSE"}
+      </span>
     </MediaController>
   );
 }
