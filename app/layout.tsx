@@ -4,7 +4,7 @@ import { groq } from "next-sanity";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
 
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 
 import "./globals.css";
 
@@ -41,7 +41,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const { theme }: SiteSettings = await client.fetch(query);
+  const { theme }: SiteSettings = await readClient.fetch(query);
 
   return (
     <html lang="en" className={theme}>

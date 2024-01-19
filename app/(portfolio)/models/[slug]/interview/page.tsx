@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
 
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug][0]
@@ -10,7 +10,7 @@ const query = groq`
 export const dynamic = "force-dynamic";
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const model: ModelDoc = await client.fetch(query, { slug });
+  const model: ModelDoc = await readClient.fetch(query, { slug });
 
   if (!model.interview) {
     return notFound();

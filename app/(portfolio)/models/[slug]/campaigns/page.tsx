@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 
 import ImageStack from "@/components/ImageStack";
 import ImageSlider from "@/components/ImageSlider";
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 import generateSlides from "@/lib/generateSlides";
 
 const query = groq`
@@ -19,7 +19,7 @@ const query = groq`
 export const dynamic = "force-dynamic";
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const model: ModelDoc = await client.fetch(query, { slug });
+  const model: ModelDoc = await readClient.fetch(query, { slug });
 
   if (!model.campaigns) {
     return notFound();

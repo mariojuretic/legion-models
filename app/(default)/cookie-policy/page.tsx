@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "cookiePolicy"][0]
@@ -9,7 +9,7 @@ const query = groq`
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const cookiePolicy: CookiePolicyPage = await client.fetch(query);
+  const cookiePolicy: CookiePolicyPage = await readClient.fetch(query);
 
   return (
     <main className="flex flex-1 items-center justify-center p-4 lg:p-8 lg:pl-0">

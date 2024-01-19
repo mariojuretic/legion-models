@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 
 import Redirect from "@/components/Redirect";
 import LandingPageVideo from "@/components/LandingPageVideo";
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 import urlFor from "@/lib/urlFor";
 
 const settingsQuery = groq`
@@ -23,12 +23,12 @@ const heroQuery = groq`
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
-  const settings: SiteSettings = await client.fetch(settingsQuery);
+  const settings: SiteSettings = await readClient.fetch(settingsQuery);
 
   const contentType = settings.landingPageContentType;
   const redirectTimeout = settings.landingPageRedirectMilliseconds;
 
-  const allHeros: HeroDoc[] = await client.fetch(heroQuery, {
+  const allHeros: HeroDoc[] = await readClient.fetch(heroQuery, {
     contentTypes: contentType === "random" ? ["image", "video"] : [contentType],
   });
 

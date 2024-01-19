@@ -5,7 +5,7 @@ import ExitPortfolio from "@/components/ExitPortfolio";
 import PortfolioTabs from "@/components/PortfolioTabs";
 import Measures from "@/components/Measures";
 import Thumbnails from "@/components/Thumbnails";
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug && hidden == false][0] {
@@ -52,7 +52,7 @@ const Layout = async ({
   children: React.ReactNode;
   params: { slug: string };
 }) => {
-  const model: ModelDoc = await client.fetch(query, { slug });
+  const model: ModelDoc = await readClient.fetch(query, { slug });
 
   if (!model) {
     return notFound();

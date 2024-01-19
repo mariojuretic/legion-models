@@ -5,7 +5,7 @@ import ImageStack from "@/components/ImageStack";
 import VideoStack from "@/components/VideoStack";
 import ImageSlider from "@/components/ImageSlider";
 import VideoSlider from "@/components/VideoSlider";
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 import generateSlides from "@/lib/generateSlides";
 
 const query = groq`
@@ -26,7 +26,7 @@ const query = groq`
 export const dynamic = "force-dynamic";
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const post: NewsDoc = await client.fetch(query, { slug });
+  const post: NewsDoc = await readClient.fetch(query, { slug });
 
   if (post.type === "image" && !post.images) return notFound();
   if (post.type === "video" && !post.videos) return notFound();

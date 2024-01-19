@@ -3,7 +3,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
 
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "news" && slug.current == $slug][0]
@@ -18,7 +18,7 @@ const Layout = async ({
   children: React.ReactNode;
   params: { slug: string };
 }) => {
-  const post: NewsDoc = await client.fetch(query, { slug });
+  const post: NewsDoc = await readClient.fetch(query, { slug });
 
   if (!post) {
     return notFound();

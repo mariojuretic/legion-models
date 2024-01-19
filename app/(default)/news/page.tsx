@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 
 import NewsFeed from "@/components/NewsFeed";
-import { client } from "@/lib/sanity.client";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "news"] | order(_createdAt desc)
@@ -10,7 +10,7 @@ const query = groq`
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const news: NewsDoc[] = await client.fetch(query);
+  const news: NewsDoc[] = await readClient.fetch(query);
 
   return (
     <main className="flex-1 self-start p-4 lg:p-8 lg:pl-0">
