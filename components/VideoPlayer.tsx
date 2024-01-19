@@ -81,13 +81,27 @@ export default function VideoPlayer({
       const cursorWidth = cursorRef.current.clientWidth;
       const cursorHeight = cursorRef.current.clientHeight;
 
-      // Check if cursor is inside of target area
-      if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
+      // Check if video is fullscreen...
+      if (fullscreen && mouseY < ref.current.clientHeight - 29) {
+        // Show custom cursor and set position
+        cursorRef.current.style.display = "block";
+        cursorRef.current.style.left = mouseX - cursorWidth / 2 + "px";
+        cursorRef.current.style.top = mouseY - cursorHeight / 2 + "px";
+      }
+      // ...or if the cursor is inside of target area
+      else if (
+        mouseX > left &&
+        mouseX < right &&
+        mouseY > top &&
+        mouseY < bottom
+      ) {
         // Show custom cursor and set position relative to target area
+        cursorRef.current.style.display = "block";
         cursorRef.current.style.left = mouseX - left - cursorWidth / 2 + "px";
         cursorRef.current.style.top = mouseY - top - cursorHeight / 2 + "px";
-        cursorRef.current.style.display = "block";
-      } else {
+      }
+      // ...otherwise
+      else {
         // Hide custom cursor
         cursorRef.current.style.display = "none";
         cursorRef.current.style.left = "0px";
@@ -98,7 +112,7 @@ export default function VideoPlayer({
     window.addEventListener("mousemove", mouseMoveHandler);
 
     return () => window.removeEventListener("mousemove", mouseMoveHandler);
-  }, [width, height]);
+  }, [width, height, fullscreen]);
 
   const src = `https://stream.mux.com/${playbackId}.m3u8`;
 
