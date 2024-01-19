@@ -14,6 +14,10 @@ export default defineType({
             value: "image",
             title: "Image",
           },
+          {
+            value: "video",
+            title: "Video",
+          },
         ],
       },
     }),
@@ -24,6 +28,19 @@ export default defineType({
       validation: (Rule) =>
         Rule.custom((value, context) => {
           if (context.document?.media === "image" && !value) {
+            return "Required";
+          } else {
+            return true;
+          }
+        }),
+    }),
+    defineField({
+      name: "video",
+      type: "mux.video",
+      hidden: ({ document }) => document?.media !== "video",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          if (context.document?.media === "video" && !value) {
             return "Required";
           } else {
             return true;

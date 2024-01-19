@@ -9,7 +9,8 @@ type BaseType = {
 interface HeroDoc extends BaseType {
   _type: "hero";
   image?: ImageType;
-  media: "image";
+  media: "image" | "video";
+  video?: VideoType;
 }
 
 interface AboutPage extends BaseType {
@@ -103,6 +104,8 @@ interface TermsOfUsePage extends BaseType {
 interface SiteSettings extends BaseType {
   _id: "settings";
   _type: "settings";
+  landingPageContentType: "random" | "image" | "video";
+  landingPageRedirectMilliseconds: number;
   theme: "dark" | "light";
 }
 

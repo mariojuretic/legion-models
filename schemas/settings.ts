@@ -21,5 +21,31 @@ export default defineType({
         ],
       },
     }),
+    defineField({
+      name: "landingPageContentType",
+      type: "string",
+      initialValue: "random",
+      options: {
+        list: [
+          {
+            value: "random",
+            title: "Random",
+          },
+          {
+            value: "image",
+            title: "Image",
+          },
+          {
+            value: "video",
+            title: "Video",
+          },
+        ],
+      },
+    }),
+    defineField({
+      name: "landingPageRedirectMilliseconds",
+      type: "number",
+      validation: (Rule) => Rule.required().integer().positive(),
+    }),
   ],
 });

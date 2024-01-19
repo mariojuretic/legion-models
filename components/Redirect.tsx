@@ -3,20 +3,24 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const DELAY_SECONDS = 2;
-
-export default function Redirect({ children }: { children: React.ReactNode }) {
-  const { push } = useRouter();
+export default function Redirect({
+  children,
+  redirectTimeout,
+}: {
+  children: React.ReactNode;
+  redirectTimeout: number;
+}) {
+  const router = useRouter();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      push("/main-board");
-    }, DELAY_SECONDS * 1000);
+      router.push("/main-board");
+    }, redirectTimeout);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [push]);
+  }, [router, redirectTimeout]);
 
   return children;
 }
