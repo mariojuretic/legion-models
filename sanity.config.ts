@@ -22,6 +22,7 @@ const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 const singletonTypes = new Set([
   "about",
   "contact",
+  "development",
   "privacyPolicy",
   "cookiePolicy",
   "termsOfUse",
@@ -66,6 +67,17 @@ export default defineConfig({
                   .title("Contact Page")
                   .documentId("contact")
                   .schemaType("contact"),
+              ),
+            S.listItem()
+              .id("development")
+              .title("Development Page")
+              .icon(DocumentText)
+              .child(
+                S.document()
+                  .id("development")
+                  .title("Development Page")
+                  .documentId("development")
+                  .schemaType("development"),
               ),
             S.divider(),
             S.documentTypeListItem("model").title("Models").icon(UserCircle),

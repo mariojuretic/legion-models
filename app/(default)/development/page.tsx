@@ -1,22 +1,21 @@
 import { groq } from "next-sanity";
 
-import ModelsList from "@/components/ModelsList";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "model" && category == "development" && hidden == false] | order(name asc)
+  *[_type == "development"][0]
 `;
 
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const models: ModelDoc[] = await readClient.fetch(query);
+  const development: DevelopmentPage = await readClient.fetch(query);
 
   return (
-    <main className="flex-1 self-start p-4 lg:p-8 lg:pl-0">
-      {models.length === 0 && <p className="brand-text">No models found.</p>}
-
-      {models.length > 0 && <ModelsList models={models} />}
+    <main className="flex flex-1 items-center justify-center p-4 lg:p-8 lg:pl-0">
+      <div className="brand-text max-w-[100ch] whitespace-pre-line">
+        <p>{development.message}</p>
+      </div>
     </main>
   );
 }

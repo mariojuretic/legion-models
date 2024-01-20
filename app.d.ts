@@ -28,6 +28,12 @@ interface ContactPage extends BaseType {
   socials?: SocialObj[];
 }
 
+interface DevelopmentPage extends BaseType {
+  _id: "development";
+  _type: "development";
+  message: string;
+}
+
 interface ModelDoc extends BaseType {
   _type: "model";
   campaigns?: ImageType[];

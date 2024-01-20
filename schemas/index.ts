@@ -1,6 +1,7 @@
 import hero from "./hero";
 import about from "./about";
 import contact from "./contact";
+import development from "./development";
 import model from "./model";
 import collection from "./collection";
 import news from "./news";
@@ -13,6 +14,7 @@ export const schemaTypes = [
   hero,
   about,
   contact,
+  development,
   model,
   collection,
   news,
