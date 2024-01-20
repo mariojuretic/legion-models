@@ -24,15 +24,15 @@ export default defineType({
     defineField({
       name: "category",
       type: "string",
-      initialValue: "new-faces",
+      initialValue: "development",
       options: {
         list: [
           {
-            value: "new-faces",
+            value: "development",
             title: "Development",
           },
           {
-            value: "models",
+            value: "main-board",
             title: "Main Board",
           },
         ],

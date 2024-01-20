@@ -4,7 +4,7 @@ import ModelsList from "@/components/ModelsList";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "model" && category == "models" && hidden == false] | order(name asc)
+  *[_type == "model" && category == "main-board" && hidden == false] | order(name asc)
 `;
 
 export const dynamic = "force-dynamic";
