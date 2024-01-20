@@ -7,7 +7,7 @@ import { useMenuStore } from "@/store/MenuStore";
 import { useSearchStore } from "@/store/SearchStore";
 import { useEffect, useState } from "react";
 
-const SEARCHABLE_PAGES = ["main-board", "development"];
+const SEARCHABLE_PAGES = ["main-board"];
 
 export default function Menu() {
   const pathname = usePathname();
