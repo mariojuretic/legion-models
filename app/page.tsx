@@ -35,9 +35,9 @@ const Page = async () => {
   const randomHero = allHeros[Math.floor(Math.random() * allHeros.length)];
 
   return (
-    <Redirect redirectTimeout={redirectTimeout}>
+    <Redirect redirectTimeout={randomHero ? redirectTimeout : 0}>
       <div className="relative h-[100svh] w-screen overflow-hidden">
-        {randomHero.media === "image" && randomHero.image && (
+        {randomHero && randomHero.media === "image" && randomHero.image && (
           <Image
             src={urlFor(randomHero.image).url()}
             alt="LEGION MODEL MANAGEMENT"
@@ -47,7 +47,7 @@ const Page = async () => {
           />
         )}
 
-        {randomHero.media === "video" && randomHero.video && (
+        {randomHero && randomHero.media === "video" && randomHero.video && (
           <LandingPageVideo playbackId={randomHero.video.playbackId} />
         )}
       </div>
