@@ -44,12 +44,24 @@ function ModelCard({ model }: { model: ModelDoc }) {
   );
 }
 
-export default function ModelsList({ models }: { models: ModelDoc[] }) {
+export default function ModelsList({
+  models,
+  filter,
+}: {
+  models: ModelDoc[];
+  filter: "main-board" | "development";
+}) {
   const searchTerm = useSearchStore((state) => state.searchTerm);
 
-  const filteredModels = models.filter((model) =>
-    normalizeString(model.name).includes(normalizeString(searchTerm)),
-  );
+  let filteredModels;
+
+  if (searchTerm === "") {
+    filteredModels = models.filter((model) => model.category === filter);
+  } else {
+    filteredModels = models.filter((model) =>
+      normalizeString(model.name).includes(normalizeString(searchTerm)),
+    );
+  }
 
   return (
     <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">

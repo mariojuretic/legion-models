@@ -16,7 +16,7 @@ import { useSearchStore } from "@/store/SearchStore";
 
 const drukWide = localFont({ src: "../fonts/DrukWide-Bold.ttf" });
 
-const SEARCHABLE_PAGES = ["main-board"];
+const SEARCHABLE_PAGES = ["main-board", "development"];
 
 export default function Header() {
   const pathname = usePathname();

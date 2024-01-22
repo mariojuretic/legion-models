@@ -4,7 +4,7 @@ import ModelsList from "@/components/ModelsList";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "model" && category == "main-board" && hidden == false] | order(name asc)
+  *[_type == "model" && hidden == false] | order(name asc)
 `;
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export default async function Page() {
     <main className="flex-1 self-start p-4 lg:p-8 lg:pl-0">
       {models.length === 0 && <p className="brand-text">No models found.</p>}
 
-      {models.length > 0 && <ModelsList models={models} />}
+      {models.length > 0 && <ModelsList models={models} filter="main-board" />}
     </main>
   );
 }
