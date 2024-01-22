@@ -45,8 +45,9 @@ const CustomImage = ({
     if (!containerWidth || !containerHeight) return;
     if (!image.dimensions) return;
 
-    let updatedImageWidth = image.dimensions.width;
-    let updatedImageHeight = image.dimensions.height;
+    // Upscale before scaling down to fill container...
+    let updatedImageWidth = image.dimensions.width * 1000;
+    let updatedImageHeight = image.dimensions.height * 1000;
 
     // Limit image width...
     if (updatedImageWidth > containerWidth) {
