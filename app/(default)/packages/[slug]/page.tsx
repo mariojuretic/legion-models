@@ -37,7 +37,7 @@ export default async function Page({
       )}
 
       {collection.models && collection.models.length > 0 && (
-        <ModelsList models={collection.models} />
+        <ModelsList models={collection.models} filter={null} />
       )}
     </main>
   );

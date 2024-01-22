@@ -49,13 +49,13 @@ export default function ModelsList({
   filter,
 }: {
   models: ModelDoc[];
-  filter: "main-board" | "development";
+  filter: "main-board" | "development" | null;
 }) {
   const searchTerm = useSearchStore((state) => state.searchTerm);
 
   let filteredModels;
 
-  if (searchTerm === "") {
+  if (searchTerm === "" && filter !== null) {
     filteredModels = models.filter((model) => model.category === filter);
   } else {
     filteredModels = models.filter((model) =>
