@@ -18,6 +18,7 @@ const ImageSlider = ({
   const router = useRouter();
   const pathname = usePathname();
 
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number | null>();
 
   const createUrlString = useCallback(
@@ -43,12 +44,16 @@ const ImageSlider = ({
   const nextPageHandler = useCallback(() => {
     if (!currentPage || currentPage >= slides.length) return;
 
+    setImageLoading(true);
+
     const nextPage = currentPage + 1;
     router.push(pathname + "?" + createUrlString("page", nextPage.toString()));
   }, [currentPage, slides.length, router, pathname, createUrlString]);
 
   const prevPageHandler = useCallback(() => {
     if (!currentPage || currentPage <= 1) return;
+
+    setImageLoading(true);
 
     const prevPage = currentPage - 1;
     router.push(pathname + "?" + createUrlString("page", prevPage.toString()));
@@ -78,14 +83,25 @@ const ImageSlider = ({
     <div className={`relative h-full w-full ${withPadding ? "p-8" : "px-8"}`}>
       {currentSlide.length === 1 && (
         <div className="h-full w-full pb-[13px]">
-          <CustomImage image={currentSlide[0]} name={name} />
+          <CustomImage
+            image={currentSlide[0]}
+            name={name}
+            isLoading={imageLoading}
+            onImageLoaded={() => setImageLoading(false)}
+          />
         </div>
       )}
 
       {currentSlide.length === 2 && (
         <>
           <div className="inline-block h-full w-1/2 pb-[13px] pr-2">
-            <CustomImage image={currentSlide[0]} name={name} alignment="end" />
+            <CustomImage
+              image={currentSlide[0]}
+              name={name}
+              alignment="end"
+              isLoading={imageLoading}
+              onImageLoaded={() => setImageLoading(false)}
+            />
           </div>
 
           <div className="inline-block h-full w-1/2 pb-[13px] pl-2">
@@ -93,6 +109,8 @@ const ImageSlider = ({
               image={currentSlide[1]}
               name={name}
               alignment="start"
+              isLoading={imageLoading}
+              onImageLoaded={() => setImageLoading(false)}
             />
           </div>
         </>

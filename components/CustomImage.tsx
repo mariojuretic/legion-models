@@ -7,10 +7,14 @@ import urlFor from "@/lib/urlFor";
 const CustomImage = ({
   image,
   name,
+  isLoading,
+  onImageLoaded,
   alignment = "center",
 }: {
   image: ImageType;
   name: string;
+  isLoading: boolean;
+  onImageLoaded: () => void;
   alignment?: "start" | "center" | "end";
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,7 +89,12 @@ const CustomImage = ({
           <img
             src={urlFor(image).url()}
             alt={name}
-            style={{ width: imageWidth, height: imageHeight }}
+            style={{
+              width: imageWidth,
+              height: imageHeight,
+              display: isLoading ? "none" : "block",
+            }}
+            onLoad={onImageLoaded}
           />
 
           {image.source && (
@@ -99,6 +108,7 @@ const CustomImage = ({
                     : alignment === "end"
                     ? 0
                     : (containerWidth - imageWidth) / 2,
+                display: isLoading ? "none" : "block",
               }}
             >
               {image.source}
