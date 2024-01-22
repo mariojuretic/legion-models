@@ -65,13 +65,14 @@ const Layout = async ({
         <h2 className="brand-text p-4 text-center lg:hidden">{model.name}</h2>
         {children}
       </div>
-      <PortfolioTabs model={model} />
 
       {model.measures && model.measures.length > 0 && (
         <Measures measures={model.measures} />
       )}
 
       <Thumbnails modelName={model.name} />
+
+      <PortfolioTabs model={model} />
     </div>
   );
 };
