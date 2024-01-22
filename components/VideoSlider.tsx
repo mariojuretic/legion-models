@@ -39,19 +39,35 @@ const VideoSlider = ({
     }
   }, [searchParams, router, pathname, createUrlString]);
 
-  const nextPageHandler = () => {
-    if (!currentPage) return;
+  const nextPageHandler = useCallback(() => {
+    if (!currentPage || currentPage >= videos.length) return;
 
     const nextPage = currentPage + 1;
     router.push(pathname + "?" + createUrlString("page", nextPage.toString()));
-  };
+  }, [currentPage, videos.length, router, pathname, createUrlString]);
 
-  const prevPageHandler = () => {
-    if (!currentPage) return;
+  const prevPageHandler = useCallback(() => {
+    if (!currentPage || currentPage <= 1) return;
 
     const prevPage = currentPage - 1;
     router.push(pathname + "?" + createUrlString("page", prevPage.toString()));
-  };
+  }, [currentPage, router, pathname, createUrlString]);
+
+  useLayoutEffect(() => {
+    const keydownHandler = (ev: KeyboardEvent) => {
+      if (ev.code === "ArrowRight") {
+        nextPageHandler();
+      }
+
+      if (ev.code === "ArrowLeft") {
+        prevPageHandler();
+      }
+    };
+
+    document.addEventListener("keydown", keydownHandler);
+
+    return () => document.removeEventListener("keydown", keydownHandler);
+  }, [nextPageHandler, prevPageHandler]);
 
   if (!currentPage) return null;
 
