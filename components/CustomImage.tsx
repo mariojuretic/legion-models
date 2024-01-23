@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 import urlFor from "@/lib/urlFor";
 
@@ -86,15 +87,14 @@ const CustomImage = ({
     >
       {containerWidth && containerHeight && imageWidth && imageHeight && (
         <>
-          <img
+          <Image
             src={urlFor(image).url()}
             alt={name}
-            style={{
-              width: imageWidth,
-              height: imageHeight,
-              display: isLoading ? "none" : "block",
-            }}
+            width={imageWidth}
+            height={imageHeight}
+            priority
             onLoad={onImageLoaded}
+            style={{ display: isLoading ? "none" : "block" }}
           />
 
           {image.source && (

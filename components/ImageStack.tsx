@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import urlFor from "@/lib/urlFor";
+import Image from "next/image";
 
 const ImageStack = ({
   slides,
@@ -70,11 +71,12 @@ const ImageStack = ({
           images &&
           images.map((image) => (
             <div key={image.asset._ref}>
-              <img
+              <Image
                 src={urlFor(image).url()}
                 alt={name}
                 width={image.dimensions?.width}
                 height={image.dimensions?.height}
+                priority
               />
 
               {image.source && (
