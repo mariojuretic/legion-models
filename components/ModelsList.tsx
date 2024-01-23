@@ -2,18 +2,27 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import urlFor from "@/lib/urlFor";
 import normalizeString from "@/lib/normalizeString";
 import { useSearchStore } from "@/store/SearchStore";
 
 function ModelCard({ model }: { model: ModelDoc }) {
+  const pathname = usePathname();
+
+  const pathSegments = pathname.split("/");
+  const indexOfPackages = pathSegments.indexOf("packages");
+
+  let href = `/models/${model.slug.current}`;
+
+  if (indexOfPackages >= 0) {
+    href = `${href}?source=${pathSegments[indexOfPackages + 1]}`;
+  }
+
   return (
     <li>
-      <Link
-        href={`/models/${model.slug.current}`}
-        className="group flex flex-col gap-y-2"
-      >
+      <Link href={href} className="group flex flex-col gap-y-2">
         <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 transition-colors duration-300 group-hover:bg-neutral-200 dark:bg-neutral-900 dark:group-hover:bg-neutral-800">
           {model.thumbnail?.default && (
             <Image
