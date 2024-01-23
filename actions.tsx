@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 import { useDocumentOperation, type DocumentActionComponent } from "sanity";
-import { Button, Stack, TextInput } from "@sanity/ui";
+import { Button, Flex, Spinner, Stack, Text, TextInput } from "@sanity/ui";
+import { shareCollectionWithEmail } from "./app/actions";
 
 export const createPublishWithShareAction: (
   originalPublishAction: DocumentActionComponent,
@@ -41,13 +42,29 @@ export const ShareWithEmailAction: DocumentActionComponent = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [showDialog, setShowDialog] = useState<boolean>(false);
+  const [sending, setSending] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const shareHandler = () => {
+  const shareHandler = async () => {
     if (!inputRef.current) return;
 
-    // Add server action to send email...
-    console.log(`Sending ${collection.name} to ${inputRef.current.value}...`);
-    setShowDialog(false);
+    setSending(true);
+    setSuccessMessage(null);
+    setErrorMessage(null);
+
+    const email = inputRef.current.value;
+
+    const response = await shareCollectionWithEmail(collection, email);
+
+    if (response.success) {
+      setSuccessMessage("Successfully shared with " + email);
+      inputRef.current.value = "";
+    } else {
+      setErrorMessage("Something went wrong.");
+    }
+
+    setSending(false);
   };
 
   return {
@@ -63,17 +80,36 @@ export const ShareWithEmailAction: DocumentActionComponent = ({
       header: "Share with Email",
       content: (
         <Stack space={3}>
-          <TextInput ref={inputRef} placeholder="E-mail" />
+          <TextInput ref={inputRef} placeholder="E-mail" disabled={sending} />
           <Button
             fontSize={2}
             onClick={shareHandler}
             padding={3}
             text="Share"
             tone="positive"
+            disabled={sending}
           />
+
+          {sending && (
+            <Flex align="center" justify="center" gap={3}>
+              <Spinner muted />
+              <Text muted>Sending package...</Text>
+            </Flex>
+          )}
+
+          {!sending && successMessage && (
+            <Text align="center" muted>
+              {successMessage}
+            </Text>
+          )}
+
+          {!sending && errorMessage && (
+            <Text align="center" muted>
+              {errorMessage}
+            </Text>
+          )}
         </Stack>
       ),
     },
-    disabled: true,
   };
 };

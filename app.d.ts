@@ -71,6 +71,7 @@ interface CollectionDoc extends BaseType {
   _type: "collection";
   models?: ModelDoc[];
   name: string;
+  share: string;
   slug: SlugType;
 }
 

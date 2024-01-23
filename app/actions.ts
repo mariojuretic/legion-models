@@ -122,3 +122,24 @@ export const submitNewsletterForm = async (data: NewsletterFormInputs) => {
     return { success: false };
   }
 };
+
+export const shareCollectionWithEmail: (
+  collection: CollectionDoc,
+  email: string,
+) => Promise<{ success: boolean }> = async (collection, email) => {
+  const msg: MailDataRequired = {
+    to: email,
+    from: `Legion Model Management <${process.env.SENDGRID_SENDER_IDENTITY}>`,
+    replyTo: process.env.SENDGRID_RECIPIENT,
+    subject: collection.name,
+    html: `<a href="${collection.share}">Open package</a>`,
+  };
+
+  try {
+    await sgMail.send(msg);
+    return { success: true };
+  } catch (error) {
+    console.log("Something went wrong.", error);
+    return { success: false };
+  }
+};
