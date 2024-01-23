@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export default async function Page() {
   const models: ModelDoc[] = await readClient.fetch(modelsQuery);
 
-  if (models && models.length > 0) {
+  if (models.filter((model) => model.category === "development").length > 0) {
     return (
       <main className="flex-1 self-start p-4 lg:p-8 lg:pl-0">
         <ModelsList models={models} filter="development" />
