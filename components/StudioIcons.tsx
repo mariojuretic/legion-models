@@ -4,6 +4,7 @@ import {
   UserCircleIcon,
   ArchiveBoxIcon,
   MegaphoneIcon,
+  ClipboardDocumentCheckIcon,
   ShieldCheckIcon,
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
@@ -26,6 +27,10 @@ export function ArchiveBox() {
 
 export function Megaphone() {
   return <MegaphoneIcon className="h-6 w-6" />;
+}
+
+export function ClipboardDocumentCheck() {
+  return <ClipboardDocumentCheckIcon className="h-6 w-6" />;
 }
 
 export function ShieldCheck() {

@@ -90,6 +90,22 @@ interface NewsDoc extends BaseType {
   videos?: VideoType[];
 }
 
+interface NewApplicationDoc {
+  _type: "application";
+  birthday: string;
+  email: string;
+  fullBodyShot: ImageType;
+  fullName: string;
+  gender: string;
+  halfBodyShot: ImageType;
+  headshot: ImageType;
+  height: string;
+  instagram?: string;
+  location: string;
+  phone: string;
+  profileHeadshot: ImageType;
+}
+
 interface PrivacyPolicyPage extends BaseType {
   _id: "privacyPolicy";
   _type: "privacyPolicy";

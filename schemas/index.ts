@@ -5,6 +5,7 @@ import development from "./development";
 import model from "./model";
 import collection from "./collection";
 import news from "./news";
+import application from "./application";
 import privacyPolicy from "./privacyPolicy";
 import cookiePolicy from "./cookiePolicy";
 import termsOfUse from "./termsOfUse";
@@ -18,6 +19,7 @@ export const schemaTypes = [
   model,
   collection,
   news,
+  application,
   privacyPolicy,
   cookiePolicy,
   termsOfUse,

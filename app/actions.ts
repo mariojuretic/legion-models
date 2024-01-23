@@ -5,6 +5,7 @@ import sgMail, { MailDataRequired } from "@sendgrid/mail";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 
 import { GetScoutedFormSchema, NewsletterFormSchema } from "@/lib/schema";
+import { writeClient } from "@/lib/sanity.client";
 
 type GetScoutedFormInputs = Omit<
   z.infer<typeof GetScoutedFormSchema>,
@@ -39,11 +40,75 @@ export const submitGetScoutedForm = async (formData: FormData) => {
   if (!result.success) return { success: false };
 
   try {
+    // Upload assets to Sanity
+    const headshotDocument = await writeClient.assets.upload(
+      "image",
+      data.headshot,
+    );
+    const profileHeadshotDocument = await writeClient.assets.upload(
+      "image",
+      data.profileHeadshot,
+    );
+    const halfBodyShotDocument = await writeClient.assets.upload(
+      "image",
+      data.halfBodyShot,
+    );
+    const fullBodyShotDocument = await writeClient.assets.upload(
+      "image",
+      data.fullBodyShot,
+    );
+
+    // Create new Sanity document
+    const doc: NewApplicationDoc = {
+      _type: "application",
+      fullName: `${data.firstName} ${data.lastName}`,
+      gender: data.gender,
+      birthday: data.birthday,
+      email: data.email,
+      phone: data.phone,
+      height: data.height,
+      location: data.countryCity,
+      instagram: data.instagram,
+      headshot: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: headshotDocument._id,
+        },
+      },
+      profileHeadshot: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: profileHeadshotDocument._id,
+        },
+      },
+      halfBodyShot: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: halfBodyShotDocument._id,
+        },
+      },
+      fullBodyShot: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: fullBodyShotDocument._id,
+        },
+      },
+    };
+
+    // Save document to Sanity
+    await writeClient.create(doc);
+
+    // Create buffers from files
     const headshotArrBuff = await data.headshot.arrayBuffer();
     const profileHeadshotArrBuff = await data.profileHeadshot.arrayBuffer();
     const halfBodyShotArrBuff = await data.halfBodyShot.arrayBuffer();
     const fullBodyShotArrBuff = await data.fullBodyShot.arrayBuffer();
 
+    // Create a Sendgrid message
     const msg: MailDataRequired = {
       to: process.env.SENDGRID_RECIPIENT,
       from: `${data.firstName} ${data.lastName} <${process.env.SENDGRID_SENDER_IDENTITY}>`,
@@ -88,6 +153,7 @@ export const submitGetScoutedForm = async (formData: FormData) => {
       ],
     };
 
+    // Send message with Sendgrid
     await sgMail.send(msg);
     return { success: true };
   } catch (error) {

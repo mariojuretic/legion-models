@@ -13,6 +13,7 @@ import {
   DocumentText,
   UserCircle,
   Megaphone,
+  ClipboardDocumentCheck,
   ArchiveBox,
   ShieldCheck,
   Cog6Tooth,
@@ -85,6 +86,10 @@ export default defineConfig({
               .title("Packages")
               .icon(ArchiveBox),
             S.documentTypeListItem("news").title("News").icon(Megaphone),
+            S.divider(),
+            S.documentTypeListItem("application")
+              .title("Applications")
+              .icon(ClipboardDocumentCheck),
             S.divider(),
             S.listItem()
               .id("privacyPolicy")
