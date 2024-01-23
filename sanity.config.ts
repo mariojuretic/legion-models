@@ -7,7 +7,7 @@ import { simplerColorInput } from "sanity-plugin-simpler-color-input";
 import { muxInput } from "sanity-plugin-mux-input";
 
 import { schemaTypes } from "./schemas";
-import { createPublishWithShareAction } from "./actions";
+import { createPublishWithShareAction, ShareWithEmailAction } from "./actions";
 import {
   Photo,
   DocumentText,
@@ -148,11 +148,14 @@ export default defineConfig({
     actions: (prev, context) => {
       const actions =
         context.schemaType === "collection"
-          ? prev.map((originalAction) =>
-              originalAction.action === "publish"
-                ? createPublishWithShareAction(originalAction)
-                : originalAction,
-            )
+          ? [
+              ...prev.map((originalAction) =>
+                originalAction.action === "publish"
+                  ? createPublishWithShareAction(originalAction)
+                  : originalAction,
+              ),
+              ShareWithEmailAction,
+            ]
           : prev;
 
       return singletonTypes.has(context.schemaType)
