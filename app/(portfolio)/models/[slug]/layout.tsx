@@ -8,7 +8,7 @@ import Thumbnails from "@/components/Thumbnails";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "model" && slug.current == $slug && hidden == false][0] {
+  *[_type == "model" && slug.current == $slug][0] {
     ...,
     portfolio[] {
       ...,
