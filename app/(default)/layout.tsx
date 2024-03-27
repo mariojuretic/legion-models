@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex min-h-[100svh] flex-col">
+    <div className="relative flex min-h-svh flex-col">
       <Header />
       <div className="flex flex-1">
         <NavMenu />

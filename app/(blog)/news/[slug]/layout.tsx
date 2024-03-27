@@ -25,7 +25,7 @@ const Layout = async ({
   }
 
   return (
-    <div className="relative flex min-h-[100svh] flex-col lg:block lg:h-screen lg:min-h-0 lg:w-screen lg:pl-60">
+    <div className="relative flex min-h-svh flex-col lg:block lg:h-screen lg:min-h-0 lg:w-screen lg:pl-60">
       <div className="brand-text flex flex-col lg:fixed lg:bottom-0 lg:left-0 lg:top-0 lg:w-60 lg:justify-between">
         <Link href="/news" className="self-end p-4 lg:hidden">
           <XMarkIcon className="h-5 w-5" />

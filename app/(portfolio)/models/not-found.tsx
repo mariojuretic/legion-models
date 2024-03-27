@@ -2,7 +2,7 @@ import NotFound from "@/components/NotFound";
 
 const NotFoundPage = () => {
   return (
-    <div className="h-[100svh] w-screen">
+    <div className="h-svh w-screen">
       <NotFound />
     </div>
   );

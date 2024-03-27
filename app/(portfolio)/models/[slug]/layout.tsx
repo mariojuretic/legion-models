@@ -59,7 +59,7 @@ const Layout = async ({
   }
 
   return (
-    <div className="relative flex min-h-[100svh] flex-col lg:block lg:h-screen lg:min-h-0 lg:w-screen lg:pb-[77px] lg:pt-[100px]">
+    <div className="relative flex min-h-svh flex-col lg:block lg:h-screen lg:min-h-0 lg:w-screen lg:pb-[77px] lg:pt-[100px]">
       <ExitPortfolio category={model.category} />
       <div className="flex flex-1 flex-col lg:block lg:h-full lg:w-full">
         <h2 className="brand-text p-4 text-center lg:hidden">{model.name}</h2>

@@ -36,7 +36,7 @@ const Page = async () => {
 
   return (
     <Redirect redirectTimeout={randomHero ? redirectTimeout : 0}>
-      <div className="relative h-[100svh] w-screen overflow-hidden">
+      <div className="relative h-svh w-screen overflow-hidden">
         {randomHero && randomHero.media === "image" && randomHero.image && (
           <Image
             src={urlFor(randomHero.image).url()}
