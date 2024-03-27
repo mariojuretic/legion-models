@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
+import { notFound } from "next/navigation";
 
 import ImageStack from "@/components/ImageStack";
-import ImageSlider from "@/components/ImageSlider";
-import { readClient } from "@/lib/sanity.client";
+import SwiperImageSlider from "@/components/SwiperImageSlider";
 import generateSlides from "@/lib/generateSlides";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug][0] {
@@ -34,7 +34,9 @@ const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
       </main>
 
       <main className="hidden h-full w-full lg:block">
-        <ImageSlider slides={slides} name={model.name} />
+        <div className="h-[calc(100svh-177px)] w-screen">
+          <SwiperImageSlider slides={slides} imagesAltText={model.name} />
+        </div>
       </main>
     </>
   );

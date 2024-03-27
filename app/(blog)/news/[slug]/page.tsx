@@ -1,12 +1,12 @@
-import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
+import { notFound } from "next/navigation";
 
 import ImageStack from "@/components/ImageStack";
-import VideoStack from "@/components/VideoStack";
-import ImageSlider from "@/components/ImageSlider";
+import SwiperImageSlider from "@/components/SwiperImageSlider";
 import VideoSlider from "@/components/VideoSlider";
-import { readClient } from "@/lib/sanity.client";
+import VideoStack from "@/components/VideoStack";
 import generateSlides from "@/lib/generateSlides";
+import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "news" && slug.current == $slug][0] {
@@ -43,11 +43,13 @@ const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
 
       <main className="hidden h-full w-full lg:block">
         {post.type === "image" ? (
-          <ImageSlider
-            slides={generateSlides(post.images!)}
-            name={post.title}
-            withPadding
-          />
+          <div className="h-svh w-[calc(100vw-240px)]">
+            <SwiperImageSlider
+              slides={generateSlides(post.images!)}
+              imagesAltText={post.title}
+              addVerticalPadding
+            />
+          </div>
         ) : (
           <VideoSlider videos={post.videos!} withPadding />
         )}
