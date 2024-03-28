@@ -5,6 +5,7 @@ import "swiper/css/keyboard";
 import { Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import SwiperControls from "./SwiperControls";
 import SwiperImage from "./SwiperImage";
 
 type Props = {
@@ -58,6 +59,8 @@ export default function SwiperImageSlider({
               )}
             </SwiperSlide>
           ))}
+
+          <SwiperControls />
         </Swiper>
       </div>
     </section>

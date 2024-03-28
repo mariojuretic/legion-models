@@ -54,4 +54,16 @@
       url("../images/chevron-right-white.png") 16 16,
       pointer;
   }
+
+  .swiper-button {
+    @apply fixed bottom-[77px] top-[100px] z-40 w-1/2 cursor-pointer outline-none;
+  }
+
+  .swiper-button-prev {
+    @apply swiper-button left-0;
+  }
+
+  .swiper-button-next {
+    @apply swiper-button right-0;
+  }
 }
