@@ -38,7 +38,7 @@ export default function SwiperImageSlider({
             <SwiperSlide key={slide[0].asset._ref}>
               {slide.length === 1 && (
                 <div className="grid h-full w-full grid-cols-1">
-                  <div className="h-full w-full overflow-hidden border border-red-500">
+                  <div className="h-full w-full overflow-hidden">
                     <SwiperImage image={slide[0]} altText={imagesAltText} />
                   </div>
                 </div>
@@ -46,7 +46,7 @@ export default function SwiperImageSlider({
 
               {slide.length === 2 && (
                 <div className="grid h-full w-full grid-cols-2 gap-x-4">
-                  <div className="h-full w-full overflow-hidden border border-green-500">
+                  <div className="h-full w-full overflow-hidden">
                     <SwiperImage
                       image={slide[0]}
                       altText={imagesAltText}
@@ -54,7 +54,7 @@ export default function SwiperImageSlider({
                     />
                   </div>
 
-                  <div className="h-full w-full overflow-hidden border border-blue-500">
+                  <div className="h-full w-full overflow-hidden">
                     <SwiperImage
                       image={slide[1]}
                       altText={imagesAltText}
