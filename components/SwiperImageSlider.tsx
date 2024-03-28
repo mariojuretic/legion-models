@@ -31,6 +31,8 @@ export default function SwiperImageSlider({
           keyboard={{ enabled: true }}
           modules={[Keyboard]}
           onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
+          spaceBetween={64}
+          speed={1000}
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide[0].asset._ref}>
