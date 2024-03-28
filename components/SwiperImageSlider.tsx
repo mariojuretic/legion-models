@@ -22,9 +22,10 @@ export default function SwiperImageSlider({
     <section className="relative h-full w-full">
       <div className={`h-full w-full ${addVerticalPadding ? "p-8" : "px-8"}`}>
         <Swiper
+          allowTouchMove={false}
           className="h-full w-full"
-          modules={[Keyboard]}
           keyboard={{ enabled: true }}
+          modules={[Keyboard]}
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide[0].asset._ref}>
