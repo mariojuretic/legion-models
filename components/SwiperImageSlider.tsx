@@ -1,6 +1,8 @@
 "use client";
 
 import "swiper/css";
+import "swiper/css/keyboard";
+import { Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import SwiperImage from "./SwiperImage";
@@ -19,7 +21,11 @@ export default function SwiperImageSlider({
   return (
     <section className="relative h-full w-full">
       <div className={`h-full w-full ${addVerticalPadding ? "p-8" : "px-8"}`}>
-        <Swiper className="h-full w-full">
+        <Swiper
+          className="h-full w-full"
+          modules={[Keyboard]}
+          keyboard={{ enabled: true }}
+        >
           {slides.map((slide) => (
             <SwiperSlide key={slide[0].asset._ref}>
               {slide.length === 1 && (
