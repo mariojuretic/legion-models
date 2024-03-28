@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/keyboard";
 import { Keyboard } from "swiper/modules";
@@ -19,6 +20,8 @@ export default function SwiperImageSlider({
   imagesAltText,
   addVerticalPadding = false,
 }: Props) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   return (
     <section className="relative h-full w-full">
       <div className={`h-full w-full ${addVerticalPadding ? "p-8" : "px-8"}`}>
@@ -27,6 +30,7 @@ export default function SwiperImageSlider({
           className="h-full w-full"
           keyboard={{ enabled: true }}
           modules={[Keyboard]}
+          onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide[0].asset._ref}>
@@ -60,7 +64,10 @@ export default function SwiperImageSlider({
             </SwiperSlide>
           ))}
 
-          <SwiperControls />
+          <SwiperControls
+            numOfSlides={slides.length}
+            currentSlide={currentSlide}
+          />
         </Swiper>
       </div>
     </section>

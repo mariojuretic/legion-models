@@ -2,20 +2,29 @@
 
 import { useSwiper } from "swiper/react";
 
-export default function SwiperControls() {
+type Props = {
+  numOfSlides: number;
+  currentSlide: number;
+};
+
+export default function SwiperControls({ numOfSlides, currentSlide }: Props) {
   const swiper = useSwiper();
 
   return (
     <>
-      <button
-        className="swiper-button-prev bg-red-500/25"
-        onClick={() => swiper.slidePrev()}
-      />
+      {currentSlide > 0 && (
+        <button
+          className="swiper-button-prev bg-red-500/25"
+          onClick={() => swiper.slidePrev()}
+        />
+      )}
 
-      <button
-        className="swiper-button-next bg-green-500/25"
-        onClick={() => swiper.slideNext()}
-      />
+      {currentSlide < numOfSlides - 1 && (
+        <button
+          className="swiper-button-next bg-green-500/25"
+          onClick={() => swiper.slideNext()}
+        />
+      )}
     </>
   );
 }
