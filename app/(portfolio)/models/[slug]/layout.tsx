@@ -1,10 +1,9 @@
-import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
+import { notFound } from "next/navigation";
 
 import ExitPortfolio from "@/components/ExitPortfolio";
-import PortfolioTabs from "@/components/PortfolioTabs";
 import Measures from "@/components/Measures";
-import Thumbnails from "@/components/Thumbnails";
+import PortfolioTabs from "@/components/PortfolioTabs";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
@@ -70,7 +69,8 @@ const Layout = async ({
         <Measures measures={model.measures} />
       )}
 
-      <Thumbnails modelName={model.name} />
+      {/* Disabled to avoid errors with Swiper */}
+      {/* <Thumbnails modelName={model.name} /> */}
 
       <PortfolioTabs model={model} />
     </div>
