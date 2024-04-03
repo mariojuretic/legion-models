@@ -31,6 +31,7 @@ export default function SwiperImageSlider({
           keyboard={{ enabled: true }}
           modules={[Keyboard]}
           onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
+          rewind
           spaceBetween={64}
           speed={1000}
         >

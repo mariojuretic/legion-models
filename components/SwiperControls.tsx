@@ -12,19 +12,15 @@ export default function SwiperControls({ numOfSlides, currentSlide }: Props) {
 
   return (
     <>
-      {currentSlide > 0 && (
-        <button
-          className="swiper-button-prev"
-          onClick={() => swiper.slidePrev()}
-        />
-      )}
+      <button
+        className="swiper-button-prev"
+        onClick={() => swiper.slidePrev()}
+      />
 
-      {currentSlide < numOfSlides - 1 && (
-        <button
-          className="swiper-button-next"
-          onClick={() => swiper.slideNext()}
-        />
-      )}
+      <button
+        className="swiper-button-next"
+        onClick={() => swiper.slideNext()}
+      />
     </>
   );
 }
