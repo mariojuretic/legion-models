@@ -30,6 +30,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
               alt={model.name}
               fill
               priority
+              sizes="(max-width: 639px) 296px, (max-width: 767px) 360px, (max-width: 1023px) 320px, (max-width: 1279px) 325px, (max-width: 1535px) 304px, 20vw"
               className={`z-20 object-cover object-center ${
                 !model.thumbnail.hover
                   ? "scale-100 transition-transform duration-300 group-hover:scale-105"
@@ -44,6 +45,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
               alt={model.name}
               fill
               priority
+              sizes="(max-width: 639px) 296px, (max-width: 767px) 360px, (max-width: 1023px) 320px, (max-width: 1279px) 325px, (max-width: 1535px) 304px, 20vw"
               className="z-10 object-cover object-center opacity-0 group-hover:opacity-100"
             />
           )}
