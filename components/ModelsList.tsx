@@ -29,6 +29,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
               src={urlFor(model.thumbnail.default).url()}
               alt={model.name}
               fill
+              priority
               className={`z-20 object-cover object-center ${
                 !model.thumbnail.hover
                   ? "scale-100 transition-transform duration-300 group-hover:scale-105"
@@ -42,7 +43,8 @@ function ModelCard({ model }: { model: ModelDoc }) {
               src={urlFor(model.thumbnail.hover).url()}
               alt={model.name}
               fill
-              className="z-10 object-cover object-center"
+              priority
+              className="z-10 object-cover object-center opacity-0 group-hover:opacity-100"
             />
           )}
         </div>
