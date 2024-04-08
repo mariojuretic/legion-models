@@ -70,7 +70,7 @@ function ThumbnailsBox({
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-[77px] left-0 right-0 z-50 hidden h-60 items-center gap-8 overflow-x-scroll bg-white p-8 pb-0 dark:bg-black lg:flex"
+      className="fixed bottom-[77px] left-0 right-0 z-30 hidden h-60 items-center gap-8 overflow-x-scroll bg-white p-8 pb-0 dark:bg-black lg:flex"
     >
       {images &&
         images.map((image) => (

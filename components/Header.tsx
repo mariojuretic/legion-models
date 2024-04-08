@@ -40,7 +40,7 @@ export default function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 flex flex-col bg-white dark:bg-black lg:flex-row lg:bg-transparent dark:lg:bg-transparent">
+    <header className="sticky top-0 z-30 flex flex-col bg-white dark:bg-black lg:flex-row lg:bg-transparent dark:lg:bg-transparent">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="p-4 lg:w-60 lg:p-8">

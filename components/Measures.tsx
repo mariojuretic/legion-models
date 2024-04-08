@@ -9,7 +9,7 @@ function MeasuresBox({ measures }: { measures: MeasureObj[] }) {
   const [units, setUnits] = useState<"eu" | "us">("eu");
 
   return (
-    <div className="brand-text flex flex-col gap-y-2 bg-white p-4 dark:bg-black lg:fixed lg:bottom-[45px] lg:left-0 lg:z-50 lg:p-8">
+    <div className="brand-text flex flex-col gap-y-2 bg-white p-4 dark:bg-black lg:fixed lg:bottom-[45px] lg:left-0 lg:z-30 lg:p-8">
       <div className="flex items-center gap-x-2 leading-[2.6] text-black/50 dark:text-white/50 lg:leading-[1.5]">
         <span
           className={`cursor-pointer ${

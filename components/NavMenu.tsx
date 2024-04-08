@@ -33,7 +33,7 @@ export default function Menu() {
 
   return (
     <nav
-      className={`brand-text fixed bottom-0 left-0 right-0 top-[52px] z-50 ${
+      className={`brand-text fixed bottom-0 left-0 right-0 top-[52px] z-30 ${
         isOpen ? "flex" : "hidden"
       } flex-col bg-white p-4 dark:bg-black lg:sticky lg:bottom-auto lg:left-auto lg:right-auto lg:top-[100px] lg:flex lg:w-60 lg:items-start lg:self-start lg:p-8`}
     >
