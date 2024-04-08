@@ -23,6 +23,7 @@
     "@types/react-dom": "18.2.7",
     "@vercel/speed-insights": "^1.0.1",
     "autoprefixer": "^10.4.19",
+    "cookies-next": "^4.1.1",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "media-chrome": "^2.0.1",

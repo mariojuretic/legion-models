@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { groq } from "next-sanity";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import { groq } from "next-sanity";
+import localFont from "next/font/local";
 
+import Cookies from "@/components/Cookies";
 import { readClient } from "@/lib/sanity.client";
-
 import "./globals.css";
 
 const neueHaasGroteskText = localFont({
@@ -49,6 +49,7 @@ export default async function Layout({
         className={`${neueHaasGroteskText.className} bg-white text-black dark:bg-black dark:text-white`}
       >
         {children}
+        <Cookies />
         <SpeedInsights />
       </body>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
