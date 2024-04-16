@@ -35,6 +35,10 @@ interface DevelopmentPage extends BaseType {
 }
 
 interface ModelDoc extends BaseType {
+  [key: "campaigns" | "covers" | "digitals" | "portfolio" | "shows"]:
+    | ImageType[]
+    | null;
+
   _type: "model";
   campaigns?: ImageType[];
   category: string;
