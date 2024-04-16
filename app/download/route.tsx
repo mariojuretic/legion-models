@@ -2,6 +2,8 @@ import { groq } from "next-sanity";
 import { NextRequest, NextResponse } from "next/server";
 
 import { readClient } from "@/lib/sanity.client";
+import { renderToBuffer } from "@react-pdf/renderer";
+import Download from "@/components/Download";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug][0]
@@ -56,5 +58,12 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  return NextResponse.json({ message: `Generating ${name}-${coll}.pdf` });
+  const buffer = await renderToBuffer(<Download name={name} coll={coll} />);
+
+  return new NextResponse(buffer, {
+    headers: {
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename="${name}-${coll}.pdf"`,
+    },
+  });
 }
