@@ -272,7 +272,7 @@ export default defineType({
           style={{
             objectFit: "cover",
             objectPosition: "center",
-            border: color ? `1px solid ${color.value}` : "none",
+            border: color ? `2px solid ${color.value}` : "2px solid white",
           }}
           sizes="35px"
         />
