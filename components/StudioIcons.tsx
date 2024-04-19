@@ -1,12 +1,14 @@
 import {
-  PhotoIcon,
-  DocumentTextIcon,
-  UserCircleIcon,
   ArchiveBoxIcon,
-  MegaphoneIcon,
   ClipboardDocumentCheckIcon,
-  ShieldCheckIcon,
   Cog6ToothIcon,
+  DocumentTextIcon,
+  FolderIcon,
+  FunnelIcon,
+  MegaphoneIcon,
+  PhotoIcon,
+  ShieldCheckIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export function Photo() {
@@ -19,6 +21,14 @@ export function DocumentText() {
 
 export function UserCircle() {
   return <UserCircleIcon className="h-6 w-6" />;
+}
+
+export function Funnel() {
+  return <FunnelIcon className="h-6 w-6" />;
+}
+
+export function Folder() {
+  return <FolderIcon className="h-6 w-6" />;
 }
 
 export function ArchiveBox() {

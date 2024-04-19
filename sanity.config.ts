@@ -12,6 +12,8 @@ import {
   ClipboardDocumentCheck,
   Cog6Tooth,
   DocumentText,
+  Folder,
+  Funnel,
   Megaphone,
   Photo,
   ShieldCheck,
@@ -86,6 +88,7 @@ export default defineConfig({
             S.listItem()
               .id("models")
               .title("Filtered Models")
+              .icon(Funnel)
               .child(
                 S.list()
                   .id("colors")
@@ -95,10 +98,11 @@ export default defineConfig({
                       S.listItem()
                         .id(color.label.toLowerCase())
                         .title(color.label)
+                        .icon(Folder)
                         .child(() =>
-                          S.documentList()
+                          S.documentTypeList("model")
                             .id("models" + color.label.toLowerCase())
-                            .title("Models")
+                            .title(color.label)
                             .filter(`_type == "model" && color.label == $color`)
                             .params({ color: color.label }),
                         ),
@@ -106,10 +110,11 @@ export default defineConfig({
                     S.listItem()
                       .id("uncategorized")
                       .title("Uncategorized")
+                      .icon(Folder)
                       .child(() =>
-                        S.documentList()
+                        S.documentTypeList("model")
                           .id("models-uncategorized")
-                          .title("Models")
+                          .title("Uncategorized")
                           .filter(`_type == "model" && color == null`),
                       ),
                   ]),
