@@ -4,6 +4,15 @@ import moment from "moment";
 
 import urlFor from "@/lib/urlFor";
 
+export const COLOR_LIST = [
+  { label: "Blue", value: "#2563eb" },
+  { label: "Red", value: "#dc2626" },
+  { label: "Green", value: "#22c55e" },
+  { label: "Yellow", value: "#facc15" },
+  { label: "Orange", value: "#f97316" },
+  { label: "Pink", value: "#f472b6" },
+];
+
 export default defineType({
   name: "model",
   type: "document",
@@ -212,14 +221,7 @@ export default defineType({
       name: "color",
       type: "simplerColor",
       options: {
-        colorList: [
-          { label: "Blue", value: "#2563eb" },
-          { label: "Red", value: "#dc2626" },
-          { label: "Green", value: "#22c55e" },
-          { label: "Yellow", value: "#facc15" },
-          { label: "Orange", value: "#f97316" },
-          { label: "Pink", value: "#f472b6" },
-        ],
+        colorList: COLOR_LIST,
       },
     }),
     defineField({

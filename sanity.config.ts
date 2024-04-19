@@ -1,23 +1,24 @@
 import { theme } from "https://themer.sanity.build/api/hues?default=737373;lightest:ffffff&primary=737373&transparent=737373&positive=22c55e;400&caution=facc15;300&critical=dc2626&darkest=000000";
 
-import { defineConfig } from "sanity";
-import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
-import { simplerColorInput } from "sanity-plugin-simpler-color-input";
+import { defineConfig } from "sanity";
 import { muxInput } from "sanity-plugin-mux-input";
+import { simplerColorInput } from "sanity-plugin-simpler-color-input";
+import { deskTool } from "sanity/desk";
 
-import { schemaTypes } from "./schemas";
 import { createPublishWithShareAction, ShareWithEmailAction } from "./actions";
 import {
-  Photo,
-  DocumentText,
-  UserCircle,
-  Megaphone,
-  ClipboardDocumentCheck,
   ArchiveBox,
-  ShieldCheck,
+  ClipboardDocumentCheck,
   Cog6Tooth,
+  DocumentText,
+  Megaphone,
+  Photo,
+  ShieldCheck,
+  UserCircle,
 } from "./components/StudioIcons";
+import { schemaTypes } from "./schemas";
+import { COLOR_LIST } from "./schemas/model";
 
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 const singletonTypes = new Set([
@@ -82,6 +83,37 @@ export default defineConfig({
               ),
             S.divider(),
             S.documentTypeListItem("model").title("Models").icon(UserCircle),
+            S.listItem()
+              .id("models")
+              .title("Filtered Models")
+              .child(
+                S.list()
+                  .id("colors")
+                  .title("Filtered Models")
+                  .items([
+                    ...COLOR_LIST.map((color) =>
+                      S.listItem()
+                        .id(color.label.toLowerCase())
+                        .title(color.label)
+                        .child(() =>
+                          S.documentList()
+                            .id("models" + color.label.toLowerCase())
+                            .title("Models")
+                            .filter(`_type == "model" && color.label == $color`)
+                            .params({ color: color.label }),
+                        ),
+                    ),
+                    S.listItem()
+                      .id("uncategorized")
+                      .title("Uncategorized")
+                      .child(() =>
+                        S.documentList()
+                          .id("models-uncategorized")
+                          .title("Models")
+                          .filter(`_type == "model" && color == null`),
+                      ),
+                  ]),
+              ),
             S.documentTypeListItem("collection")
               .title("Packages")
               .icon(ArchiveBox),
