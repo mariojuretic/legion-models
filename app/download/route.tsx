@@ -60,10 +60,5 @@ export async function GET(request: NextRequest) {
 
   const buffer = await renderToBuffer(<Download name={name} coll={coll} />);
 
-  return new NextResponse(buffer, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${name}-${coll}.pdf"`,
-    },
-  });
+  return new NextResponse(buffer);
 }
