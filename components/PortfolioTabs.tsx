@@ -130,16 +130,12 @@ const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
         </span>
       )}
 
-      {downloadHref && downloadFilename && (
-        <a
-          href={`${downloadHref}?dl=${downloadFilename}.pdf`}
-          download
-          target="_blank"
-          className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
-        >
-          Download
-        </a>
-      )}
+      <a
+        href={`/download?name=${model.slug.current}&coll=portfolio`}
+        className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
+      >
+        Download
+      </a>
 
       {/* Disabled to avoid errors with Swiper */}
       {/* {hasThumbnails && (
