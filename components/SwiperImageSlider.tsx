@@ -6,6 +6,7 @@ import "swiper/css/keyboard";
 import { Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { useTabsStore } from "@/store/TabsStore";
 import SwiperControls from "./SwiperControls";
 import SwiperImage from "./SwiperImage";
 
@@ -22,6 +23,8 @@ export default function SwiperImageSlider({
 }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const hideMeasures = useTabsStore((state) => state.hideMeasures);
+
   return (
     <section className="relative h-full w-full">
       <div className={`h-full w-full ${addVerticalPadding ? "p-8" : "px-8"}`}>
@@ -30,7 +33,10 @@ export default function SwiperImageSlider({
           className="h-full w-full"
           keyboard={{ enabled: true }}
           modules={[Keyboard]}
-          onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
+          onSlideChange={(swiper) => {
+            hideMeasures();
+            setCurrentSlide(swiper.activeIndex);
+          }}
           rewind
           spaceBetween={64}
           speed={1000}
