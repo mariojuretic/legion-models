@@ -52,7 +52,10 @@ export default async function Layout({
         <Cookies />
         <SpeedInsights />
       </body>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+
+      {process.env.NODE_ENV === "production" && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+      )}
     </html>
   );
 }
