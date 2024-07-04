@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { groq } from "next-sanity";
+import Link from "next/link";
 
 import ModelsList from "@/components/ModelsList";
 import { readClient } from "@/lib/sanity.client";
@@ -29,11 +29,9 @@ export default async function Page() {
 
   return (
     <main className="flex flex-1 items-center justify-center p-4 lg:p-8 lg:pl-0">
-      <div className="brand-text max-w-[100ch] whitespace-pre-line text-center">
+      <div className="brand-text flex max-w-[100ch] flex-col items-center gap-2 whitespace-pre-line text-center">
+        <p>{development.message}</p>
         <p>
-          {development.message}
-          <br />
-          <br />
           <Link href={`mailto:${process.env.SENDGRID_RECIPIENT}`}>
             {process.env.SENDGRID_RECIPIENT}
           </Link>
