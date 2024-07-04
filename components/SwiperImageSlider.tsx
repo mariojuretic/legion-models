@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import "swiper/css";
+import "swiper/css/free-mode";
 import "swiper/css/keyboard";
 import "swiper/css/thumbs";
-import { Keyboard, Thumbs } from "swiper/modules";
+import { FreeMode, Keyboard, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 
@@ -93,7 +94,8 @@ export default function SwiperImageSlider({
       >
         <Swiper
           className="h-full w-full"
-          modules={[Thumbs]}
+          freeMode
+          modules={[Thumbs, FreeMode]}
           onSwiper={setThumbsSwiper}
           slidesPerView="auto"
           spaceBetween={32}
