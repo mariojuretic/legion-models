@@ -69,9 +69,6 @@ const Layout = async ({
         <Measures measures={model.measures} />
       )}
 
-      {/* Disabled to avoid errors with Swiper */}
-      {/* <Thumbnails modelName={model.name} /> */}
-
       <PortfolioTabs model={model} />
     </div>
   );

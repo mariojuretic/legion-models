@@ -141,8 +141,7 @@ const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
         </a>
       )}
 
-      {/* Disabled to avoid errors with Swiper */}
-      {/* {hasThumbnails && (
+      {hasThumbnails && (
         <span
           className="hidden cursor-pointer text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:block"
           onClick={
@@ -151,7 +150,7 @@ const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
         >
           Thumbnails
         </span>
-      )} */}
+      )}
     </div>
   );
 };
