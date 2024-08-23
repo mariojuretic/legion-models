@@ -13,7 +13,7 @@ export const useMenuStore = create<MenuState>((set) => ({
     set({ isOpen: true });
   },
   closeMenu: () => {
-    document.body.classList.add("overflow-hidden");
+    document.body.classList.remove("overflow-hidden");
     set({ isOpen: false });
   },
 }));
