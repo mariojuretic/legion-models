@@ -29,6 +29,14 @@ export default defineType({
       type: "text",
     }),
     defineField({
+      name: "model",
+      type: "reference",
+      to: [{ type: "model" }],
+      options: {
+        disableNew: true,
+      },
+    }),
+    defineField({
       name: "thumbnail",
       type: "object",
       fields: [

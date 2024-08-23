@@ -80,6 +80,7 @@ interface NewsDoc extends BaseType {
   details?: string;
   excerpt?: string;
   images?: ImageType[];
+  model?: ModelDoc;
   slug: SlugType;
   thumbnail?: {
     default?: ImageType;

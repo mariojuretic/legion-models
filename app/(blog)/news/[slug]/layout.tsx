@@ -6,7 +6,15 @@ import { groq } from "next-sanity";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "news" && slug.current == $slug][0]
+  *[_type == "news" && slug.current == $slug][0] {
+    ...,
+    model-> {
+      name,
+      slug {
+        current
+      }
+    }
+  }
 `;
 
 export const dynamic = "force-dynamic";
@@ -26,7 +34,7 @@ const Layout = async ({
 
   return (
     <div className="relative flex min-h-svh flex-col lg:block lg:h-screen lg:min-h-0 lg:w-screen lg:pl-60">
-      <div className="brand-text flex flex-col lg:fixed lg:bottom-0 lg:left-0 lg:top-0 lg:w-60 lg:justify-between">
+      <div className="brand-text z-20 flex flex-col lg:fixed lg:bottom-0 lg:left-0 lg:top-0 lg:w-60 lg:justify-between">
         <Link href="/news" className="self-end p-4 lg:hidden">
           <XMarkIcon className="h-5 w-5" />
         </Link>
@@ -37,7 +45,23 @@ const Layout = async ({
 
         {post.details && (
           <div className="whitespace-pre-line p-4 lg:p-8">
-            <p className="text-center lg:text-left">{post.details}</p>
+            <p className="text-center lg:text-left">
+              {post.model && (
+                <>
+                  <span>Model</span>
+                  <br />
+                  <span>
+                    <a href={`/models/${post.model.slug.current}`}>
+                      {post.model.name}
+                    </a>
+                  </span>
+                  <br />
+                  <br />
+                </>
+              )}
+
+              <span>{post.details}</span>
+            </p>
           </div>
         )}
       </div>
