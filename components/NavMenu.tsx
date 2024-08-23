@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useMenuStore } from "@/store/MenuStore";
 import { useSearchStore } from "@/store/SearchStore";
 import { useEffect, useState } from "react";
+import Footer from "./Footer";
 
 const SEARCHABLE_PAGES = ["main-board", "development"];
 
@@ -79,6 +80,10 @@ export default function Menu() {
       >
         Contact
       </Link>
+
+      <div className="mt-auto lg:hidden">
+        <Footer removePadding />
+      </div>
 
       {searchable && (
         <button

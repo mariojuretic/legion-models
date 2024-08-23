@@ -1,8 +1,10 @@
 import Link from "next/link";
 
-export default function Footer() {
+export default function Footer({ removePadding }: { removePadding?: boolean }) {
   return (
-    <footer className="brand-text flex flex-wrap items-center gap-x-4 p-4 lg:ml-60 lg:flex-row-reverse lg:justify-between lg:p-8">
+    <footer
+      className={`brand-text flex flex-wrap items-center gap-x-4 ${removePadding ? "p-0" : "p-4"} lg:ml-60 lg:flex-row-reverse lg:justify-between ${removePadding ? "lg:p-0" : "lg:p-8"}`}
+    >
       <div className="flex flex-wrap items-center gap-x-4">
         <a
           href="https://instagram.com/legionmodels"
