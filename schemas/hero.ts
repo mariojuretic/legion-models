@@ -33,6 +33,12 @@ export default defineType({
             return true;
           }
         }),
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+        }),
+      ],
     }),
     defineField({
       name: "video",

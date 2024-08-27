@@ -140,6 +140,7 @@ interface SlugType {
 
 interface ImageType {
   _type: "image";
+  alt?: string;
   asset: ReferenceType;
   dimensions?: ImageDimensionsType;
   sliderPage?: number;

@@ -40,7 +40,7 @@ const Page = async () => {
         {randomHero && randomHero.media === "image" && randomHero.image && (
           <Image
             src={urlFor(randomHero.image).url()}
-            alt="LEGION MODEL MANAGEMENT"
+            alt={randomHero.image.alt || ""}
             className="object-cover object-center"
             fill
             priority
