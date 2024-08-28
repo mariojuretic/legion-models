@@ -1,6 +1,11 @@
+"use client";
+
+import { useMenuStore } from "@/store/MenuStore";
 import Link from "next/link";
 
 export default function Footer({ removePadding }: { removePadding?: boolean }) {
+  const closeMenu = useMenuStore((state) => state.closeMenu);
+
   return (
     <footer
       className={`brand-text flex flex-wrap items-center gap-x-4 ${removePadding ? "p-0" : "p-4"} lg:ml-60 lg:flex-row-reverse lg:justify-between ${removePadding ? "lg:p-0" : "lg:p-8"}`}
@@ -16,6 +21,7 @@ export default function Footer({ removePadding }: { removePadding?: boolean }) {
         <Link
           href="/newsletter"
           className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+          onClick={closeMenu}
         >
           Newsletter
         </Link>
@@ -27,6 +33,7 @@ export default function Footer({ removePadding }: { removePadding?: boolean }) {
             <Link
               href="/privacy-policy"
               className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+              onClick={closeMenu}
             >
               Privacy Policy
             </Link>
@@ -35,6 +42,7 @@ export default function Footer({ removePadding }: { removePadding?: boolean }) {
             <Link
               href="/cookie-policy"
               className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+              onClick={closeMenu}
             >
               Cookie Policy
             </Link>
@@ -43,6 +51,7 @@ export default function Footer({ removePadding }: { removePadding?: boolean }) {
             <Link
               href="/terms-of-use"
               className="leading-[2.6] hover:font-bold lg:leading-[1.3]"
+              onClick={closeMenu}
             >
               Terms of Use
             </Link>
