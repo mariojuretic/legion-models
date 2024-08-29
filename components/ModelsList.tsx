@@ -27,7 +27,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
           {model.thumbnail?.default && (
             <Image
               src={urlFor(model.thumbnail.default).url()}
-              alt={model.name}
+              alt={model.thumbnail.default.alt || model.name}
               fill
               priority
               sizes="(max-width: 639px) 296px, (max-width: 767px) 360px, (max-width: 1023px) 320px, (max-width: 1279px) 325px, (max-width: 1535px) 304px, 20vw"
@@ -42,7 +42,7 @@ function ModelCard({ model }: { model: ModelDoc }) {
           {model.thumbnail?.default && model.thumbnail.hover && (
             <Image
               src={urlFor(model.thumbnail.hover).url()}
-              alt={model.name}
+              alt={model.thumbnail.hover.alt || model.name}
               fill
               priority
               sizes="(max-width: 639px) 296px, (max-width: 767px) 360px, (max-width: 1023px) 320px, (max-width: 1279px) 325px, (max-width: 1535px) 304px, 20vw"
