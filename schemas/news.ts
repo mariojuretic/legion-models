@@ -43,10 +43,22 @@ export default defineType({
         defineField({
           name: "default",
           type: "image",
+          fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+            }),
+          ],
         }),
         defineField({
           name: "hover",
           type: "image",
+          fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+            }),
+          ],
         }),
       ],
       options: {
@@ -75,6 +87,10 @@ export default defineType({
         defineArrayMember({
           type: "image",
           fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+            }),
             defineField({
               name: "source",
               type: "string",

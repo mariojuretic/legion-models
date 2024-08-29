@@ -14,7 +14,7 @@ function NewsCard({ newsData }: { newsData: NewsDoc }) {
           {newsData.thumbnail?.default && (
             <Image
               src={urlFor(newsData.thumbnail.default).url()}
-              alt={newsData.title}
+              alt={newsData.thumbnail.default.alt || newsData.title}
               fill
               className={`z-20 object-cover object-center ${
                 !newsData.thumbnail.hover
@@ -27,7 +27,7 @@ function NewsCard({ newsData }: { newsData: NewsDoc }) {
           {newsData.thumbnail?.default && newsData.thumbnail.hover && (
             <Image
               src={urlFor(newsData.thumbnail.hover).url()}
-              alt={newsData.title}
+              alt={newsData.thumbnail.hover.alt || newsData.title}
               fill
               className="z-10 object-cover object-center"
             />
