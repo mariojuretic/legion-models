@@ -17,6 +17,7 @@ interface AboutPage extends BaseType {
   _id: "about";
   _type: "about";
   description: string;
+  seo?: SeoObj;
 }
 
 interface ContactPage extends BaseType {

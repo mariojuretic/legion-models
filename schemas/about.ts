@@ -9,5 +9,9 @@ export default defineType({
       type: "text",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "seo",
+      type: "seo",
+    }),
   ],
 });

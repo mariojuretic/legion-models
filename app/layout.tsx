@@ -28,11 +28,7 @@ const query = groq`
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const q = groq`
-    *[_type == "settings"][0] {
-      landingPageSeo
-    }
-  `;
+  const q = groq`*[_type == "settings"][0]{ landingPageSeo }`;
 
   const { landingPageSeo }: SiteSettings = await readClient.fetch(q);
 
