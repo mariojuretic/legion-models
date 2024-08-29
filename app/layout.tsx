@@ -27,14 +27,25 @@ const query = groq`
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "LEGION MODEL MANAGEMENT",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    userScalable: false,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const q = groq`
+    *[_type == "settings"][0] {
+      landingPageSeo
+    }
+  `;
+
+  const { landingPageSeo }: SiteSettings = await readClient.fetch(q);
+
+  return {
+    title: landingPageSeo?.title,
+    description: landingPageSeo?.description,
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+      userScalable: false,
+    },
+  };
+}
 
 export default async function Layout({
   children,

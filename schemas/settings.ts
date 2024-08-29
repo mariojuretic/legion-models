@@ -47,5 +47,9 @@ export default defineType({
       type: "number",
       validation: (Rule) => Rule.required().integer().positive(),
     }),
+    defineField({
+      name: "landingPageSeo",
+      type: "seo",
+    }),
   ],
 });

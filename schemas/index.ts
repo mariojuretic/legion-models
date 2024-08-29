@@ -1,3 +1,4 @@
+import seo from "./seo";
 import hero from "./hero";
 import about from "./about";
 import contact from "./contact";
@@ -12,6 +13,7 @@ import termsOfUse from "./termsOfUse";
 import settings from "./settings";
 
 export const schemaTypes = [
+  seo,
   hero,
   about,
   contact,

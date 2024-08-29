@@ -130,6 +130,7 @@ interface SiteSettings extends BaseType {
   _type: "settings";
   landingPageContentType: "random" | "image" | "video";
   landingPageRedirectMilliseconds: number;
+  landingPageSeo?: SeoObj;
   theme: "dark" | "light";
 }
 
@@ -182,4 +183,10 @@ interface MeasureObj {
   label?: string;
   value_eu?: string;
   value_us?: string;
+}
+
+interface SeoObj {
+  _type: "seo";
+  title?: string;
+  description?: string;
 }
