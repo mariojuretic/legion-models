@@ -1,5 +1,6 @@
-import Link from "next/link";
+import type { Metadata, ResolvingMetadata } from "next";
 import { groq } from "next-sanity";
+import Link from "next/link";
 
 import { readClient } from "@/lib/sanity.client";
 
@@ -8,6 +9,20 @@ const query = groq`
 `;
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(
+  props: {},
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const q = groq`*[_type == "contact"][0]{ seo }`;
+
+  const { seo }: ContactPage = await readClient.fetch(q);
+
+  const title = seo?.title || (await parent).title;
+  const description = seo?.description || (await parent).description;
+
+  return { title, description };
+}
 
 export default async function Page() {
   const contact: ContactPage = await readClient.fetch(query);

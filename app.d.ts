@@ -26,6 +26,7 @@ interface ContactPage extends BaseType {
   address: string;
   emails?: string[];
   phones?: string[];
+  seo?: SeoObj;
   socials?: SocialObj[];
 }
 
