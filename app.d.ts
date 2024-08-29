@@ -34,6 +34,7 @@ interface DevelopmentPage extends BaseType {
   _id: "development";
   _type: "development";
   message: string;
+  seo?: SeoObj;
 }
 
 interface ModelDoc extends BaseType {
