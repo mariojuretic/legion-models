@@ -1,5 +1,6 @@
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { groq } from "next-sanity";
+import { notFound } from "next/navigation";
 
 import ModelsList from "@/components/ModelsList";
 import { readClient } from "@/lib/sanity.client";
@@ -12,6 +13,12 @@ const query = groq`
 `;
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+  },
+};
 
 export default async function Page({
   params: { slug },
