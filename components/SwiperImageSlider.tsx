@@ -89,8 +89,7 @@ export default function SwiperImageSlider({
       </div>
 
       <div
-        className="absolute z-10 hidden h-80 w-full bg-white p-8 dark:bg-black lg:block"
-        style={{ bottom: thumbnailsActive ? 0 : -397 }}
+        className={`absolute bottom-0 z-10 hidden h-80 w-full bg-white p-8 dark:bg-black ${thumbnailsActive ? "lg:block" : "lg:hidden"}`}
       >
         <Swiper
           className="h-full w-full"
