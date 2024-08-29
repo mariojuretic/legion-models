@@ -73,7 +73,7 @@ const ImageStack = ({
             <div key={image.asset._ref}>
               <Image
                 src={urlFor(image).url()}
-                alt={name}
+                alt={image.alt || name}
                 width={image.dimensions?.width}
                 height={image.dimensions?.height}
                 priority

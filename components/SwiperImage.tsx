@@ -60,7 +60,7 @@ export default function SwiperImage({
       <img
         ref={imgRef}
         src={urlFor(image).url()}
-        alt={altText}
+        alt={image.alt || altText}
         className="max-h-full max-w-full"
       />
 

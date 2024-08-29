@@ -89,6 +89,10 @@ export default defineType({
           type: "image",
           fields: [
             defineField({
+              name: "alt",
+              type: "string",
+            }),
+            defineField({
               name: "source",
               type: "string",
             }),
@@ -104,6 +108,10 @@ export default defineType({
         defineArrayMember({
           type: "image",
           fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+            }),
             defineField({
               name: "source",
               type: "string",
@@ -129,6 +137,10 @@ export default defineType({
           type: "image",
           fields: [
             defineField({
+              name: "alt",
+              type: "string",
+            }),
+            defineField({
               name: "source",
               type: "string",
             }),
@@ -144,6 +156,10 @@ export default defineType({
           type: "image",
           fields: [
             defineField({
+              name: "alt",
+              type: "string",
+            }),
+            defineField({
               name: "source",
               type: "string",
             }),
@@ -158,6 +174,10 @@ export default defineType({
         defineArrayMember({
           type: "image",
           fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+            }),
             defineField({
               name: "source",
               type: "string",
