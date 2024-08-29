@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { groq } from "next-sanity";
 
 import { readClient } from "@/lib/sanity.client";
@@ -7,6 +8,12 @@ const query = groq`
 `;
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+  },
+};
 
 export default async function Page() {
   const privacyPolicy: PrivacyPolicyPage = await readClient.fetch(query);
