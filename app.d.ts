@@ -70,6 +70,7 @@ interface ModelDoc extends BaseType {
     hover?: ImageType;
   };
   videos?: VideoType[];
+  videosSeo?: SeoObj;
 }
 
 interface CollectionDoc extends BaseType {

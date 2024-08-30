@@ -138,6 +138,10 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "videosSeo",
+      type: "seo",
+    }),
+    defineField({
       name: "shows",
       type: "array",
       of: [
