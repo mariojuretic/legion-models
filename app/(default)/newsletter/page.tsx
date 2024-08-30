@@ -1,4 +1,22 @@
+import type { Metadata, ResolvingMetadata } from "next";
+import { groq } from "next-sanity";
+
 import NewsletterForm from "@/components/NewsletterForm";
+import { readClient } from "@/lib/sanity.client";
+
+export async function generateMetadata(
+  props: {},
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const q = groq`*[_type == "settings"][0]{ newsletterSeo }`;
+
+  const { newsletterSeo }: SiteSettings = await readClient.fetch(q);
+
+  const title = newsletterSeo?.title || (await parent).title;
+  const description = newsletterSeo?.description || (await parent).description;
+
+  return { title, description };
+}
 
 export default function Page() {
   return (

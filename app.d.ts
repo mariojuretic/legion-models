@@ -137,6 +137,7 @@ interface SiteSettings extends BaseType {
   landingPageSeo?: SeoObj;
   mainBoardSeo?: SeoObj;
   newsSeo?: SeoObj;
+  newsletterSeo?: SeoObj;
   theme: "dark" | "light";
 }
 

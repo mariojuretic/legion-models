@@ -64,5 +64,9 @@ export default defineType({
       name: "newsSeo",
       type: "seo",
     }),
+    defineField({
+      name: "newsletterSeo",
+      type: "seo",
+    }),
   ],
 });
