@@ -131,6 +131,7 @@ interface TermsOfUsePage extends BaseType {
 interface SiteSettings extends BaseType {
   _id: "settings";
   _type: "settings";
+  getScoutedSeo?: SeoObj;
   landingPageContentType: "random" | "image" | "video";
   landingPageRedirectMilliseconds: number;
   landingPageSeo?: SeoObj;

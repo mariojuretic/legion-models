@@ -1,4 +1,22 @@
+import type { Metadata, ResolvingMetadata } from "next";
+import { groq } from "next-sanity";
+
 import GetScoutedForm from "@/components/GetScoutedForm";
+import { readClient } from "@/lib/sanity.client";
+
+export async function generateMetadata(
+  props: {},
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const q = groq`*[_type == "settings"][0]{ getScoutedSeo }`;
+
+  const { getScoutedSeo }: SiteSettings = await readClient.fetch(q);
+
+  const title = getScoutedSeo?.title || (await parent).title;
+  const description = getScoutedSeo?.description || (await parent).description;
+
+  return { title, description };
+}
 
 export default function Page() {
   return (

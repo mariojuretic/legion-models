@@ -56,5 +56,9 @@ export default defineType({
       name: "mainBoardSeo",
       type: "seo",
     }),
+    defineField({
+      name: "getScoutedSeo",
+      type: "seo",
+    }),
   ],
 });
