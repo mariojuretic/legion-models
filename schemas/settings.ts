@@ -49,6 +49,11 @@ export default defineType({
     }),
     defineField({
       name: "landingPageSeo",
+      description: "Default values, used as fallback values for all pages.",
+      type: "seo",
+    }),
+    defineField({
+      name: "mainBoardSeo",
       type: "seo",
     }),
   ],

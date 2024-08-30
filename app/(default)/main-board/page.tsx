@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import { groq } from "next-sanity";
 
 import ModelsList from "@/components/ModelsList";
@@ -8,6 +9,20 @@ const query = groq`
 `;
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(
+  props: {},
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const q = groq`*[_type == "settings"][0]{ mainBoardSeo }`;
+
+  const { mainBoardSeo }: SiteSettings = await readClient.fetch(q);
+
+  const title = mainBoardSeo?.title || (await parent).title;
+  const description = mainBoardSeo?.description || (await parent).description;
+
+  return { title, description };
+}
 
 export default async function Page() {
   const models: ModelDoc[] = await readClient.fetch(query);

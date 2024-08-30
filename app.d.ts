@@ -134,6 +134,7 @@ interface SiteSettings extends BaseType {
   landingPageContentType: "random" | "image" | "video";
   landingPageRedirectMilliseconds: number;
   landingPageSeo?: SeoObj;
+  mainBoardSeo?: SeoObj;
   theme: "dark" | "light";
 }
 
