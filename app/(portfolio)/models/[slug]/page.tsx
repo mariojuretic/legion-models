@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import { groq } from "next-sanity";
 
 import ImageStack from "@/components/ImageStack";
@@ -16,6 +17,20 @@ const query = groq`
 `;
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(
+  { params: { slug } }: { params: { slug: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const q = groq`*[_type == "model" && slug.current == $slug][0]{ portfolioSeo }`;
+
+  const { portfolioSeo }: ModelDoc = await readClient.fetch(q, { slug });
+
+  const title = portfolioSeo?.title || (await parent).title;
+  const description = portfolioSeo?.description || (await parent).description;
+
+  return { title, description };
+}
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
   const model: ModelDoc = await readClient.fetch(query, { slug });

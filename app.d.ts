@@ -61,6 +61,7 @@ interface ModelDoc extends BaseType {
   name: string;
   notes?: string;
   portfolio: ImageType[];
+  portfolioSeo?: SeoObj;
   shows: ImageType[];
   slug: SlugType;
   thumbnail?: {
