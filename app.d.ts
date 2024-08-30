@@ -60,6 +60,7 @@ interface ModelDoc extends BaseType {
   hidden: boolean;
   instagram?: string;
   interview?: string;
+  interviewSeo?: SeoObj;
   measures?: MeasureObj[];
   name: string;
   notes?: string;
