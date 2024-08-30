@@ -136,6 +136,7 @@ interface SiteSettings extends BaseType {
   landingPageRedirectMilliseconds: number;
   landingPageSeo?: SeoObj;
   mainBoardSeo?: SeoObj;
+  newsSeo?: SeoObj;
   theme: "dark" | "light";
 }
 
