@@ -184,6 +184,10 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "coversSeo",
+      type: "seo",
+    }),
+    defineField({
       name: "campaigns",
       type: "array",
       of: [

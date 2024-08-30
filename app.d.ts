@@ -48,6 +48,7 @@ interface ModelDoc extends BaseType {
   contract: boolean;
   contractExpirationDate?: string;
   covers?: ImageType[];
+  coversSeo?: SeoObj;
   dateOfBirth?: string;
   digitals?: ImageType[];
   digitalsSeo?: SeoObj;
