@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
 
@@ -17,6 +18,20 @@ const query = groq`
 `;
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(
+  { params: { slug } }: { params: { slug: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const q = groq`*[_type == "model" && slug.current == $slug][0]{ showsSeo }`;
+
+  const { showsSeo }: ModelDoc = await readClient.fetch(q, { slug });
+
+  const title = showsSeo?.title || (await parent).title;
+  const description = showsSeo?.description || (await parent).description;
+
+  return { title, description };
+}
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
   const model: ModelDoc = await readClient.fetch(query, { slug });

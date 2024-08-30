@@ -161,6 +161,10 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "showsSeo",
+      type: "seo",
+    }),
+    defineField({
       name: "covers",
       type: "array",
       of: [
