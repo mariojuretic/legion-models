@@ -50,6 +50,7 @@ interface ModelDoc extends BaseType {
   covers?: ImageType[];
   dateOfBirth?: string;
   digitals?: ImageType[];
+  digitalsSeo?: SeoObj;
   downloads?: {
     digitals?: FileType;
     portfolio?: FileType;
