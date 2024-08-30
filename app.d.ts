@@ -40,6 +40,7 @@ interface DevelopmentPage extends BaseType {
 interface ModelDoc extends BaseType {
   _type: "model";
   campaigns?: ImageType[];
+  campaignsSeo?: SeoObj;
   category: string;
   color?: {
     label: string;

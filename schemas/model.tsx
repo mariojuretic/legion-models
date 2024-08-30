@@ -207,6 +207,10 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "campaignsSeo",
+      type: "seo",
+    }),
+    defineField({
       name: "interview",
       type: "text",
     }),
