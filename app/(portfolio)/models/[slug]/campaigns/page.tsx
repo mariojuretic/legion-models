@@ -30,11 +30,13 @@ export async function generateMetadata(
   const title = campaignsSeo?.title || (await parent).title || undefined;
   const description =
     campaignsSeo?.description || (await parent).description || undefined;
+  const openGraph = (await parent).openGraph || {};
 
   return {
     title,
     description,
     openGraph: {
+      ...openGraph,
       title,
       description,
     },

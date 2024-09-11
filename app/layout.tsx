@@ -1,6 +1,6 @@
 import { GoogleTagManager } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { groq } from "next-sanity";
 import localFont from "next/font/local";
 
@@ -27,15 +27,21 @@ const query = groq`
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(
+  { params: { slug } }: { params: { slug: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const q = groq`*[_type == "settings"][0]{ landingPageSeo }`;
 
   const { landingPageSeo }: SiteSettings = await readClient.fetch(q);
+
+  const openGraph = (await parent).openGraph || {};
 
   return {
     title: landingPageSeo?.title,
     description: landingPageSeo?.description,
     openGraph: {
+      ...openGraph,
       title: landingPageSeo?.title,
       description: landingPageSeo?.description,
     },

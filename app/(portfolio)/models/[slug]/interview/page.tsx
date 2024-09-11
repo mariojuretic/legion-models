@@ -21,11 +21,13 @@ export async function generateMetadata(
   const title = interviewSeo?.title || (await parent).title || undefined;
   const description =
     interviewSeo?.description || (await parent).description || undefined;
+  const openGraph = (await parent).openGraph || {};
 
   return {
     title,
     description,
     openGraph: {
+      ...openGraph,
       title,
       description,
     },

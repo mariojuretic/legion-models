@@ -21,11 +21,13 @@ export async function generateMetadata(
   const title = seo?.title || (await parent).title || undefined;
   const description =
     seo?.description || (await parent).description || undefined;
+  const openGraph = (await parent).openGraph || {};
 
   return {
     title,
     description,
     openGraph: {
+      ...openGraph,
       title,
       description,
     },
