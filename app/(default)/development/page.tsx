@@ -19,10 +19,18 @@ export async function generateMetadata(
 
   const { seo }: DevelopmentPage = await readClient.fetch(q);
 
-  const title = seo?.title || (await parent).title;
-  const description = seo?.description || (await parent).description;
+  const title = seo?.title || (await parent).title || undefined;
+  const description =
+    seo?.description || (await parent).description || undefined;
 
-  return { title, description };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
 }
 
 export default async function Page() {

@@ -12,10 +12,18 @@ export async function generateMetadata(
 
   const { getScoutedSeo }: SiteSettings = await readClient.fetch(q);
 
-  const title = getScoutedSeo?.title || (await parent).title;
-  const description = getScoutedSeo?.description || (await parent).description;
+  const title = getScoutedSeo?.title || (await parent).title || undefined;
+  const description =
+    getScoutedSeo?.description || (await parent).description || undefined;
 
-  return { title, description };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
 }
 
 export default function Page() {

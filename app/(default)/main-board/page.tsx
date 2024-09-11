@@ -18,10 +18,18 @@ export async function generateMetadata(
 
   const { mainBoardSeo }: SiteSettings = await readClient.fetch(q);
 
-  const title = mainBoardSeo?.title || (await parent).title;
-  const description = mainBoardSeo?.description || (await parent).description;
+  const title = mainBoardSeo?.title || (await parent).title || undefined;
+  const description =
+    mainBoardSeo?.description || (await parent).description || undefined;
 
-  return { title, description };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
 }
 
 export default async function Page() {

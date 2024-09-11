@@ -34,10 +34,18 @@ export async function generateMetadata(
 
   const { seo }: NewsDoc = await readClient.fetch(q, { slug });
 
-  const title = seo?.title || (await parent).title;
-  const description = seo?.description || (await parent).description;
+  const title = seo?.title || (await parent).title || undefined;
+  const description =
+    seo?.description || (await parent).description || undefined;
 
-  return { title, description };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
 }
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {

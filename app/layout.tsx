@@ -35,6 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: landingPageSeo?.title,
     description: landingPageSeo?.description,
+    openGraph: {
+      title: landingPageSeo?.title,
+      description: landingPageSeo?.description,
+    },
     viewport: {
       width: "device-width",
       initialScale: 1,
