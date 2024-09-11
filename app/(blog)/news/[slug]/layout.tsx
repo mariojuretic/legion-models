@@ -1,14 +1,14 @@
-import Link from "next/link";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
   *[_type == "news" && slug.current == $slug][0] {
     ...,
-    model-> {
+    model[]-> {
       name,
       slug {
         current
@@ -46,16 +46,20 @@ const Layout = async ({
         {post.details && (
           <div className="whitespace-pre-line p-4 lg:p-8">
             <p className="text-center lg:text-left">
-              {post.model && (
+              {post.model && post.model.length > 0 && (
                 <>
                   <span>Model</span>
                   <br />
-                  <span>
-                    <a href={`/models/${post.model.slug.current}`}>
-                      {post.model.name}
-                    </a>
-                  </span>
-                  <br />
+                  {post.model.map((model) => (
+                    <>
+                      <span key={model._id}>
+                        <a href={`/models/${model.slug.current}`}>
+                          {model.name}
+                        </a>
+                      </span>
+                      <br />
+                    </>
+                  ))}
                   <br />
                 </>
               )}

@@ -30,11 +30,16 @@ export default defineType({
     }),
     defineField({
       name: "model",
-      type: "reference",
-      to: [{ type: "model" }],
-      options: {
-        disableNew: true,
-      },
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "model" }],
+          options: {
+            disableNew: true,
+          },
+        }),
+      ],
     }),
     defineField({
       name: "thumbnail",

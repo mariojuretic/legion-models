@@ -90,7 +90,7 @@ interface NewsDoc extends BaseType {
   details?: string;
   excerpt?: string;
   images?: ImageType[];
-  model?: ModelDoc;
+  model?: ModelDoc[];
   seo?: SeoObj;
   slug: SlugType;
   thumbnail?: {
