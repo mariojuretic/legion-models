@@ -5,6 +5,7 @@ import ImageStack from "@/components/ImageStack";
 import SwiperImageSlider from "@/components/SwiperImageSlider";
 import generateSlides from "@/lib/generateSlides";
 import { readClient } from "@/lib/sanity.client";
+import urlFor from "@/lib/urlFor";
 
 const query = groq`
   *[_type == "model" && slug.current == $slug][0] {
@@ -22,20 +23,35 @@ export async function generateMetadata(
   { params: { slug } }: { params: { slug: string } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const q = groq`*[_type == "model" && slug.current == $slug][0]{ portfolioSeo }`;
+  const q = groq`
+    *[_type == "model" && slug.current == $slug][0]{
+      portfolioSeo,
+      portfolio[] {
+        ...,
+        "dimensions": asset->metadata.dimensions
+      }
+    }
+  `;
 
-  const { portfolioSeo }: ModelDoc = await readClient.fetch(q, { slug });
+  const { portfolioSeo, portfolio }: ModelDoc = await readClient.fetch(q, {
+    slug,
+  });
 
   const title = portfolioSeo?.title || (await parent).title || undefined;
   const description =
     portfolioSeo?.description || (await parent).description || undefined;
-  const openGraph = (await parent).openGraph || {};
 
   return {
     title,
     description,
     openGraph: {
-      ...openGraph,
+      images: [
+        {
+          url: urlFor(portfolio[0]).url(),
+          width: portfolio[0].dimensions?.width,
+          height: portfolio[0].dimensions?.height,
+        },
+      ],
       title,
       description,
     },
