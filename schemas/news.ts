@@ -12,12 +12,20 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "date",
+      type: "datetime",
+      options: {
+        dateFormat: "MMMM D, YYYY",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       options: {
         source: (doc: SanityDocument) => {
           const title = doc.title as string;
-          const date = moment(doc._createdAt).format("YYYY-MM-DD");
+          const date = moment(doc.date).format("YYYY-MM-DD");
 
           return `${title}-${date}`;
         },
@@ -135,5 +143,12 @@ export default defineType({
       name: "seo",
       type: "seo",
     }),
+  ],
+  orderings: [
+    {
+      title: "Date",
+      name: "date",
+      by: [{ field: "date", direction: "desc" }],
+    },
   ],
 });

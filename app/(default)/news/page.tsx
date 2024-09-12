@@ -5,7 +5,7 @@ import NewsFeed from "@/components/NewsFeed";
 import { readClient } from "@/lib/sanity.client";
 
 const query = groq`
-  *[_type == "news"] | order(_createdAt desc)
+  *[_type == "news"] | order(date desc)
 `;
 
 export const dynamic = "force-dynamic";

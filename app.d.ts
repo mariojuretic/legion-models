@@ -87,6 +87,7 @@ interface CollectionDoc extends BaseType {
 
 interface NewsDoc extends BaseType {
   _type: "news";
+  date: string;
   details?: string;
   excerpt?: string;
   images?: ImageType[];
