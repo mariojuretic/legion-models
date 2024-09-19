@@ -12,7 +12,8 @@ const query = groq`
       name,
       slug {
         current
-      }
+      },
+      category
     }
   }
 `;
@@ -50,16 +51,21 @@ const Layout = async ({
                 <>
                   <span>Model</span>
                   <br />
-                  {post.model.map((model) => (
-                    <>
-                      <span key={model._id}>
-                        <a href={`/models/${model.slug.current}`}>
-                          {model.name}
-                        </a>
-                      </span>
-                      <br />
-                    </>
-                  ))}
+                  {post.model.map((model) => {
+                    const href =
+                      model.category === "development"
+                        ? "/development"
+                        : `/models/${model.slug.current}`;
+
+                    return (
+                      <>
+                        <span key={model._id}>
+                          <a href={href}>{model.name}</a>
+                        </span>
+                        <br />
+                      </>
+                    );
+                  })}
                   <br />
                 </>
               )}
