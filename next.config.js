@@ -12,6 +12,7 @@ const nextConfig = {
   experimental: {
     urlImports: ["https://themer.sanity.build/"],
     serverActions: true,
+    serverComponentsExternalPackages: ["@react-pdf/renderer"],
   },
 };
 

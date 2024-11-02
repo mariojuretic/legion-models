@@ -28,18 +28,6 @@ const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
   const pathSegments = pathname.split("/");
   const endPathSegment = pathSegments[pathSegments.length - 1];
 
-  let downloadHref, downloadFilename;
-
-  if (endPathSegment === slug && model.downloads?.portfolio?.downloadUrl) {
-    downloadHref = model.downloads.portfolio.downloadUrl;
-    downloadFilename = slug + "-portfolio";
-  }
-
-  if (endPathSegment === "digitals" && model.downloads?.digitals?.downloadUrl) {
-    downloadHref = model.downloads.digitals.downloadUrl;
-    downloadFilename = slug + "-digitals";
-  }
-
   let thumbnails = model.portfolio;
 
   if (
@@ -130,16 +118,14 @@ const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
         </span>
       )}
 
-      {downloadHref && downloadFilename && (
-        <a
-          href={`${downloadHref}?dl=${downloadFilename}.pdf`}
-          download
-          target="_blank"
-          className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
-        >
-          Download
-        </a>
-      )}
+      <a
+        href={`/models/${model.slug.current}/download`}
+        download={`${model.slug.current}-portfolio`}
+        target="_blank"
+        className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
+      >
+        Download
+      </a>
 
       {hasThumbnails && (
         <span
