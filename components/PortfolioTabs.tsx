@@ -118,14 +118,16 @@ const PortfolioTabs = ({ model }: { model: ModelDoc }) => {
         </span>
       )}
 
-      <a
-        href={`/models/${model.slug.current}/download`}
-        download={`${model.slug.current}-portfolio`}
-        target="_blank"
-        className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
-      >
-        Download
-      </a>
+      {[slug, "digitals"].includes(endPathSegment) && (
+        <a
+          href={`/models/${model.slug.current}/download?doc=${endPathSegment === slug ? "portfolio" : endPathSegment}`}
+          download={`${model.slug.current}-${endPathSegment === slug ? "portfolio" : endPathSegment}`}
+          target="_blank"
+          className="leading-[2.6] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white lg:leading-[1.3]"
+        >
+          Download
+        </a>
+      )}
 
       {hasThumbnails && (
         <span

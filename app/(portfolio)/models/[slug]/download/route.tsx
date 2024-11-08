@@ -10,6 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
+import type { NextRequest } from "next/server";
 
 import generateSlides from "@/lib/generateSlides";
 import { readClient } from "@/lib/sanity.client";
@@ -89,25 +90,38 @@ const query = groq`
     portfolio[] {
       ...,
       "dimensions": asset->metadata.dimensions
+    },
+    digitals[] {
+      ...,
+      "dimensions": asset->metadata.dimensions
     }
   }
 `;
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { slug: string } },
 ) {
+  const searchParams = request.nextUrl.searchParams;
+  const doc = searchParams.get("doc") || "portfolio";
+
   const model: ModelDoc = await readClient.fetch(query, { slug: params.slug });
 
   if (!model) {
     return notFound();
   }
 
-  const slides = generateSlides(model.portfolio);
+  let slides;
+
+  if (doc === "digitals" && model.digitals) {
+    slides = generateSlides(model.digitals);
+  } else {
+    slides = generateSlides(model.portfolio);
+  }
 
   const pdf = await renderToBuffer(
     <Document
-      title={`${model.name}'s Portfolio`}
+      title={`${model.name}'s ${doc === "digitals" ? "Digitals" : "Portfolio"}`}
       author="LEGION MODEL MANAGEMENT"
       subject={model.name}
     >
