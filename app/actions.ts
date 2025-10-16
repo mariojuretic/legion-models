@@ -1,7 +1,13 @@
 "use server";
 
 import { z } from "zod";
-import sgMail, { MailDataRequired } from "@sendgrid/mail";
+import {
+  MailerSend,
+  EmailParams,
+  Sender,
+  Recipient,
+  Attachment,
+} from "mailersend";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 
 import { GetScoutedFormSchema, NewsletterFormSchema } from "@/lib/schema";
@@ -19,7 +25,9 @@ type GetScoutedFormInputs = Omit<
 
 type NewsletterFormInputs = z.infer<typeof NewsletterFormSchema>;
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+const mailerSend = new MailerSend({
+  apiKey: process.env.MAILERSEND_API_TOKEN!,
+});
 
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
@@ -108,13 +116,45 @@ export const submitGetScoutedForm = async (formData: FormData) => {
     const halfBodyShotArrBuff = await data.halfBodyShot.arrayBuffer();
     const fullBodyShotArrBuff = await data.fullBodyShot.arrayBuffer();
 
-    // Create a Sendgrid message
-    const msg: MailDataRequired = {
-      to: process.env.SENDGRID_RECIPIENT,
-      from: `${data.firstName} ${data.lastName} <${process.env.SENDGRID_SENDER_IDENTITY}>`,
-      replyTo: `${data.firstName} ${data.lastName} <${data.email}>`,
-      subject: "GET SCOUTED - LEGION MODEL MANAGEMENT",
-      html: `
+    // Create a MailerSend message
+    const sentFrom = new Sender(
+      process.env.MAILERSEND_SENDER_IDENTITY!,
+      `${data.firstName} ${data.lastName}`,
+    );
+
+    const recipients = [new Recipient(process.env.MAILERSEND_RECIPIENT!)];
+
+    const attachments = [
+      new Attachment(
+        Buffer.from(headshotArrBuff).toString("base64"),
+        data.headshot.name,
+        "attachment",
+      ),
+      new Attachment(
+        Buffer.from(profileHeadshotArrBuff).toString("base64"),
+        data.profileHeadshot.name,
+        "attachment",
+      ),
+      new Attachment(
+        Buffer.from(halfBodyShotArrBuff).toString("base64"),
+        data.halfBodyShot.name,
+        "attachment",
+      ),
+      new Attachment(
+        Buffer.from(fullBodyShotArrBuff).toString("base64"),
+        data.fullBodyShot.name,
+        "attachment",
+      ),
+    ];
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(
+        new Recipient(data.email, `${data.firstName} ${data.lastName}`),
+      )
+      .setAttachments(attachments)
+      .setSubject("GET SCOUTED - LEGION MODEL MANAGEMENT").setHtml(`
         <div>
           <p>FULL NAME: ${data.firstName.toUpperCase()} ${data.lastName.toUpperCase()}</p>
           <p>DATE OF BIRTH: ${data.birthday.toUpperCase()}</p>
@@ -124,37 +164,11 @@ export const submitGetScoutedForm = async (formData: FormData) => {
           <p>LOCATION: ${data.countryCity.toUpperCase()}</p>
           <p>INSTAGRAM: ${data.instagram.toUpperCase()}</p>
         </div>
-      `,
-      attachments: [
-        {
-          content: Buffer.from(headshotArrBuff).toString("base64"),
-          filename: data.headshot.name,
-          type: data.headshot.type,
-          disposition: "attachment",
-        },
-        {
-          content: Buffer.from(profileHeadshotArrBuff).toString("base64"),
-          filename: data.profileHeadshot.name,
-          type: data.profileHeadshot.type,
-          disposition: "attachment",
-        },
-        {
-          content: Buffer.from(halfBodyShotArrBuff).toString("base64"),
-          filename: data.halfBodyShot.name,
-          type: data.halfBodyShot.type,
-          disposition: "attachment",
-        },
-        {
-          content: Buffer.from(fullBodyShotArrBuff).toString("base64"),
-          filename: data.fullBodyShot.name,
-          type: data.fullBodyShot.type,
-          disposition: "attachment",
-        },
-      ],
-    };
+      `);
 
-    // Send message with Sendgrid
-    await sgMail.send(msg);
+    // Send message with MailerSend
+    await mailerSend.email.send(emailParams);
+
     return { success: true };
   } catch (error) {
     console.log("Something went wrong.", error);
@@ -193,16 +207,23 @@ export const shareCollectionWithEmail: (
   collection: CollectionDoc,
   email: string,
 ) => Promise<{ success: boolean }> = async (collection, email) => {
-  const msg: MailDataRequired = {
-    to: email,
-    from: `Legion Model Management <${process.env.SENDGRID_SENDER_IDENTITY}>`,
-    replyTo: process.env.SENDGRID_RECIPIENT,
-    subject: collection.name,
-    html: `<a href="${collection.share}">Open package</a>`,
-  };
+  const sentFrom = new Sender(
+    process.env.MAILERSEND_SENDER_IDENTITY!,
+    "LEGION MODEL MANAGEMENT",
+  );
+
+  const recipients = [new Recipient(email)];
+
+  const emailParams = new EmailParams()
+    .setFrom(sentFrom)
+    .setTo(recipients)
+    .setReplyTo(new Recipient(process.env.MAILERSEND_RECIPIENT!))
+    .setSubject(collection.name)
+    .setHtml(`<a href="${collection.share}">Open package</a>`);
 
   try {
-    await sgMail.send(msg);
+    await mailerSend.email.send(emailParams);
+
     return { success: true };
   } catch (error) {
     console.log("Something went wrong.", error);
