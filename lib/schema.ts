@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 2000000; // 2MB
-const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/png"];
 
 export const GetScoutedFormSchema = z.object({
   gender: z.string({ invalid_type_error: "Gender is required." }),
@@ -43,7 +43,7 @@ export const GetScoutedFormSchema = z.object({
         typeof window !== "undefined"
           ? ACCEPTED_FILE_TYPES.includes(val?.[0]?.type)
           : ACCEPTED_FILE_TYPES.includes(val?.type),
-      "JPEG, PNG and WebP files are accepted.",
+      "JPEG and PNG files are accepted.",
     ),
   profileHeadshot: z
     .any()
@@ -63,7 +63,7 @@ export const GetScoutedFormSchema = z.object({
         typeof window !== "undefined"
           ? ACCEPTED_FILE_TYPES.includes(val?.[0]?.type)
           : ACCEPTED_FILE_TYPES.includes(val?.type),
-      "JPEG, PNG and WebP files are accepted.",
+      "JPEG and PNG files are accepted.",
     ),
   halfBodyShot: z
     .any()
@@ -83,7 +83,7 @@ export const GetScoutedFormSchema = z.object({
         typeof window !== "undefined"
           ? ACCEPTED_FILE_TYPES.includes(val?.[0]?.type)
           : ACCEPTED_FILE_TYPES.includes(val?.type),
-      "JPEG, PNG and WebP files are accepted.",
+      "JPEG and PNG files are accepted.",
     ),
   fullBodyShot: z
     .any()
@@ -103,7 +103,7 @@ export const GetScoutedFormSchema = z.object({
         typeof window !== "undefined"
           ? ACCEPTED_FILE_TYPES.includes(val?.[0]?.type)
           : ACCEPTED_FILE_TYPES.includes(val?.type),
-      "JPEG, PNG and WebP files are accepted.",
+      "JPEG and PNG files are accepted.",
     ),
 });
 

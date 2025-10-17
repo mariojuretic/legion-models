@@ -377,7 +377,7 @@ export default function GetScoutedForm() {
               {...register("headshot")}
               id="headshot"
               className="hidden"
-              accept="image/jpeg, image/png, image/webp"
+              accept="image/jpeg, image/png"
             />
             <label htmlFor="headshot" className="custom-image-upload">
               <Image
@@ -403,7 +403,7 @@ export default function GetScoutedForm() {
               {...register("profileHeadshot")}
               id="profile-headshot"
               className="hidden"
-              accept="image/jpeg, image/png, image/webp"
+              accept="image/jpeg, image/png"
             />
             <label htmlFor="profile-headshot" className="custom-image-upload">
               <Image
@@ -433,7 +433,7 @@ export default function GetScoutedForm() {
               {...register("halfBodyShot")}
               id="half-body-shot"
               className="hidden"
-              accept="image/jpeg, image/png, image/webp"
+              accept="image/jpeg, image/png"
             />
             <label htmlFor="half-body-shot" className="custom-image-upload">
               <Image
@@ -463,7 +463,7 @@ export default function GetScoutedForm() {
               {...register("fullBodyShot")}
               id="full-body-shot"
               className="hidden"
-              accept="image/jpeg, image/png, image/webp"
+              accept="image/jpeg, image/png"
             />
             <label htmlFor="full-body-shot" className="custom-image-upload">
               <Image
