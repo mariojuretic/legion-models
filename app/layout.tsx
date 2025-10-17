@@ -1,4 +1,5 @@
 import { GoogleTagManager } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, ResolvingMetadata } from "next";
 import { groq } from "next-sanity";
@@ -68,6 +69,7 @@ export default async function Layout({
         {children}
         <Cookies />
         <SpeedInsights />
+        <Analytics />
       </body>
 
       {process.env.NODE_ENV === "production" && (
