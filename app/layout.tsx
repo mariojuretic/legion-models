@@ -6,6 +6,7 @@ import { groq } from "next-sanity";
 import localFont from "next/font/local";
 
 import Cookies from "@/components/Cookies";
+import ScrollMemory from "@/components/ScrollMemory";
 import { readClient } from "@/lib/sanity.client";
 import "./globals.css";
 
@@ -66,6 +67,7 @@ export default async function Layout({
       <body
         className={`${neueHaasGroteskText.className} bg-white text-black dark:bg-black dark:text-white`}
       >
+        <ScrollMemory />
         {children}
         <Cookies />
         <SpeedInsights />
