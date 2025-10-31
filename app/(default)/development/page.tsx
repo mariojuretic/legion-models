@@ -57,8 +57,8 @@ export default async function Page() {
       <div className="brand-text flex max-w-[100ch] flex-col items-center gap-2 whitespace-pre-line text-center">
         <p>{development.message}</p>
         <p>
-          <Link href={`mailto:${process.env.SENDGRID_RECIPIENT}`}>
-            {process.env.SENDGRID_RECIPIENT}
+          <Link href={`mailto:${process.env.DEVELOPMENT_BOARD_RECIPIENT}`}>
+            {process.env.DEVELOPMENT_BOARD_RECIPIENT}
           </Link>
         </p>
       </div>
