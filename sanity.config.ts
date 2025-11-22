@@ -1,6 +1,7 @@
 import { theme } from "https://themer.sanity.build/api/hues?default=737373;lightest:ffffff&primary=737373&transparent=737373&positive=22c55e;400&caution=facc15;300&critical=dc2626&darkest=000000";
 
-import { visionTool } from "@sanity/vision";
+// import { visionTool } from "@sanity/vision";
+import { media } from "sanity-plugin-media";
 import { defineConfig } from "sanity";
 import { muxInput } from "sanity-plugin-mux-input";
 import { simplerColorInput } from "sanity-plugin-simpler-color-input";
@@ -175,7 +176,8 @@ export default defineConfig({
               ),
           ]),
     }),
-    visionTool(),
+    // visionTool(),
+    media(),
     simplerColorInput(),
     muxInput(),
   ],
