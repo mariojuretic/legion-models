@@ -12,6 +12,7 @@ import mailchimp from "@mailchimp/mailchimp_marketing";
 
 import { GetScoutedFormSchema, NewsletterFormSchema } from "@/lib/schema";
 import { writeClient } from "@/lib/sanity.client";
+import { groq } from "next-sanity";
 
 type GetScoutedFormInputs = Omit<
   z.infer<typeof GetScoutedFormSchema>,
@@ -79,36 +80,46 @@ export const submitGetScoutedForm = async (formData: FormData) => {
       instagram: data.instagram,
       headshot: {
         _type: "image",
-        asset: {
-          _type: "reference",
-          _ref: headshotDocument._id,
-        },
+        asset: { _type: "reference", _ref: headshotDocument._id },
       },
       profileHeadshot: {
         _type: "image",
-        asset: {
-          _type: "reference",
-          _ref: profileHeadshotDocument._id,
-        },
+        asset: { _type: "reference", _ref: profileHeadshotDocument._id },
       },
       halfBodyShot: {
         _type: "image",
-        asset: {
-          _type: "reference",
-          _ref: halfBodyShotDocument._id,
-        },
+        asset: { _type: "reference", _ref: halfBodyShotDocument._id },
       },
       fullBodyShot: {
         _type: "image",
-        asset: {
-          _type: "reference",
-          _ref: fullBodyShotDocument._id,
-        },
+        asset: { _type: "reference", _ref: fullBodyShotDocument._id },
       },
     };
 
     // Save document to Sanity
     await writeClient.create(doc);
+
+    const getScoutedTagId = await ensureMediaTag("origin:get-scouted");
+
+    const fullNameSlug = slugify(doc.fullName);
+    const appTagId = await ensureMediaTag(`application:${fullNameSlug}`);
+
+    await tagAssetWithMediaTags(headshotDocument._id, [
+      getScoutedTagId,
+      appTagId,
+    ]);
+    await tagAssetWithMediaTags(profileHeadshotDocument._id, [
+      getScoutedTagId,
+      appTagId,
+    ]);
+    await tagAssetWithMediaTags(halfBodyShotDocument._id, [
+      getScoutedTagId,
+      appTagId,
+    ]);
+    await tagAssetWithMediaTags(fullBodyShotDocument._id, [
+      getScoutedTagId,
+      appTagId,
+    ]);
 
     // Create buffers from files
     const headshotArrBuff = await data.headshot.arrayBuffer();
@@ -183,17 +194,12 @@ export const submitNewsletterForm = async (data: NewsletterFormInputs) => {
 
   try {
     const listId = process.env.MAILCHIMP_AUDIENCE_ID!;
-    const subscribingUser = {
-      firstName: data.firstName,
-      email: data.email,
-    };
+    const subscribingUser = { firstName: data.firstName, email: data.email };
 
     const response = await mailchimp.lists.addListMember(listId, {
       email_address: subscribingUser.email,
       status: "pending",
-      merge_fields: {
-        FNAME: subscribingUser.firstName,
-      },
+      merge_fields: { FNAME: subscribingUser.firstName },
     });
 
     return { success: true, status: response.status };
@@ -230,3 +236,48 @@ export const shareCollectionWithEmail: (
     return { success: false };
   }
 };
+
+async function ensureMediaTag(slug: string) {
+  const query = groq`
+    *[_type =="media.tag" && name.current == $slug][0] {
+      _id
+    }
+  `;
+
+  const existing = await writeClient.fetch(query, { slug });
+
+  if (existing?._id) {
+    return existing._id;
+  }
+
+  const newTag = await writeClient.create({
+    _type: "media.tag",
+    title: slug,
+    name: { _type: "slug", current: slug },
+  });
+
+  return newTag._id;
+}
+
+async function tagAssetWithMediaTags(assetId: string, tagIds: string[]) {
+  const tagRefs = tagIds.map((id) => ({
+    _type: "reference",
+    _ref: id,
+    _weak: true,
+  }));
+
+  await writeClient
+    .patch(assetId)
+    .setIfMissing({ opt: { media: { tags: [] } } })
+    .append("opt.media.tags", tagRefs)
+    .commit();
+}
+
+function slugify(str: string) {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/gi, "-")
+    .replace(/^-+|-+$/g, "");
+}
