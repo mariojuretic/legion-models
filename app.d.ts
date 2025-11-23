@@ -42,10 +42,7 @@ interface ModelDoc extends BaseType {
   campaigns?: ImageType[];
   campaignsSeo?: SeoObj;
   category: string;
-  color?: {
-    label: string;
-    value: string;
-  };
+  color?: { label: string; value: string };
   contract: boolean;
   contractExpirationDate?: string;
   covers?: ImageType[];
@@ -53,10 +50,7 @@ interface ModelDoc extends BaseType {
   dateOfBirth?: string;
   digitals?: ImageType[];
   digitalsSeo?: SeoObj;
-  downloads?: {
-    digitals?: FileType;
-    portfolio?: FileType;
-  };
+  downloads?: { digitals?: FileType; portfolio?: FileType };
   hidden: boolean;
   instagram?: string;
   interview?: string;
@@ -69,10 +63,7 @@ interface ModelDoc extends BaseType {
   shows: ImageType[];
   showsSeo?: SeoObj;
   slug: SlugType;
-  thumbnail?: {
-    default?: ImageType;
-    hover?: ImageType;
-  };
+  thumbnail?: { default?: ImageType; hover?: ImageType };
   videos?: VideoType[];
   videosSeo?: SeoObj;
 }
@@ -94,10 +85,7 @@ interface NewsDoc extends BaseType {
   model?: ModelDoc[];
   seo?: SeoObj;
   slug: SlugType;
-  thumbnail?: {
-    default?: ImageType;
-    hover?: ImageType;
-  };
+  thumbnail?: { default?: ImageType; hover?: ImageType };
   title: string;
   type: "image" | "video";
   videos?: VideoType[];
@@ -148,6 +136,11 @@ interface SiteSettings extends BaseType {
   newsSeo?: SeoObj;
   newsletterSeo?: SeoObj;
   theme: "dark" | "light";
+}
+
+interface MediaTagDoc extends BaseType {
+  _type: "media.tag";
+  name: SlugType;
 }
 
 interface SlugType {

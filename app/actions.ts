@@ -12,7 +12,9 @@ import mailchimp from "@mailchimp/mailchimp_marketing";
 
 import { GetScoutedFormSchema, NewsletterFormSchema } from "@/lib/schema";
 import { writeClient } from "@/lib/sanity.client";
-import { groq } from "next-sanity";
+import getOrCreateMediaTag from "@/lib/getOrCreateMediaTag";
+import addMediaTagsToAsset from "@/lib/addMediaTagsToAsset";
+import slugify from "@/lib/slugify";
 
 type GetScoutedFormInputs = Omit<
   z.infer<typeof GetScoutedFormSchema>,
@@ -99,24 +101,24 @@ export const submitGetScoutedForm = async (formData: FormData) => {
     // Save document to Sanity
     await writeClient.create(doc);
 
-    const getScoutedTagId = await ensureMediaTag("origin:get-scouted");
+    const getScoutedTagId = await getOrCreateMediaTag("origin:get-scouted");
 
     const fullNameSlug = slugify(doc.fullName);
-    const appTagId = await ensureMediaTag(`application:${fullNameSlug}`);
+    const appTagId = await getOrCreateMediaTag(`application:${fullNameSlug}`);
 
-    await tagAssetWithMediaTags(headshotDocument._id, [
+    await addMediaTagsToAsset(headshotDocument._id, [
       getScoutedTagId,
       appTagId,
     ]);
-    await tagAssetWithMediaTags(profileHeadshotDocument._id, [
+    await addMediaTagsToAsset(profileHeadshotDocument._id, [
       getScoutedTagId,
       appTagId,
     ]);
-    await tagAssetWithMediaTags(halfBodyShotDocument._id, [
+    await addMediaTagsToAsset(halfBodyShotDocument._id, [
       getScoutedTagId,
       appTagId,
     ]);
-    await tagAssetWithMediaTags(fullBodyShotDocument._id, [
+    await addMediaTagsToAsset(fullBodyShotDocument._id, [
       getScoutedTagId,
       appTagId,
     ]);
@@ -236,48 +238,3 @@ export const shareCollectionWithEmail: (
     return { success: false };
   }
 };
-
-async function ensureMediaTag(slug: string) {
-  const query = groq`
-    *[_type =="media.tag" && name.current == $slug][0] {
-      _id
-    }
-  `;
-
-  const existing = await writeClient.fetch(query, { slug });
-
-  if (existing?._id) {
-    return existing._id;
-  }
-
-  const newTag = await writeClient.create({
-    _type: "media.tag",
-    title: slug,
-    name: { _type: "slug", current: slug },
-  });
-
-  return newTag._id;
-}
-
-async function tagAssetWithMediaTags(assetId: string, tagIds: string[]) {
-  const tagRefs = tagIds.map((id) => ({
-    _type: "reference",
-    _ref: id,
-    _weak: true,
-  }));
-
-  await writeClient
-    .patch(assetId)
-    .setIfMissing({ opt: { media: { tags: [] } } })
-    .append("opt.media.tags", tagRefs)
-    .commit();
-}
-
-function slugify(str: string) {
-  return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/gi, "-")
-    .replace(/^-+|-+$/g, "");
-}
